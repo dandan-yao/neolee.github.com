@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Android | Paradigm X]]></title>
+  <link href="http://paradigmx.net/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://paradigmx.net/"/>
+  <updated>2013-04-29T14:04:37+08:00</updated>
+  <id>http://paradigmx.net/</id>
+  <author>
+    <name><![CDATA[soulhacker]]></name>
+    <email><![CDATA[neo@paradigmx.net]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Go for Android]]></title>
+    <link href="http://paradigmx.net/blog/2012/02/05/go-for-android/"/>
+    <updated>2012-02-05T19:42:00+08:00</updated>
+    <id>http://paradigmx.net/blog/2012/02/05/go-for-android</id>
+    <content type="html"><![CDATA[<p><a href="http://golang.org/">Go</a> is <em>the</em> language from Google and Android is <em>the</em> mobile OS from Google. The bond between them are just born with. So there should be no surprise that we can use Go to write Android programs, though some important restricts for now:</p>
+
+<!-- more -->
+
+
+<ul>
+<li>There is no Android SDK for Go, so no system API nor GUI for Go program on Android.</li>
+<li>Go doesn't support JNI for now. So Go programs have to be compiled as separate executables, wrapped as assets in apk and called within Java based apps.</li>
+<li>Maybe cross-compiling is really hard. We cannot build Android applications which use Cgo(C bridge for Go) on our desktop computer for now, as shown below.</li>
+</ul>
+
+
+<p>But it's not just a toy because of the following advantages:</p>
+
+<ul>
+<li>Go is <em>fast</em> and all C programmers just like it.</li>
+<li>Go language is bundled with high quality libraries, especially suitable for special tasks.</li>
+<li>Go is from Google! It does have a future! Well, at least let's hope so.</li>
+</ul>
+
+
+<p>Go is a very young language, thus there's few guides or tutorials out there. But it also makes earlier investion provide more return. My friend and colleague <a href="https://twitter.com/#!/rarnu">@rarnu</a> also likes the idea of writing Android program using Go and has written <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">a short tutorial</a>. I'd like to rewrite it here and fill all lost details which he was too lazy to include.</p>
+
+<h3>Prerequisites</h3>
+
+<ul>
+<li>C Tools
+
+<ul>
+<li>GCC, C standard library, bison, GNU Make and Awk</li>
+</ul>
+</li>
+<li><a href="http://mercurial.selenic.com/wiki/Download">Mercurial</a>
+
+<ul>
+<li><code>hg</code></li>
+</ul>
+</li>
+<li><a href="http://developer.android.com/sdk/installing.html">Android SDK</a>
+
+<ul>
+<li><code>adb</code></li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Preparing Go Language</h3>
+
+<p>Firstly some environment variables need to be set (better be added to <code>.bashrc</code> or <code>.zshrc</code> etc.):
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span><span class="nv">GOROOT</span><span class="o">=</span><span class="s2">&quot;$HOME/Code/Go/Home&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GOBIN</span><span class="o">=</span><span class="s2">&quot;$GOROOT/bin&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$PATH:$GOBIN:&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<code>GOROOT</code> should be the folder where Go source is in and <code>GOBIN</code> should be in the system <code>PATH</code>. Double check them and issue these commands in terminal:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>hg clone -u release https://go.googlecode.com/hg/ <span class="nv">$GOROOT</span>
+</span><span class='line'><span class="nb">cd</span> <span class="nv">$GOROOT</span>/src
+</span><span class='line'><span class="nb">export </span><span class="nv">GOOS</span><span class="o">=</span>linux
+</span><span class='line'><span class="nb">export </span><span class="nv">GOARCH</span><span class="o">=</span>arm
+</span><span class='line'>./all.bash
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Now check out <code>$GOBIN</code> folder, three commands <code>go</code> <code>godoc</code> <code>gofmt</code>(<code>go</code> command line tools) and a folder <code>linux_arm</code>(cross-compiling tools for Linux/ARM targets) should be in there. <strong>Line 2-5</strong> can be run multiple times by setting different <code>$GOOS</code> and <code>$GOARCH</code> combinations to support <code>amd64</code> <code>386</code> and <code>arm</code> instruction sets all in one install base. See "<a href="http://golang.org/doc/install/source">Installing Go from source</a>" for detail.</p>
+
+<h3>Hello Android from Go!</h3>
+
+<p>Now create Go source files for testing. Let's start with the most favorite 'Hello world!' one.
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>hello.go </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="kn">package</span> <span class="nx">main</span><span class="p">&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;</span><span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="nx">pre</span><span class="p">&gt;&lt;</span><span class="nx">code</span><span class="p">&gt;</span><span class="nb">println</span><span class="p">(</span><span class="s">&quot;Hello Android from Go!&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">&lt;</span><span class="o">/</span><span class="nx">code</span><span class="p">&gt;&lt;</span><span class="o">/</span><span class="nx">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Compile it and generate executable:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">CGO_ENABLED</span><span class="o">=</span>0 <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARCH</span><span class="o">=</span>arm go build -o hello-arm hello.go
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+The last command will generate an executable named <code>hello-arm</code> which targets Linux/ARM system (i.e. Android). Now connect to an debuggable Android device and issue in the same folder:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>adb push hello-arm /data/local/
+</span><span class='line'>adb shell
+</span><span class='line'>/data/local/hello-arm
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+If all things go right it will generate output as expected. Using the same routine showed above, all code examples on <a href="http://golang.org/">Go's homepage</a> can be verified working well on Android devices.</p>
+
+<h3>Real World Example</h3>
+
+<p>The following code example is borrowed from rarnu's <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">blog post</a> and modified a bit.
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>checkupdate.go </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="kn">package</span> <span class="nx">main</span><span class="p">&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;</span><span class="kn">import</span> <span class="p">(</span><span class="s">&quot;net/http&quot;</span><span class="p">;</span> <span class="s">&quot;flag&quot;</span><span class="p">;</span> <span class="s">&quot;os&quot;</span><span class="p">;</span> <span class="s">&quot;strconv&quot;</span><span class="p">;</span> <span class="s">&quot;encoding/json&quot;</span><span class="p">;</span> <span class="s">&quot;io/ioutil&quot;</span><span class="p">)&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;</span><span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="nx">pre</span><span class="p">&gt;&lt;</span><span class="nx">code</span><span class="p">&gt;</span><span class="nx">flag</span><span class="p">.</span><span class="nx">Parse</span><span class="p">()</span>
+</span><span class='line'><span class="k">if</span> <span class="nx">flag</span><span class="p">.</span><span class="nx">NArg</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">version</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nx">Atoi</span><span class="p">(</span><span class="nx">flag</span><span class="p">.</span><span class="nx">Arg</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</span><span class='line'><span class="nx">res</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;http://rarnu.7thgen.info/api/query_software_update.php&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">if</span> <span class="nx">res</span><span class="p">.</span><span class="nx">StatusCode</span> <span class="o">!=</span> <span class="mi">200</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nx">ReadAll</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">f</span> <span class="kd">interface</span><span class="p">{}</span>
+</span><span class='line'><span class="nx">json</span><span class="p">.</span><span class="nx">Unmarshal</span><span class="p">(</span><span class="nx">buf</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="nx">f</span><span class="p">)</span>
+</span><span class='line'><span class="nx">m</span> <span class="o">:=</span> <span class="nx">f</span><span class="p">.(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{});</span>
+</span><span class='line'><span class="nx">v</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">[</span><span class="s">&quot;lastver&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="nx">sver</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nx">Atoi</span><span class="p">(</span><span class="nx">v</span><span class="p">.(</span><span class="kt">string</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="nx">sver</span> <span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">version</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">fn</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">[</span><span class="s">&quot;url&quot;</span><span class="p">]</span>
+</span><span class='line'>    <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="nx">fn</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">&lt;</span><span class="o">/</span><span class="nx">code</span><span class="p">&gt;&lt;</span><span class="o">/</span><span class="nx">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Handling JSON data returned from web services in Go is pretty neat and clean, right? Build it as above:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">CGO_ENABLED</span><span class="o">=</span>0 <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARCH</span><span class="o">=</span>arm go build -o cu-arm checkupdate.go
+</span><span class='line'>adb push cu-arm /data/local/
+</span><span class='line'>adb shell
+</span><span class='line'>/data/local/cu-arm 20
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+When running it on my Galaxy Nexus (ARM v7 dual-core 1.2 GHz Cortex-A9, Android 4.0.2 with kernel 3.0.8) it crashed on <strong>line 14</strong> - the <code>http.Get</code> call failed. Because of some issues in the cross-compiling system, all calls using Cgo will cause failure like that, at least for now. Unfortunately the <code>net</code> package depend on Cgo and nearly all useful applications need <code>net</code> package.</p>
+
+<h3>Call Go Code in Android Apps</h3>
+
+<p>Exactly the same as calling any native executables in Android apps, which fully explained in <a href="http://gimite.net/en/index.php?Run%20native%20executable%20in%20Android%20App">this guide</a>. I'll list a more general and accurate solution below for convenience.</p>
+
+<p>The following Java class shows how to invoke a process in Android apps (actually it is used by Google itself), which is the base of the following guide:
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>CommandResult.java </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CommandResult</span> <span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">public</span> <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="kd">public</span> <span class="n">String</span> <span class="n">error</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="nf">runCommand</span><span class="o">(</span><span class="n">String</span> <span class="n">command</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">&quot;runCommand&quot;</span><span class="o">,</span> <span class="n">command</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Process</span> <span class="n">process</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">DataOutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">DataInputStream</span> <span class="n">stdout</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">DataInputStream</span> <span class="n">stderr</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">CommandResult</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CommandResult</span><span class="o">();</span>
+</span><span class='line'>    <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">StringBuffer</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">StringBuffer</span> <span class="n">error</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">process</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">exec</span><span class="o">(</span><span class="s">&quot;su&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">os</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+</span><span class='line'>            <span class="n">os</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">command</span> <span class="o">+</span> <span class="s">&quot;\n&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">os</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="s">&quot;exit\n&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">os</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">process</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">exec</span><span class="o">(</span><span class="n">command</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">stdout</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataInputStream</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">line</span><span class="o">;</span>
+</span><span class='line'>        <span class="k">while</span> <span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">stdout</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">output</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">line</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;\n&#39;</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="n">stderr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataInputStream</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">getErrorStream</span><span class="o">());</span>
+</span><span class='line'>        <span class="k">while</span> <span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">stderr</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">error</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">line</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;\n&#39;</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="n">process</span><span class="o">.</span><span class="na">waitFor</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">ret</span><span class="o">.</span><span class="na">result</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="na">toString</span><span class="o">().</span><span class="na">trim</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">ret</span><span class="o">.</span><span class="na">error</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="na">toString</span><span class="o">().</span><span class="na">trim</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">ret</span><span class="o">.</span><span class="na">result</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">ret</span><span class="o">.</span><span class="na">error</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="o">(</span><span class="n">os</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>            <span class="k">if</span> <span class="o">(</span><span class="n">stdout</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">stdout</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>            <span class="k">if</span> <span class="o">(</span><span class="n">stderr</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">stderr</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>            <span class="n">process</span><span class="o">.</span><span class="na">destroy</span><span class="o">();</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">ret</span><span class="o">.</span><span class="na">result</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">ret</span><span class="o">.</span><span class="na">error</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+To run a native executable (whether written in Go or not) in Android apps:</p>
+
+<ul>
+<li>Include the binary <code>go-exec</code> in the <code>assets</code> folder.</li>
+<li>Use <code>getAssets().open("go-exec")</code> to get an <code>InputStream</code>.</li>
+<li>Write it to <code>/data/data/app-package-name/</code>, where the app has access to write files and make it executable.</li>
+<li>Make it executable using the code above, i.e. <code>CommandResult.runCommand("/system/bin/chmod 744 /data/data/app-package-name/go-exec", 0)</code></li>
+<li>Run <code>/data/data/app-package-name/go-exec</code> using the code above.</li>
+</ul>
+
+
+<h3>Updates</h3>
+
+<p><code>Go 1</code> is now live! Article updated to match changes in <code>Go 1</code>. And the <code>Go 1</code> <a href="http://golang.org/doc/go1.html">release note</a> is a must read.</p>
+]]></content>
+  </entry>
+  
+</feed>

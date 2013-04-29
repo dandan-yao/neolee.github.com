@@ -1,1 +1,687 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Paradigm X</title>
+  <meta name="author" content="soulhacker">
+
+  
+  <meta name="description" content="Clojure keeps growning up, and my 2.5-years old guide for setting up Clojure environment on Mac OS X had been out-of-date for quite a while. The &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://paradigmx.net">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Paradigm X" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/javascripts/footnote.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28206679-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Paradigm</a></h1>
+  <div id="logo">
+  	<div id="logoLeft">{</div>
+  	<div id="logoText">X</div>
+  	<div id="logoRight">}</div>
+  	<div class="clear"></div>
+  </div>
+  
+    <h2>Vision quests of a soul hacker.</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:paradigmx.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://cn.paradigmx.net">Chinese Articles</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/01/clojure-toolchain-reloaded/">Clojure Toolchain Reloaded</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-01T23:45:00+08:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://clojure.org">Clojure</a> keeps <a href="http://wit.io/posts/clojure-all-grown-up">growning up</a>, and my 2.5-years old <a href="http://7thgen.info/blog/2010/12/clojure-for-mac-os-x/">guide for setting up Clojure environment on Mac OS X</a> had been out-of-date for quite a while. The toolchains based on <a href="https://github.com/technomancy/leiningen">Leiningen 2</a> and <a href="https://github.com/clojure/tools.nrepl">nREPL</a> rise from underground, become really powerful and easy (even joyful for most of us) to use, and de facto standard. Nearly all main stream developing environments provide solutions for serious Clojure developers: <a href="http://eclipse.org">Eclipse</a> + <a href="http://code.google.com/p/counterclockwise/">Counter Clockwise</a>, <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> + <a href="http://www.jetbrains.com/idea/">La Clojure</a>, <a href="http://www.sublimetext.com/2">Sublime Text 2</a> + <a href="http://github.com/wuub/SublimeREPL">SublimeREPL</a>, Vim with <a href="http://clojure-doc.org/articles/tutorials/vim_fireplace.html">fireplace.vim</a>, etc.<sup id='fnref:1'>[<a href='#fn:1' rel='footnote'>1</a>]</sup>, and the favorite I finally found several months ago, <a href="https://github.com/overtone/emacs-live">Emacs Live</a>.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/01/clojure-toolchain-reloaded/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/29/ios-7/">iOS 7</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-29T23:55:00+08:00" pubdate data-updated="true">Jan 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In my opinion, the major tasks for Apple in this year are all about software, especially in the iOS eco-system.</p>
+
+<p>iOS has very solid Unix foundation and decent application framework. For a long time iOS had incontrovertible advantages over its rivals: performance, security, smooth user interaction, etc., most of which are still advantages today. But we all know that some incapabilities in iOS, especially compared to Android, are becoming more and more important aspects that Apple cannot ignore. Consider the following facts: Android may not be rendering the UI animation as smoothly as iOS always does, but it&#8217;s been getting better and better since Android 4.0, while iOS still doesn&#8217;t allow third-party apps customize the lock screen or put widgets on any part of the main UI. See the difference? Android&#8217;s problems are &#8216;not as good as iOS&#8217; and iOS has some <em>incapabilities</em>. If Apple want more people to choose iOS it should persuade the swing people (not the fans) that <em>iOS is better in all aspects</em>. It&#8217;s a prerequisite to eliminate those incapabilities ASAP.</p>
+
+<p>Ars Technica <a href="http://arstechnica.com/apple/2013/01/bring-us-the-features-an-ars-staff-wish-list-for-ios-7/">posted their staff wish list for iOS 7</a> last week. Most features in their list are <em>good</em> ones but not the <em>critical</em> ones. Base on the above <em>eliminating incapabilities</em> theory I&#8217;ll list mine below, divided to developer and user categories.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/01/29/ios-7/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/18/a-brief-guide-of-restful-soa/">A Brief Guide of (RESTful) SOA, Part III</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-18T15:47:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">Part I</a> <a href="/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">Part II</a></p>
+
+<p>In the final part of this article we will discuss several common topics of RESTful web service implementation. I will not dig deep here because all these topics are all quite complicated.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/10/18/a-brief-guide-of-restful-soa/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">A Brief Guide of (RESTful) SOA, Part II</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-17T20:53:00+08:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the <a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part of this series</a> we have discussed the core concepts of RESTful architectural style and gives some guideline in how to define the system and prepare for defining the APIs specs, which will be covered in this part.</p>
+
+<h2>Level III: Define and Tune the API</h2>
+
+<p>Defining API specs is the most important part of all and it&#8217;s a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as <a href="http://www.mediawiki.org/">MediaWiki</a> or <a href="http://daringfireball.net/projects/markdown/">Markdown</a> + <a href="https://github.com">GitHub</a> etc. Then you can follow these sections below.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/18/europe-summer-2012-and-500px/">Europe Summer 2012 and 500px</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-18T14:18:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I spent my summer vacation with my family in Germany, Austria and Switzerland. It&#8217;s the first time I visit Europe. Had bunch of photos, most of which are taken by my Fujifilm Finepix X100 with its wide conversion lens WCL-X100. After one and half months I finally picked up <a href="http://500px.com/soulhacker/sets/europe_tour_2012">~150 photos</a> and uploaded them to 500px.</p>
+
+<p>X100 is a really amazing camera. Its <a href="http://www.dxomark.com/index.php/en.../Cameras/Camera-Sensor-Database/Fujifilm/FinePix-X100">top-of-the-line</a> APS-C sized CMOS sensor provides great resolution and SNR. Its prime lens (with field of view equivalent to 35mm and 28mm lens on full frame) are especially suitable for landscape and cultural photography. iPhone 4S is a great backup, provide fairly good photos even in some typically difficult scenarios for compact DCs. Remember all these are very lightweight. Farewell my big DSLRs. <em>The best cameras are the ones you always take with you.</em></p>
+
+<p>As for the digital darkroom, Aperture is a perfect tool both on organising and editing. And the <a href="https://github.com/iKenndac/500px-Aperture-Uploader/">500px Uploader</a> developed by iKenndac significantly simplifies the process of uploading photos to 500px. But I have some serious suggestions for 500px. Yep, this is the real reason I wrote this blog.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/09/18/europe-summer-2012-and-500px/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/01/wanted-image-website-tool-not-suck/">WANTED: Image Website Tool Not Suck</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-01T12:28:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Per my 13-years old daughter&#8217;s request I&#8217;m searching for some tools to build her own image website, so she can publish and manage all her drawings and photos. To my surprise after all these years there are still very few such tools that not sucks.</p>
+
+<p><a href="http://gallery.menalto.com/">Gallery</a>, <a href="http://piwigo.org/">Piwigo</a>, <a href="http://www.zenphoto.org/">Zenphoto</a>, <a href="http://www.e2interactive.com/e2_photo_gallery/">E2 Photo Gallery</a>, etc. They are old, powerful and actively developed. But all of them are so <em>last-century</em>. They are ancient content manage systems and just not work for modern creative artists, like  my daughter of cause. Here is <em>my requirements</em>:</p>
+
+<ul>
+<li>Free and open source (optional)</li>
+<li>Easy to deploy to shared hosting service and/or VPS</li>
+<li>Easy-to-use uploading tool which supports single and multiple files</li>
+<li>Support imagesets (&#8220;albums&#8221;)</li>
+<li>Support tags</li>
+<li>Manageable commenting and rating system (built-in or integration with Disqus)</li>
+<li>Support direct hyperlinks to the images (can be toggled on/off per album based)</li>
+<li>Sharing button for Twitter and other social networks</li>
+<li>Automatically EXIF/IPTC handling</li>
+<li>Thumbnail view with AJAX based in-place zooming and editing (for meta info)</li>
+<li>Cool built-in themes (at lease 2 for dark and light backgrounds), simple but working customizing system</li>
+<li>Support iPhone <em>and</em> iPad-size mobile devices</li>
+<li>Support i18n</li>
+<li>Easy to backup/restore or export/import</li>
+<li>Acceptable performance for hundreds of images</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/01/wanted-image-website-tool-not-suck/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">A Brief Guide of (RESTful) SOA, Part I</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-27T16:53:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Many say that <code>XML</code> <code>SOAP</code> <code>WS-\*</code> suck and SOA is over or becoming profit tool for big consultant companies. But I would say: SOA is <em>not</em> evil, IBM is. Look at these principles of SOA:</p>
+
+<blockquote><p>- reuse, granularity, modularity, composability, componentization and interoperability.<br/>- standards-compliance (both common and industry-specific).<br/>- services identification and categorization, provisioning and delivery, and monitoring and tracking.</p><footer><strong>Wikipedia</strong> <cite><a href='http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles'>Service-oriented Architecture</a></cite></footer></blockquote>
+
+
+<p>All these are perfect software architectural styles(well, except those words your spell checker complains), our best dream. These can&#8217;t be wrong. The problem is in the implementations. Fortunately the rises of RESTful services on the open web prove that the spirit of SOA can really matters. Maybe one day similar architecture and implementation will eventually change enterprise computing in return.</p>
+
+<p>I always believe <strong>the service-oriented architecture will be the future of massive distributed software system</strong>. And <strong>RESTful services will replace web sites and eventually become the main body of the Internet</strong>. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol - it can be used as RPC protocol but it&#8217;s not RESTful and cannot provide key benefits which REST want to apply.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/31/soul-link/">Soul Link</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-31T16:56:00+08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="/images/paper-by-fiftythree.jpg">
+Apple AppStore&#8217;s biggest news this week is that, <a href="http://www.fiftythree.com/paper">FiftyThree&#8217;s Paper</a> became the <a href="http://itunes.apple.com/app/paper-by-fiftythree/id506003812?mt=8">iPad App of the Week</a> in just 2 days. I think that it&#8217;s far from coincidence.</p>
+
+<p>I tried <em>Paper</em> for several hours. It offers no unique features. It&#8217;s much less powerful than <a href="http://itunes.apple.com/app/sketchbook-pro-for-ipad/id364253478?mt=8">AutoDesk&#8217;s SketchBook Pro</a>, a full-featured paint tool especially designed for the new iPad&#8217;s Retina Display which was showed off on Apple&#8217;s event. But I can predict that <em>Paper</em> will be much more popular. So why is it so special?</p>
+
+<p>Watch their <a href="http://vimeo.com/37254322">official trailer</a> and you can get some clues. The trailer spreads several important ideas: 1. <em>Paper</em> can be used anytime anywhere whenever people want to use pen and paper. 2. The User, the iPad, <em>Paper</em> and the stylus work together as a whole. 3. All these are all about the user&#8217;s lifestyle, becoming part to it.</p>
+
+<p>So what do you think while watching the video? Desire to light up your iPad at once and sketch something? Think about buying one <a href="http://wacom.com/en/Products/Bamboo/BambooStylus.aspx">Wacom Stylus</a> for your iPad? Or those <a href="http://www.youtube.com/watch?v=D2BvVcSkNkA">amazing</a> <a href="http://www.youtube.com/watch?v=9bYx3iEdzzc">ads</a> for the <a href="http://www.youtube.com/watch?v=btfbIVGES1I">original</a> <a href="http://www.youtube.com/watch?v=NMvETJ0bxEQ">iPad</a>? My answer is: all of them. And one more <del>thing</del> person, Don Draper.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/03/31/soul-link/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/05/go-for-android/">Go for Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-05T19:42:00+08:00" pubdate data-updated="true">Feb 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://golang.org/">Go</a> is <em>the</em> language from Google and Android is <em>the</em> mobile OS from Google. The bond between them are just born with. So there should be no surprise that we can use Go to write Android programs, though some important restricts for now:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/02/05/go-for-android/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/31/introducing-restkit/">Introducing RestKit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-31T18:59:00+08:00" pubdate data-updated="true">Jan 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://restkit.org/">RestKit</a> is an amazing <strong>Objective-C framework for iOS</strong> that aims to make interacting with RESTful web services simple, fast and fun. As said on its homepage:</p>
+
+<blockquote><p>It combines a clean, simple HTTP request/response API with a powerful object mapping system that reduces the amount of code you need to write to get stuff done.</p></blockquote>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/01/31/introducing-restkit/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/04/01/clojure-toolchain-reloaded/">Clojure Toolchain Reloaded</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/29/ios-7/">iOS 7</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/18/a-brief-guide-of-restful-soa/">A Brief Guide of (RESTful) SOA, Part III</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">A Brief Guide of (RESTful) SOA, Part II</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/18/europe-summer-2012-and-500px/">Europe Summer 2012 and 500px</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/neolee">@neolee</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'neolee',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - soulhacker -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'paradigmx';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

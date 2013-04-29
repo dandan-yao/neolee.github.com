@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS 7 - Paradigm X</title>
+  <meta name="author" content="soulhacker">
+
+  
+  <meta name="description" content="In my opinion, the major tasks for Apple in this year are all about software, especially in the iOS eco-system. iOS has very solid Unix foundation &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://paradigmx.net/blog/2013/01/29/ios-7">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Paradigm X" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/javascripts/footnote.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28206679-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Paradigm</a></h1>
+  <div id="logo">
+  	<div id="logoLeft">{</div>
+  	<div id="logoText">X</div>
+  	<div id="logoRight">}</div>
+  	<div class="clear"></div>
+  </div>
+  
+    <h2>Vision quests of a soul hacker.</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:paradigmx.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://cn.paradigmx.net">Chinese Articles</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS 7</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-29T23:55:00+08:00" pubdate data-updated="true">Jan 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In my opinion, the major tasks for Apple in this year are all about software, especially in the iOS eco-system.</p>
+
+<p>iOS has very solid Unix foundation and decent application framework. For a long time iOS had incontrovertible advantages over its rivals: performance, security, smooth user interaction, etc., most of which are still advantages today. But we all know that some incapabilities in iOS, especially compared to Android, are becoming more and more important aspects that Apple cannot ignore. Consider the following facts: Android may not be rendering the UI animation as smoothly as iOS always does, but it&#8217;s been getting better and better since Android 4.0, while iOS still doesn&#8217;t allow third-party apps customize the lock screen or put widgets on any part of the main UI. See the difference? Android&#8217;s problems are &#8216;not as good as iOS&#8217; and iOS has some <em>incapabilities</em>. If Apple want more people to choose iOS it should persuade the swing people (not the fans) that <em>iOS is better in all aspects</em>. It&#8217;s a prerequisite to eliminate those incapabilities ASAP.</p>
+
+<p>Ars Technica <a href="http://arstechnica.com/apple/2013/01/bring-us-the-features-an-ars-staff-wish-list-for-ios-7/">posted their staff wish list for iOS 7</a> last week. Most features in their list are <em>good</em> ones but not the <em>critical</em> ones. Base on the above <em>eliminating incapabilities</em> theory I&#8217;ll list mine below, divided to developer and user categories.</p>
+
+<!-- more -->
+
+
+<h2>Wish List as a Developer</h2>
+
+<h3>1. Inter-app Communication</h3>
+
+<p><img class="left" src="/images/ios-7-wishlist/cameraplus.png" width="180" height="284" title="Calling Camera+ from Tweetbot" ></p>
+
+<p>Cocoa provides very powerful and elegant inter-process communication solution on Mac OS X: <code>NSDistributedNotificationCenter</code> and <code>NSPortNameServer</code>, but none is available on iOS (for third-party apps at least). <a href="http://api.camerapl.us/app-api">Inspired by</a> the popular photography app Camera+, many apps use shared system clipboard and <a href="http://developer.apple.com/library/ios/#DOCUMENTATION/iPhone/Conceptual/iPhoneOSProgrammingGuide/AdvancedAppTricks/AdvancedAppTricks.html#//apple_ref/doc/uid/TP40007072-CH7-SW50">custom URL schemes</a> to <em>simulate</em> a cross-app call with custom data. Following this approach Apple can easily develop a secure, simple but powerful solution.</p>
+
+<p><img class="right" src="/images/ios-7-wishlist/share-panels.jpg" width="360" title="Share Panel in iOS and Android" ></p>
+
+<p>The <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivityViewController_Class/Reference/Reference.html#//apple_ref/occ/cl/UIActivityViewController">UIActivityViewController</a> API introduced in iOS 6 is a high level interface for inter-app data sharing. It&#8217;s similar to Android&#8217;s &#8220;Share&#8230;via&#8221; interface, but not allow third-party apps to add system level services (app level services are allowed, see this <a href="http://stackoverflow.com/questions/12546574/using-apple-icons-with-ios-6">StackOverflow question</a> for details). This is another improvement opportunity for Apple.</p>
+
+<h3>2. Widget API</h3>
+
+<p>Widgets may bring trouble (drained battery, inconsistent user interaction, etc.) but still useful and sometimes very attractive. There are several parts of iOS&#8217;s system UI that are calling for custom widgets: the lock screen, the notification center, and the multitasking bar (actually we already have some <a href="http://www.theverge.com/2012/10/4/3451322/rethinking-the-app-switcher-for-the-iphone-5-mockups">impressive mockup</a> for this one).</p>
+
+<p>For now all these UI parts are running inside the Springboard process. Apple must move them into independent processes before allowing third-party widgets running within them. Then Apple should push some strict guideline for widget development (just like multitasking). Finally open a front page section in the App Store and Boom! Everybody will be happy with it.</p>
+
+<p><img src="/images/ios-7-wishlist/widgets.jpg" width="600" title="iOS Widgets?" ></p>
+
+<h3>3. Siri API</h3>
+
+<p>This one is easy to describe: open APIs of Siri, let us develop plugins for Siri and make her a real goddess. Third-party apps can facilitate Siri&#8217;s advanced voice recognition and text-to-speech engine, response to Siri commands and integrate content into Siri&#8217;s search result. It will bring a whole new world in.</p>
+
+<h3>4. A Better App Store</h3>
+
+<p>App Store is good, App Store changed the world, App Store brings money to the happy developers. But App Store desperately needs these (thank <a href="https://twitter.com/GossipSama">@GossipSama</a> for insightful addition):</p>
+
+<ul>
+<li><strong>Incremental update for apps</strong>. Enough said.</li>
+<li><strong>Better IAP flow</strong>. The standard flow today is fragile: app connect to iTunes to let user purchase; app connect to its own server to log the purchased token; app server connect to Apple&#8217;s IAP server for verification; etc. If user quits app during some steps or app server fails on IAP server, the transaction will fail and may leave incomplete state in the system. A one step server-to-server workflow will be life changer for developers who highly rely on the IAP mechanism.</li>
+<li><strong>Account statement</strong>. Developers need detail account statements for many reasons: fix failed payments, find cheating users, etc.</li>
+<li><strong>App promoting policy</strong>. Developers need more transparency on app recommendation and sorting mechanism, and a clean policy for app promoting (can and cannot do, good and evil behaviors and so on).</li>
+</ul>
+
+
+<h2>Wish List as a User</h2>
+
+<p>First of all, most features listed in the previous part can extremely benefit all users. Users will get a shiny new iOS with powerful new features like:</p>
+
+<ul>
+<li>Bluetooth/WiFi/3G/Screen Rotation Lock toggles right in the multitasking bar.</li>
+<li>Event and weather display in the lock screen.</li>
+<li>Sending any link from any apps to Instapaper (even the apps without builtin support for Instapaper).</li>
+<li>Beautiful, secure, reliable widgets in App Store to customize iOS.</li>
+<li>Much more apps in the App Store with Siri integration.</li>
+<li>Faster app updating and more robust IAP purchase.</li>
+<li>More easily to find good apps.</li>
+</ul>
+
+
+<p>Beside these we also have the following:</p>
+
+<h3>1. iTunes Account Merge</h3>
+
+<p>If you have more than one iTunes account (e.g. Japanese have many exclusive, excellent music and games!) you are in trouble. You have to manually log off and log on to each of your accounts to check app updates. And when you want to do some IAP you have to confirm (manually again) that you are currently logged on to the account from which you originally bought the app.</p>
+
+<p>iOS and iTunes should make it better.</p>
+
+<h3>2. Better Arranged System Setting</h3>
+
+<p>Tell me where is the Auto-Lock setting in 5 seconds. Can you do that? Yes? And how to turn off iCloud sync for document and iTunes Match under cellular network, huh?</p>
+
+<h3>3. More Useful Gestures</h3>
+
+<p><a href="http://gigaom.com/2012/04/02/how-to-use-ipad-multitasking-gestures-and-why-you-should/">Multitasking Gestures</a> on iPad is good, please fine-tune and bring them to iPhone. Further more, Apple should seriously consider the jailbreak system add-on Activator and bring more useful gestures to iOS. So people can forget the ugly AssistiveTouch button.</p>
+
+<h3>4. Multiple User Profiles on a Device</h3>
+
+<p>Sharing iPad in a family is very common. By supporting multiple profile and user switch the children will have more chance to use the iDevice, and more likely buy their own sooner or later.</p>
+
+<p>So what do you think? Share your wishes in the comment!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">soulhacker</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-29T23:55:00+08:00" pubdate data-updated="true">Jan 29<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/apple/'>Apple</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://paradigmx.net/blog/2013/01/29/ios-7/" data-via="" data-counturl="http://paradigmx.net/blog/2013/01/29/ios-7/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/10/18/a-brief-guide-of-restful-soa/" title="Previous Post: A Brief Guide of (RESTful) SOA, Part III">&laquo; A Brief Guide of (RESTful) SOA, Part III</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/04/01/clojure-toolchain-reloaded/" title="Next Post: Clojure Toolchain Reloaded">Clojure Toolchain Reloaded &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/04/01/clojure-toolchain-reloaded/">Clojure Toolchain Reloaded</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/29/ios-7/">iOS 7</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/18/a-brief-guide-of-restful-soa/">A Brief Guide of (RESTful) SOA, Part III</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">A Brief Guide of (RESTful) SOA, Part II</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/18/europe-summer-2012-and-500px/">Europe Summer 2012 and 500px</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/neolee">@neolee</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'neolee',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - soulhacker -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'paradigmx';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://paradigmx.net/blog/2013/01/29/ios-7/';
+        var disqus_url = 'http://paradigmx.net/blog/2013/01/29/ios-7/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
