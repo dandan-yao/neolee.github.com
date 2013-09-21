@@ -120,21 +120,21 @@
 
 <ul>
 <li>There is no Android SDK for Go, so no system API nor GUI for Go program on Android.</li>
-<li>Go doesn&#8217;t support JNI for now. So Go programs have to be compiled as separate executables, wrapped as assets in apk and called within Java based apps.</li>
+<li>Go doesn&rsquo;t support JNI for now. So Go programs have to be compiled as separate executables, wrapped as assets in apk and called within Java based apps.</li>
 <li>Maybe cross-compiling is really hard. We cannot build Android applications which use Cgo(C bridge for Go) on our desktop computer for now, as shown below.</li>
 </ul>
 
 
-<p>But it&#8217;s not just a toy because of the following advantages:</p>
+<p>But it&rsquo;s not just a toy because of the following advantages:</p>
 
 <ul>
 <li>Go is <em>fast</em> and all C programmers just like it.</li>
 <li>Go language is bundled with high quality libraries, especially suitable for special tasks.</li>
-<li>Go is from Google! It does have a future! Well, at least let&#8217;s hope so.</li>
+<li>Go is from Google! It does have a future! Well, at least let&rsquo;s hope so.</li>
 </ul>
 
 
-<p>Go is a very young language, thus there&#8217;s few guides or tutorials out there. But it also makes earlier investion provide more return. My friend and colleague <a href="https://twitter.com/#!/rarnu">@rarnu</a> also likes the idea of writing Android program using Go and has written <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">a short tutorial</a>. I&#8217;d like to rewrite it here and fill all lost details which he was too lazy to include.</p>
+<p>Go is a very young language, thus there&rsquo;s few guides or tutorials out there. But it also makes earlier investion provide more return. My friend and colleague <a href="https://twitter.com/#!/rarnu">@rarnu</a> also likes the idea of writing Android program using Go and has written <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">a short tutorial</a>. I&rsquo;d like to rewrite it here and fill all lost details which he was too lazy to include.</p>
 
 <h3>Prerequisites</h3>
 
@@ -188,11 +188,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now check out <code>$GOBIN</code> folder, three commands <code>go</code> <code>godoc</code> <code>gofmt</code>(<code>go</code> command line tools) and a folder <code>linux_arm</code>(cross-compiling tools for Linux/ARM targets) should be in there. <strong>Line 2-5</strong> can be run multiple times by setting different <code>$GOOS</code> and <code>$GOARCH</code> combinations to support <code>amd64</code> <code>386</code> and <code>arm</code> instruction sets all in one install base. See &#8221;<a href="http://golang.org/doc/install/source">Installing Go from source</a>&#8221; for detail.</p>
+<p>Now check out <code>$GOBIN</code> folder, three commands <code>go</code> <code>godoc</code> <code>gofmt</code>(<code>go</code> command line tools) and a folder <code>linux_arm</code>(cross-compiling tools for Linux/ARM targets) should be in there. <strong>Line 2-5</strong> can be run multiple times by setting different <code>$GOOS</code> and <code>$GOARCH</code> combinations to support <code>amd64</code> <code>386</code> and <code>arm</code> instruction sets all in one install base. See &ldquo;<a href="http://golang.org/doc/install/source">Installing Go from source</a>&rdquo; for detail.</p>
 
 <h3>Hello Android from Go!</h3>
 
-<p>Now create Go source files for testing. Let&#8217;s start with the most favorite &#8216;Hello world!&#8217; one.</p>
+<p>Now create Go source files for testing. Let&rsquo;s start with the most favorite &lsquo;Hello world!&rsquo; one.</p>
 
 <figure class='code'><figcaption><span>hello.go </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -226,11 +226,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>If all things go right it will generate output as expected. Using the same routine showed above, all code examples on <a href="http://golang.org/">Go&#8217;s homepage</a> can be verified working well on Android devices.</p>
+<p>If all things go right it will generate output as expected. Using the same routine showed above, all code examples on <a href="http://golang.org/">Go&rsquo;s homepage</a> can be verified working well on Android devices.</p>
 
 <h3>Real World Example</h3>
 
-<p>The following code example is borrowed from rarnu&#8217;s <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">blog post</a> and modified a bit.</p>
+<p>The following code example is borrowed from rarnu&rsquo;s <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">blog post</a> and modified a bit.</p>
 
 <figure class='code'><figcaption><span>checkupdate.go </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -313,11 +313,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>When running it on my Galaxy Nexus (ARM v7 dual-core 1.2 GHz Cortex-A9, Android 4.0.2 with kernel 3.0.8) it crashed on <strong>line 14</strong> - the <code>http.Get</code> call failed. Because of some issues in the cross-compiling system, all calls using Cgo will cause failure like that, at least for now. Unfortunately the <code>net</code> package depend on Cgo and nearly all useful applications need <code>net</code> package.</p>
+<p>When running it on my Galaxy Nexus (ARM v7 dual-core 1.2 GHz Cortex-A9, Android 4.0.2 with kernel 3.0.8) it crashed on <strong>line 14</strong> &ndash; the <code>http.Get</code> call failed. Because of some issues in the cross-compiling system, all calls using Cgo will cause failure like that, at least for now. Unfortunately the <code>net</code> package depend on Cgo and nearly all useful applications need <code>net</code> package.</p>
 
 <h3>Call Go Code in Android Apps</h3>
 
-<p>Exactly the same as calling any native executables in Android apps, which fully explained in <a href="http://gimite.net/en/index.php?Run%20native%20executable%20in%20Android%20App">this guide</a>. I&#8217;ll list a more general and accurate solution below for convenience.</p>
+<p>Exactly the same as calling any native executables in Android apps, which fully explained in <a href="http://gimite.net/en/index.php?Run%20native%20executable%20in%20Android%20App">this guide</a>. I&rsquo;ll list a more general and accurate solution below for convenience.</p>
 
 <p>The following Java class shows how to invoke a process in Android apps (actually it is used by Google itself), which is the base of the following guide:</p>
 
@@ -497,7 +497,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://paradigmx.net/blog/2012/02/05/go-for-android/" data-via="" data-counturl="http://paradigmx.net/blog/2012/02/05/go-for-android/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://paradigmx.net/blog/2012/02/05/go-for-android/" data-via="" data-counturl="http://paradigmx.net/blog/2012/02/05/go-for-android/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -647,7 +647,7 @@
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

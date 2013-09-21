@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Architecture | Paradigm X]]></title>
   <link href="http://paradigmx.net/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://paradigmx.net/"/>
-  <updated>2013-06-02T23:35:45+08:00</updated>
+  <updated>2013-09-21T16:31:01+08:00</updated>
   <id>http://paradigmx.net/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
@@ -79,7 +79,7 @@
 
 <h2>Extended Readings</h2>
 
-<p>RESTful web services are not traditional web sites but they share most characteristic features of Internet software architecture. If you are an architect but new to Internet-scale services architecture James Hamilton's <a href="http://static.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">classic thesis</a> is a must-read.</p>
+<p>RESTful web services are not traditional web sites but they share most characteristic features of Internet software architecture. If you are an architect but new to Internet-scale services architecture James Hamilton&rsquo;s <a href="http://static.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">classic thesis</a> is a must-read.</p>
 
 <p>For new software architects this <a href="http://gorban.org/post/32873465932/software-architecture-cheat-sheet">cheat sheet</a> is a good start.</p>
 
@@ -96,7 +96,7 @@
 
 <h2>Level III: Define and Tune the API</h2>
 
-<p>Defining API specs is the most important part of all and it's a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as <a href="http://www.mediawiki.org/">MediaWiki</a> or <a href="http://daringfireball.net/projects/markdown/">Markdown</a> + <a href="https://github.com">GitHub</a> etc. Then you can follow these sections below.</p>
+<p>Defining API specs is the most important part of all and it&rsquo;s a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as <a href="http://www.mediawiki.org/">MediaWiki</a> or <a href="http://daringfireball.net/projects/markdown/">Markdown</a> + <a href="https://github.com">GitHub</a> etc. Then you can follow these sections below.</p>
 
 <!-- more -->
 
@@ -126,7 +126,7 @@
 <li>There are 2 types of <strong>services</strong> in most <strong>platform</strong>: (A) services related to a specific <em>user</em> in the platform; (B) services independent to <em>users</em>. They need different kinds of tokens:
 
 <ul>
-<li>For type (A): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET, correlated user's ID and expected access profile (commonly called '<em>scope</em>') to request the access token.</li>
+<li>For type (A): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET, correlated user&rsquo;s ID and expected access profile (commonly called &lsquo;<em>scope</em>&rsquo;) to request the access token.</li>
 <li>For type (B): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET and <em>scope</em> to request the access token.</li>
 </ul>
 </li>
@@ -134,7 +134,7 @@
 </ul>
 
 
-<p>In many cases the <strong>platform</strong> cannot issue type (A) token to an <strong>app</strong> unless correlated user explicitly approve the request. That's where OAuth-like mechanisms make sense. In such cases, when <strong>platform</strong> receives request for issuing a token to some user, it will redirect the user to a page showing Approve/Decline buttons and continue the flow after the user explicitly approve the request. For detail info about the widely uses OAuth v2 protocol refer to the official <a href="http://tools.ietf.org/html/rfc6749">IETF RFC6749 document</a>.</p>
+<p>In many cases the <strong>platform</strong> cannot issue type (A) token to an <strong>app</strong> unless correlated user explicitly approve the request. That&rsquo;s where OAuth-like mechanisms make sense. In such cases, when <strong>platform</strong> receives request for issuing a token to some user, it will redirect the user to a page showing Approve/Decline buttons and continue the flow after the user explicitly approve the request. For detail info about the widely uses OAuth v2 protocol refer to the official <a href="http://tools.ietf.org/html/rfc6749">IETF RFC6749 document</a>.</p>
 
 <p>A platform should choose mechanism wisely and make the flows (app registration, token issuing/revoking/managing, etc.) clean, flexible and friendly to all potential client apps. Useful tutorials about all these flows are required.</p>
 
@@ -150,7 +150,7 @@
 </ol>
 
 
-<p>So let's look at some typical RESTful URI patterns.</p>
+<p>So let&rsquo;s look at some typical RESTful URI patterns.</p>
 
 <ul>
 <li><strong>Object</strong>
@@ -169,7 +169,7 @@
 <li><strong>Aspect</strong> or <strong>Attribute</strong>
 
 <ul>
-<li><code>/:type/:id/:aspect</code> e.g. <code>/user/1532/friends</code> <code>/user/1532/pets</code>: Return zero or more objects of some type related to designated object. In our examples, user #1532's friends should be zero or more <em>user</em> objects, and user #1532's pets should be zero or more <em>pet</em> objects.</li>
+<li><code>/:type/:id/:aspect</code> e.g. <code>/user/1532/friends</code> <code>/user/1532/pets</code>: Return zero or more objects of some type related to designated object. In our examples, user #1532&rsquo;s friends should be zero or more <em>user</em> objects, and user #1532&rsquo;s pets should be zero or more <em>pet</em> objects.</li>
 </ul>
 </li>
 <li><strong>Action</strong>
@@ -215,7 +215,7 @@
 </table></p>
 
 
-<p>Well, some special APIs will be hard to classify. Here are the most commonly used two (we won't discuss more, just list them here):</p>
+<p>Well, some special APIs will be hard to classify. Here are the most commonly used two (we won&rsquo;t discuss more, just list them here):</p>
 
 <ul>
 <li><code>compound</code>: combine several API requests into a batch and response the batch results altogether.</li>
@@ -239,11 +239,11 @@
 
 <h3>3.5 Test the Specs</h3>
 
-<p>To give app developers' and yourself a better life, you need an API test console from the first day. It can be a command line tool or a GUI tool or, the easiest and most convenient way, a browser based tool. In the test console user can input token and API endpoint, choose HTTP verb, input parameters and get 100% real response data, in nicely formatted JSON format. It can save tons of time and money. Have a look at foursquare's <a href="https://developer.foursquare.com/docs/explore#req=users/self">online API explorer</a> for some real world example.</p>
+<p>To give app developers' and yourself a better life, you need an API test console from the first day. It can be a command line tool or a GUI tool or, the easiest and most convenient way, a browser based tool. In the test console user can input token and API endpoint, choose HTTP verb, input parameters and get 100% real response data, in nicely formatted JSON format. It can save tons of time and money. Have a look at foursquare&rsquo;s <a href="https://developer.foursquare.com/docs/explore#req=users/self">online API explorer</a> for some real world example.</p>
 
 <p>Further more, an automatic regressive testing solution should be considered as early as possible. Web services are entries of your business and API implementation will surely be in a continuously developing progress. After any changes a series of strict tests must be automatically executed to confirm that all APIs are still working as intended. Use a high productivity dynamic language such as Ruby or Python to write a simple but complete client lib for your APIs and build test case for every defined API endpoints. Personally I like Ruby w/ RSpec but many other languages and frameworks also work fine.</p>
 
-<p><strong>To be continued...</strong></p>
+<p><strong>To be continued&hellip;</strong></p>
 
 <p>In the final part of this series we will talk about implementation of the API specs.</p>
 ]]></content>
@@ -256,22 +256,16 @@
     <id>http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i</id>
     <content type="html"><![CDATA[<p>Many say that <code>XML</code> <code>SOAP</code> <code>WS-\*</code> suck and SOA is over or becoming profit tool for big consultant companies. But I would say: SOA is <em>not</em> evil, IBM is. Look at these principles of SOA:</p>
 
-<p><blockquote><p>- reuse, granularity, modularity, composability, componentization and interoperability.<br/>- standards-compliance (both common and industry-specific).<br/>- services identification and categorization, provisioning and delivery, and monitoring and tracking.</p><footer><strong>Wikipedia</strong> <cite><a href='http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles'>Service-oriented Architecture</a></cite></footer></blockquote></p>
+<p><blockquote><p>&ndash; reuse, granularity, modularity, composability, componentization and interoperability.<br/>&ndash; standards-compliance (both common and industry-specific).<br/>&ndash; services identification and categorization, provisioning and delivery, and monitoring and tracking.</p><footer><strong>Wikipedia <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles">http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles</a> Service-oriented architecture</strong></footer></blockquote></p>
 
-<p>All these are perfect software architectural styles(well, except those words your spell checker complains), our best dream. These can't be wrong. The problem is in the implementations. Fortunately the rises of RESTful services on the open web prove that the spirit of SOA can really matters. Maybe one day similar architecture and implementation will eventually change enterprise computing in return.</p>
+<p>All these are perfect software architectural styles(well, except those words your spell checker complains), our best dream. These can&rsquo;t be wrong. The problem is in the implementations. Fortunately the rises of RESTful services on the open web prove that the spirit of SOA can really matters. Maybe one day similar architecture and implementation will eventually change enterprise computing in return.</p>
 
-<p>I always believe <strong>the service-oriented architecture will be the future of massive distributed software system</strong>. And <strong>RESTful services will replace web sites and eventually become the main body of the Internet</strong>. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol - it can be used as RPC protocol but it's not RESTful and cannot provide key benefits which REST want to apply.</p>
+<p>I always believe <strong>the service-oriented architecture will be the future of massive distributed software system</strong>. And <strong>RESTful services will replace web sites and eventually become the main body of the Internet</strong>. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol &ndash; it can be used as RPC protocol but it&rsquo;s not RESTful and cannot provide key benefits which REST want to apply.</p>
 
 <!-- more -->
 
 
-<p><span class='pullquote-right' data-pullquote='&#8220;Try not to think of it in terms of right and wrong. She is a guide. She can help you to find the path.&#8221;'>
-Here it is. Below I'll list a brief guide which can help you find the path, as in the Matrix movies Morpheus told Neo about the Oracle: "Try not to think of it in terms of right and wrong. She is a guide. She can help you to find the path."</p>
-
-<p>Don't get me wrong, I tried my best to keep it right and accurate, but it's very complicated and cannot be completely covered and explained while keep it simple and readable. If you want more conceptual or technical details, I'll leave you a bunch of references.</p>
-
-<p>Even we have all these compromises this guide will still be too long for a single blog post, so I will divide it into 3 parts and complete them within a month or two.
-</span></p>
+<p>Surround your pullquote like this {" text to be quoted "}</p>
 
 <p><strong>NOTE:</strong> In this guide, <em>service oriented architecture</em> and <em>RESTful architecture style</em> are nearly the same concept. I will use the term <em>RESTful</em> from here on.</p>
 
@@ -299,9 +293,9 @@ Here it is. Below I'll list a brief guide which can help you find the path, as i
 
 <p><strong>Layered:</strong> System is layered and no cross layer info exposures. Client cannot tell whether it is directly connecting to the service provider or some intermediate layer, giving the interface is the same.</p>
 
-<p><strong>Uniform interface</strong> which makes server and client decoupled on implementation, enables each part to evolve independently. It's the most practical part so we will discuss it separately below.</p>
+<p><strong>Uniform interface</strong> which makes server and client decoupled on implementation, enables each part to evolve independently. It&rsquo;s the most practical part so we will discuss it separately below.</p>
 
-<p>All these 5 rules are required. If a service violet any of them it cannot be called 'RESTful' - and more important, cannot get the benefits which RESTful styles declare to provide. So understanding all of them is the most important pre-requisite.</p>
+<p>All these 5 rules are required. If a service violet any of them it cannot be called &lsquo;RESTful&rsquo; &ndash; and more important, cannot get the benefits which RESTful styles declare to provide. So understanding all of them is the most important pre-requisite.</p>
 
 <h2>Level II: Define Your System</h2>
 
@@ -309,17 +303,17 @@ Here it is. Below I'll list a brief guide which can help you find the path, as i
 
 <h3>2.1 Business Abstraction</h3>
 
-<p>Business abstraction is <a href="/blog/2011/12/24/back-end-is-hard/">very important but hard to routinize</a>. And it's mostly beyond the realm which RESTful style can control. You should find the <em>essential</em> business concepts and make smart abstraction for high flexibility and extensibility. Yet we still can have some guideline. Probably will not solve the most difficult part of the problem but still give some help.</p>
+<p>Business abstraction is <a href="/blog/2011/12/24/back-end-is-hard/">very important but hard to routinize</a>. And it&rsquo;s mostly beyond the realm which RESTful style can control. You should find the <em>essential</em> business concepts and make smart abstraction for high flexibility and extensibility. Yet we still can have some guideline. Probably will not solve the most difficult part of the problem but still give some help.</p>
 
 <p><strong>Find business objects.</strong> When the system complete, every business objects exposed to the public will be presented as an URI. Clients can issue <code>POST</code> <code>GET</code> <code>PATCH/PUT</code> <code>DELETE</code> requests to the URI to <code>CRUD</code>(create/read/update/delete) correlated object. <em>So any objects you want to exposed to the public for clients to do the <code>CRUD</code> things you should make them in the business object model, as essential objects.</em></p>
 
 <p><strong>Define the relations.</strong> Next step is to define the relations between objects. The classical entity-relation analysis methodology is very good at that. Find all <code>1-1</code> <code>1-*</code>  <code>*-*</code> etc. relations and make them clearly documented.</p>
 
-<p><strong>The object graph.</strong> It's optional but very useful. In most case build an <a href="http://en.wikipedia.org/wiki/Object_graph">object graph</a> at this stage will help to clarify many potential obscure concepts in the business object model. Try fill some real data in the object model and understand the order and constrains of each operation. Refine the object-relation model if necessary.</p>
+<p><strong>The object graph.</strong> It&rsquo;s optional but very useful. In most case build an <a href="http://en.wikipedia.org/wiki/Object_graph">object graph</a> at this stage will help to clarify many potential obscure concepts in the business object model. Try fill some real data in the object model and understand the order and constrains of each operation. Refine the object-relation model if necessary.</p>
 
 <h3>2.2 Define Response Objects</h3>
 
-<p>Now define some response data formats. Some may feel weird to do that in such early stage but trust me it's the best path you can choose.</p>
+<p>Now define some response data formats. Some may feel weird to do that in such early stage but trust me it&rsquo;s the best path you can choose.</p>
 
 <p>Firstly you should know that as highly recommended by RESTful style, the object and its <em>representation</em> are isolated. The same object can have many different <em>representations</em> which can be designated by the clients when issuing the request.</p>
 
@@ -372,18 +366,18 @@ Here it is. Below I'll list a brief guide which can help you find the path, as i
 </pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// BAD style</span>
 </span><span class='line'><span class="nx">post</span><span class="o">:</span> <span class="p">{</span>
 </span><span class='line'>  <span class="nx">id</span><span class="o">:</span> <span class="mi">10010</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Hello&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">body</span><span class="o">:</span> <span class="s2">&quot;Hi there!&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">title</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Hello</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;,</span>
+</span><span class='line'>  <span class="nx">body</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Hi</span> <span class="nx">there</span><span class="o">!&amp;</span><span class="nx">rdquo</span><span class="p">;,</span>
 </span><span class='line'>  <span class="nx">createdAt</span><span class="o">:</span> <span class="mi">1333250513</span><span class="p">,</span>
 </span><span class='line'>  <span class="nx">author</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>  <span class="p">...</span>
+</span><span class='line'>  <span class="o">&amp;</span><span class="nx">hellip</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="c1">// GOOD style</span>
 </span><span class='line'><span class="nx">post</span><span class="o">:</span> <span class="p">{</span>
 </span><span class='line'>  <span class="nx">id</span><span class="o">:</span> <span class="mi">10010</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Hello&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">body</span><span class="o">:</span> <span class="s2">&quot;Hi there!&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">title</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Hello</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;,</span>
+</span><span class='line'>  <span class="nx">body</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Hi</span> <span class="nx">there</span><span class="o">!&amp;</span><span class="nx">rdquo</span><span class="p">;,</span>
 </span><span class='line'>  <span class="nx">createdAt</span><span class="o">:</span> <span class="mi">1333250513</span><span class="p">,</span>
 </span><span class='line'>  <span class="nx">author</span><span class="o">:</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
 </span><span class='line'>
@@ -396,7 +390,7 @@ Here it is. Below I'll list a brief guide which can help you find the path, as i
 </span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">},</span>
-</span><span class='line'>  <span class="p">...</span>
+</span><span class='line'>  <span class="o">&amp;</span><span class="nx">hellip</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
@@ -479,17 +473,17 @@ Here it is. Below I'll list a brief guide which can help you find the path, as i
 </span><span class='line'>  <span class="c1"># data is a JSON object return from JSON.parse(response)</span>
 </span><span class='line'>  <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="kp">nil</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;  total = data[&#39;total&#39;]</span>
-</span><span class='line'><span class="sr">  count = data[&#39;count&#39;]</span>
+</span><span class='line'><span class="sr">&lt;p&gt;  total = data[&amp;lsquo;total&amp;rsquo;]</span>
+</span><span class='line'><span class="sr">  count = data[&amp;lsquo;count&amp;rsquo;]</span>
 </span><span class='line'><span class="sr">  return Integer(total), Integer(count)</span>
 </span><span class='line'><span class="sr">end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">itemsFromJSONCollection</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 </span><span class='line'>  <span class="c1"># c is a class with class method named fromJSON to init object</span>
-</span><span class='line'>  <span class="k">return</span> <span class="kp">nil</span> <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="kp">nil</span> <span class="ow">or</span> <span class="n">data</span> <span class="o">==</span> <span class="kp">nil</span> <span class="ow">or</span> <span class="n">data</span><span class="o">[</span><span class="s1">&#39;items&#39;</span><span class="o">]</span> <span class="o">==</span> <span class="kp">nil</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kp">nil</span> <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="kp">nil</span> <span class="ow">or</span> <span class="n">data</span> <span class="o">==</span> <span class="kp">nil</span> <span class="ow">or</span> <span class="n">data</span><span class="o">[&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">items</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span><span class="o">]</span> <span class="o">==</span> <span class="kp">nil</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;  count = data[&#39;items&#39;].size</span>
-</span><span class='line'><span class="sr">  array = Array.new(count) { |i| c.fromJSON(data[&#39;items&#39;][i]) }</span>
+</span><span class='line'><span class="sr">&lt;p&gt;  count = data[&amp;lsquo;items&amp;rsquo;].size</span>
+</span><span class='line'><span class="sr">  array = Array.new(count) { |i| c.fromJSON(data[&amp;lsquo;items&amp;rsquo;][i]) }</span>
 </span><span class='line'><span class="sr">end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="k">class</span> <span class="nc">Collection</span>
@@ -512,7 +506,7 @@ Here it is. Below I'll list a brief guide which can help you find the path, as i
 
 <p><strong>Explicitly mark all required and optional fields.</strong> Not all data are equally important. As part of the protocol service providers should let clients know exactly which ones are optional. But remember HTTP is not a reliable communication protocol and the network status is even more complicated in mobile Internet, clients should do all error-tolerant things even for those fields marked as required.</p>
 
-<p><strong>To be continued...</strong></p>
+<p><strong>To be continued&hellip;</strong></p>
 
 <p>In the following parts we will talk about how to define the API specs and give general info about concerns in implementation.</p>
 ]]></content>

@@ -4,7 +4,7 @@
   <title><![CDATA[Paradigm X]]></title>
   <link href="http://paradigmx.net/atom.xml" rel="self"/>
   <link href="http://paradigmx.net/"/>
-  <updated>2013-06-02T23:35:45+08:00</updated>
+  <updated>2013-09-21T16:31:01+08:00</updated>
   <id>http://paradigmx.net/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
@@ -48,7 +48,7 @@
 
 <p><img src="http://paradigmx.net/images/emacs-live.png" title="My custom Emacs Live in working" ></p>
 
-<p><em>Emacs Live</em> also provides modular customization mechanism called <em>packs</em>. As you can see in the above screenshot, I don&#8217;t like the font and color theme bundled with Emacs Live so I use my favorite <a href="http://www.fsd.it/fonts/pragmatapro.htm">Pragmata Pro coding font</a> and <a href="http://ethanschoonover.com/solarized">Solarized color theme</a>. For people who like a really powerful yet beautiful and elegant developing environment for Clojure, I&#8217;ll describe below how I set up all on Mac OS X in half an hour, step by step.</p>
+<p><em>Emacs Live</em> also provides modular customization mechanism called <em>packs</em>. As you can see in the above screenshot, I don&rsquo;t like the font and color theme bundled with Emacs Live so I use my favorite <a href="http://www.fsd.it/fonts/pragmatapro.htm">Pragmata Pro coding font</a> and <a href="http://ethanschoonover.com/solarized">Solarized color theme</a>. For people who like a really powerful yet beautiful and elegant developing environment for Clojure, I&rsquo;ll describe below how I set up all on Mac OS X in half an hour, step by step.</p>
 
 <h2>Pre-requisites</h2>
 
@@ -76,7 +76,7 @@
 
 <ul>
 <li>Download pre-built universal binary from <a href="http://emacsformacosx.com">emacsformacosx.com</a>, mount the image and copy Emacs.app to <code>/Applications</code>.</li>
-<li>Use <a href="http://mxcl.github.com/homebrew/">Homebrew</a>, the best package manager for OS X. It&#8217;s as simple as <code>brew install emacs --cocoa</code>.</li>
+<li>Use <a href="http://mxcl.github.com/homebrew/">Homebrew</a>, the best package manager for OS X. It&rsquo;s as simple as <code>brew install emacs --cocoa</code>.</li>
 <li>Download source from GNU Emacs site and build it:</li>
 </ul>
 
@@ -142,7 +142,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>That&#8217;s it. Now you can try it by simply launching <code>Emacs.app</code> from your <code>/Applications</code> folder. You&#8217;d better not touch the <code>~/.emacs.d</code> folder from now on, so you can update <em>Emacs Live</em> anytime you want by issuing <code>git pull</code> in this folder.</p>
+<p>That&rsquo;s it. Now you can try it by simply launching <code>Emacs.app</code> from your <code>/Applications</code> folder. You&rsquo;d better not touch the <code>~/.emacs.d</code> folder from now on, so you can update <em>Emacs Live</em> anytime you want by issuing <code>git pull</code> in this folder.</p>
 
 <p>All following steps are for more customization, and <em>optional</em>.</p>
 
@@ -157,7 +157,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The folder name <code>yourname-pack</code> can be anything you&#8217;d like. Mine is <code>neo-pack</code> and you can have it as reference on <a href="https://github.com/neolee/neo-pack">GitHub</a>.</p>
+<p>The folder name <code>yourname-pack</code> can be anything you&rsquo;d like. Mine is <code>neo-pack</code> and you can have it as reference on <a href="https://github.com/neolee/neo-pack">GitHub</a>.</p>
 
 <h3>User Pack Structure</h3>
 
@@ -314,14 +314,14 @@ A: Modify <code>default-frame-alist</code> in <code>conf/yourname-conf.el</code>
 
 
 <p><strong>Q: I want the highlight current line feature back!</strong> <br/>
-A: After disabling the built-in <code>live/colour-pack</code> (see the first question above) you will lose the <em>highlight current line</em> feature as a side effect (since it&#8217;s defined in that pack). But it&#8217;s very easy to add it back, by adding the following line to <code>conf/yourname-conf.el</code> under your user pack:</p>
+A: After disabling the built-in <code>live/colour-pack</code> (see the first question above) you will lose the <em>highlight current line</em> feature as a side effect (since it&rsquo;s defined in that pack). But it&rsquo;s very easy to add it back, by adding the following line to <code>conf/yourname-conf.el</code> under your user pack:</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">global-hl-line-mode</span> <span class="mi">1</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>&#8211;</p>
+<p>&mdash;</p>
 
 <div class="footnotes">
     <ol>
@@ -349,9 +349,9 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
     <id>http://paradigmx.net/blog/2013/01/29/ios-7</id>
     <content type="html"><![CDATA[<p>In my opinion, the major tasks for Apple in this year are all about software, especially in the iOS eco-system.</p>
 
-<p>iOS has very solid Unix foundation and decent application framework. For a long time iOS had incontrovertible advantages over its rivals: performance, security, smooth user interaction, etc., most of which are still advantages today. But we all know that some incapabilities in iOS, especially compared to Android, are becoming more and more important aspects that Apple cannot ignore. Consider the following facts: Android may not be rendering the UI animation as smoothly as iOS always does, but it&#8217;s been getting better and better since Android 4.0, while iOS still doesn&#8217;t allow third-party apps customize the lock screen or put widgets on any part of the main UI. See the difference? Android&#8217;s problems are &#8216;not as good as iOS&#8217; and iOS has some <em>incapabilities</em>. If Apple want more people to choose iOS it should persuade the swing people (not the fans) that <em>iOS is better in all aspects</em>. It&#8217;s a prerequisite to eliminate those incapabilities ASAP.</p>
+<p>iOS has very solid Unix foundation and decent application framework. For a long time iOS had incontrovertible advantages over its rivals: performance, security, smooth user interaction, etc., most of which are still advantages today. But we all know that some incapabilities in iOS, especially compared to Android, are becoming more and more important aspects that Apple cannot ignore. Consider the following facts: Android may not be rendering the UI animation as smoothly as iOS always does, but it&rsquo;s been getting better and better since Android 4.0, while iOS still doesn&rsquo;t allow third-party apps customize the lock screen or put widgets on any part of the main UI. See the difference? Android&rsquo;s problems are &lsquo;not as good as iOS&rsquo; and iOS has some <em>incapabilities</em>. If Apple want more people to choose iOS it should persuade the swing people (not the fans) that <em>iOS is better in all aspects</em>. It&rsquo;s a prerequisite to eliminate those incapabilities ASAP.</p>
 
-<p>Ars Technica <a href="http://arstechnica.com/apple/2013/01/bring-us-the-features-an-ars-staff-wish-list-for-ios-7/">posted their staff wish list for iOS 7</a> last week. Most features in their list are <em>good</em> ones but not the <em>critical</em> ones. Base on the above <em>eliminating incapabilities</em> theory I&#8217;ll list mine below, divided to developer and user categories.</p>
+<p>Ars Technica <a href="http://arstechnica.com/apple/2013/01/bring-us-the-features-an-ars-staff-wish-list-for-ios-7/">posted their staff wish list for iOS 7</a> last week. Most features in their list are <em>good</em> ones but not the <em>critical</em> ones. Base on the above <em>eliminating incapabilities</em> theory I&rsquo;ll list mine below, divided to developer and user categories.</p>
 
 <!-- more -->
 
@@ -366,11 +366,11 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 
 <p><img class="right" src="http://paradigmx.net/images/ios-7-wishlist/share-panels.jpg" width="360" title="Share Panel in iOS and Android" ></p>
 
-<p>The <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivityViewController_Class/Reference/Reference.html#//apple_ref/occ/cl/UIActivityViewController">UIActivityViewController</a> API introduced in iOS 6 is a high level interface for inter-app data sharing. It&#8217;s similar to Android&#8217;s &#8220;Share&#8230;via&#8221; interface, but not allow third-party apps to add system level services (app level services are allowed, see this <a href="http://stackoverflow.com/questions/12546574/using-apple-icons-with-ios-6">StackOverflow question</a> for details). This is another improvement opportunity for Apple.</p>
+<p>The <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivityViewController_Class/Reference/Reference.html#//apple_ref/occ/cl/UIActivityViewController">UIActivityViewController</a> API introduced in iOS 6 is a high level interface for inter-app data sharing. It&rsquo;s similar to Android&rsquo;s &ldquo;Share&hellip;via&rdquo; interface, but not allow third-party apps to add system level services (app level services are allowed, see this <a href="http://stackoverflow.com/questions/12546574/using-apple-icons-with-ios-6">StackOverflow question</a> for details). This is another improvement opportunity for Apple.</p>
 
 <h3>2. Widget API</h3>
 
-<p>Widgets may bring trouble (drained battery, inconsistent user interaction, etc.) but still useful and sometimes very attractive. There are several parts of iOS&#8217;s system UI that are calling for custom widgets: the lock screen, the notification center, and the multitasking bar (actually we already have some <a href="http://www.theverge.com/2012/10/4/3451322/rethinking-the-app-switcher-for-the-iphone-5-mockups">impressive mockup</a> for this one).</p>
+<p>Widgets may bring trouble (drained battery, inconsistent user interaction, etc.) but still useful and sometimes very attractive. There are several parts of iOS&rsquo;s system UI that are calling for custom widgets: the lock screen, the notification center, and the multitasking bar (actually we already have some <a href="http://www.theverge.com/2012/10/4/3451322/rethinking-the-app-switcher-for-the-iphone-5-mockups">impressive mockup</a> for this one).</p>
 
 <p>For now all these UI parts are running inside the Springboard process. Apple must move them into independent processes before allowing third-party widgets running within them. Then Apple should push some strict guideline for widget development (just like multitasking). Finally open a front page section in the App Store and Boom! Everybody will be happy with it.</p>
 
@@ -378,7 +378,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 
 <h3>3. Siri API</h3>
 
-<p>This one is easy to describe: open APIs of Siri, let us develop plugins for Siri and make her a real goddess. Third-party apps can facilitate Siri&#8217;s advanced voice recognition and text-to-speech engine, response to Siri commands and integrate content into Siri&#8217;s search result. It will bring a whole new world in.</p>
+<p>This one is easy to describe: open APIs of Siri, let us develop plugins for Siri and make her a real goddess. Third-party apps can facilitate Siri&rsquo;s advanced voice recognition and text-to-speech engine, response to Siri commands and integrate content into Siri&rsquo;s search result. It will bring a whole new world in.</p>
 
 <h3>4. A Better App Store</h3>
 
@@ -386,7 +386,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 
 <ul>
 <li><strong>Incremental update for apps</strong>. Enough said.</li>
-<li><strong>Better IAP flow</strong>. The standard flow today is fragile: app connect to iTunes to let user purchase; app connect to its own server to log the purchased token; app server connect to Apple&#8217;s IAP server for verification; etc. If user quits app during some steps or app server fails on IAP server, the transaction will fail and may leave incomplete state in the system. A one step server-to-server workflow will be life changer for developers who highly rely on the IAP mechanism.</li>
+<li><strong>Better IAP flow</strong>. The standard flow today is fragile: app connect to iTunes to let user purchase; app connect to its own server to log the purchased token; app server connect to Apple&rsquo;s IAP server for verification; etc. If user quits app during some steps or app server fails on IAP server, the transaction will fail and may leave incomplete state in the system. A one step server-to-server workflow will be life changer for developers who highly rely on the IAP mechanism.</li>
 <li><strong>Account statement</strong>. Developers need detail account statements for many reasons: fix failed payments, find cheating users, etc.</li>
 <li><strong>App promoting policy</strong>. Developers need more transparency on app recommendation and sorting mechanism, and a clean policy for app promoting (can and cannot do, good and evil behaviors and so on).</li>
 </ul>
@@ -497,7 +497,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 
 <h2>Extended Readings</h2>
 
-<p>RESTful web services are not traditional web sites but they share most characteristic features of Internet software architecture. If you are an architect but new to Internet-scale services architecture James Hamilton&#8217;s <a href="http://static.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">classic thesis</a> is a must-read.</p>
+<p>RESTful web services are not traditional web sites but they share most characteristic features of Internet software architecture. If you are an architect but new to Internet-scale services architecture James Hamilton&rsquo;s <a href="http://static.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">classic thesis</a> is a must-read.</p>
 
 <p>For new software architects this <a href="http://gorban.org/post/32873465932/software-architecture-cheat-sheet">cheat sheet</a> is a good start.</p>
 
@@ -514,7 +514,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 
 <h2>Level III: Define and Tune the API</h2>
 
-<p>Defining API specs is the most important part of all and it&#8217;s a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as <a href="http://www.mediawiki.org/">MediaWiki</a> or <a href="http://daringfireball.net/projects/markdown/">Markdown</a> + <a href="https://github.com">GitHub</a> etc. Then you can follow these sections below.</p>
+<p>Defining API specs is the most important part of all and it&rsquo;s a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as <a href="http://www.mediawiki.org/">MediaWiki</a> or <a href="http://daringfireball.net/projects/markdown/">Markdown</a> + <a href="https://github.com">GitHub</a> etc. Then you can follow these sections below.</p>
 
 <!-- more -->
 
@@ -544,7 +544,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 <li>There are 2 types of <strong>services</strong> in most <strong>platform</strong>: (A) services related to a specific <em>user</em> in the platform; (B) services independent to <em>users</em>. They need different kinds of tokens:
 
 <ul>
-<li>For type (A): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET, correlated user&#8217;s ID and expected access profile (commonly called &#8217;<em>scope</em>&#8217;) to request the access token.</li>
+<li>For type (A): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET, correlated user&rsquo;s ID and expected access profile (commonly called &lsquo;<em>scope</em>&rsquo;) to request the access token.</li>
 <li>For type (B): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET and <em>scope</em> to request the access token.</li>
 </ul>
 </li>
@@ -552,7 +552,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 </ul>
 
 
-<p>In many cases the <strong>platform</strong> cannot issue type (A) token to an <strong>app</strong> unless correlated user explicitly approve the request. That&#8217;s where OAuth-like mechanisms make sense. In such cases, when <strong>platform</strong> receives request for issuing a token to some user, it will redirect the user to a page showing Approve/Decline buttons and continue the flow after the user explicitly approve the request. For detail info about the widely uses OAuth v2 protocol refer to the official <a href="http://tools.ietf.org/html/rfc6749">IETF RFC6749 document</a>.</p>
+<p>In many cases the <strong>platform</strong> cannot issue type (A) token to an <strong>app</strong> unless correlated user explicitly approve the request. That&rsquo;s where OAuth-like mechanisms make sense. In such cases, when <strong>platform</strong> receives request for issuing a token to some user, it will redirect the user to a page showing Approve/Decline buttons and continue the flow after the user explicitly approve the request. For detail info about the widely uses OAuth v2 protocol refer to the official <a href="http://tools.ietf.org/html/rfc6749">IETF RFC6749 document</a>.</p>
 
 <p>A platform should choose mechanism wisely and make the flows (app registration, token issuing/revoking/managing, etc.) clean, flexible and friendly to all potential client apps. Useful tutorials about all these flows are required.</p>
 
@@ -568,7 +568,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 </ol>
 
 
-<p>So let&#8217;s look at some typical RESTful URI patterns.</p>
+<p>So let&rsquo;s look at some typical RESTful URI patterns.</p>
 
 <ul>
 <li><strong>Object</strong>
@@ -587,7 +587,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 <li><strong>Aspect</strong> or <strong>Attribute</strong>
 
 <ul>
-<li><code>/:type/:id/:aspect</code> e.g. <code>/user/1532/friends</code> <code>/user/1532/pets</code>: Return zero or more objects of some type related to designated object. In our examples, user #1532&#8217;s friends should be zero or more <em>user</em> objects, and user #1532&#8217;s pets should be zero or more <em>pet</em> objects.</li>
+<li><code>/:type/:id/:aspect</code> e.g. <code>/user/1532/friends</code> <code>/user/1532/pets</code>: Return zero or more objects of some type related to designated object. In our examples, user #1532&rsquo;s friends should be zero or more <em>user</em> objects, and user #1532&rsquo;s pets should be zero or more <em>pet</em> objects.</li>
 </ul>
 </li>
 <li><strong>Action</strong>
@@ -633,7 +633,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 </table></p>
 
 
-<p>Well, some special APIs will be hard to classify. Here are the most commonly used two (we won&#8217;t discuss more, just list them here):</p>
+<p>Well, some special APIs will be hard to classify. Here are the most commonly used two (we won&rsquo;t discuss more, just list them here):</p>
 
 <ul>
 <li><code>compound</code>: combine several API requests into a batch and response the batch results altogether.</li>
@@ -657,11 +657,11 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 
 <h3>3.5 Test the Specs</h3>
 
-<p>To give app developers&#8217; and yourself a better life, you need an API test console from the first day. It can be a command line tool or a GUI tool or, the easiest and most convenient way, a browser based tool. In the test console user can input token and API endpoint, choose HTTP verb, input parameters and get 100% real response data, in nicely formatted JSON format. It can save tons of time and money. Have a look at foursquare&#8217;s <a href="https://developer.foursquare.com/docs/explore#req=users/self">online API explorer</a> for some real world example.</p>
+<p>To give app developers&#8217; and yourself a better life, you need an API test console from the first day. It can be a command line tool or a GUI tool or, the easiest and most convenient way, a browser based tool. In the test console user can input token and API endpoint, choose HTTP verb, input parameters and get 100% real response data, in nicely formatted JSON format. It can save tons of time and money. Have a look at foursquare&rsquo;s <a href="https://developer.foursquare.com/docs/explore#req=users/self">online API explorer</a> for some real world example.</p>
 
 <p>Further more, an automatic regressive testing solution should be considered as early as possible. Web services are entries of your business and API implementation will surely be in a continuously developing progress. After any changes a series of strict tests must be automatically executed to confirm that all APIs are still working as intended. Use a high productivity dynamic language such as Ruby or Python to write a simple but complete client lib for your APIs and build test case for every defined API endpoints. Personally I like Ruby w/ RSpec but many other languages and frameworks also work fine.</p>
 
-<p><strong>To be continued&#8230;</strong></p>
+<p><strong>To be continued&hellip;</strong></p>
 
 <p>In the final part of this series we will talk about implementation of the API specs.</p>
 ]]></content>
@@ -672,7 +672,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
     <link href="http://paradigmx.net/blog/2012/09/18/europe-summer-2012-and-500px/"/>
     <updated>2012-09-18T14:18:00+08:00</updated>
     <id>http://paradigmx.net/blog/2012/09/18/europe-summer-2012-and-500px</id>
-    <content type="html"><![CDATA[<p>I spent my summer vacation with my family in Germany, Austria and Switzerland. It&#8217;s the first time I visit Europe. Had bunch of photos, most of which are taken by my Fujifilm Finepix X100 with its wide conversion lens WCL-X100. After one and half months I finally picked up <a href="http://500px.com/soulhacker/sets/europe_tour_2012">~150 photos</a> and uploaded them to 500px.</p>
+    <content type="html"><![CDATA[<p>I spent my summer vacation with my family in Germany, Austria and Switzerland. It&rsquo;s the first time I visit Europe. Had bunch of photos, most of which are taken by my Fujifilm Finepix X100 with its wide conversion lens WCL-X100. After one and half months I finally picked up <a href="http://500px.com/soulhacker/sets/europe_tour_2012">~150 photos</a> and uploaded them to 500px.</p>
 
 <p>X100 is a really amazing camera. Its <a href="http://www.dxomark.com/index.php/en.../Cameras/Camera-Sensor-Database/Fujifilm/FinePix-X100">top-of-the-line</a> APS-C sized CMOS sensor provides great resolution and SNR. Its prime lens (with field of view equivalent to 35mm and 28mm lens on full frame) are especially suitable for landscape and cultural photography. iPhone 4S is a great backup, provide fairly good photos even in some typically difficult scenarios for compact DCs. Remember all these are very lightweight. Farewell my big DSLRs. <em>The best cameras are the ones you always take with you.</em></p>
 
@@ -681,17 +681,17 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 <!-- more -->
 
 
-<p>First of all, please provide full support to all high DPI displays, i.e. iPhone 4/4S/5, the latest iPad and the MBP with Retina Display. You are a professional photography site and you have to support the best display devices in this planet, don&#8217;t you? It feels very bad when I see those low resolution photos in the shiny Retina Display MBP, especially when I&#8217;ve uploaded all the full resolution(12MP) images.</p>
+<p>First of all, please provide full support to all high DPI displays, i.e. iPhone 4/4S/5, the latest iPad and the MBP with Retina Display. You are a professional photography site and you have to support the best display devices in this planet, don&rsquo;t you? It feels very bad when I see those low resolution photos in the shiny Retina Display MBP, especially when I&rsquo;ve uploaded all the full resolution(12MP) images.</p>
 
-<p>Second, re-design your site navigation please. Think about it, user has profile, sets and stories. When I dig into some photo I want clear path to get out (e.g. back to a set or story). And I&#8217;d like some shortcut to quickly navigate between my sets and stories. The site&#8217;s navigation design does not exist, for now.</p>
+<p>Second, re-design your site navigation please. Think about it, user has profile, sets and stories. When I dig into some photo I want clear path to get out (e.g. back to a set or story). And I&rsquo;d like some shortcut to quickly navigate between my sets and stories. The site&rsquo;s navigation design does not exist, for now.</p>
 
 <p>Third, the Organizer should be designed for batch operation. We can only drag one photo at a time. I uploaded several hundreds photos and had to drag several hundreds times to move them to specific sets. How could it work sir?</p>
 
-<p>The last but not least. Why add some grey corner to the photo thumb in the set view? Just to put the shopping cart icon there? Do you know that the grey corners are most common flaws of photos? The grey corners make my photos look flawed and it&#8217;s not cool.</p>
+<p>The last but not least. Why add some grey corner to the photo thumb in the set view? Just to put the shopping cart icon there? Do you know that the grey corners are most common flaws of photos? The grey corners make my photos look flawed and it&rsquo;s not cool.</p>
 
-<p>If I have time I can list more issues on 500px&#8217;s function and interaction design. But I think the ones listed are more than enough.</p>
+<p>If I have time I can list more issues on 500px&rsquo;s function and interaction design. But I think the ones listed are more than enough.</p>
 
-<p>Actually 500px has some very good sense and idea on high quality photo sharing and exchanging. But the bad user experience (although the UI is beautiful and fairly responsive) and slow development may kill it. I&#8217;m a Plus member for a while but I highly doubt that I will upgrade to Awesome without seeing some significant changes on the site.</p>
+<p>Actually 500px has some very good sense and idea on high quality photo sharing and exchanging. But the bad user experience (although the UI is beautiful and fairly responsive) and slow development may kill it. I&rsquo;m a Plus member for a while but I highly doubt that I will upgrade to Awesome without seeing some significant changes on the site.</p>
 ]]></content>
   </entry>
   
@@ -700,7 +700,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
     <link href="http://paradigmx.net/blog/2012/05/01/wanted-image-website-tool-not-suck/"/>
     <updated>2012-05-01T12:28:00+08:00</updated>
     <id>http://paradigmx.net/blog/2012/05/01/wanted-image-website-tool-not-suck</id>
-    <content type="html"><![CDATA[<p>Per my 13-years old daughter&#8217;s request I&#8217;m searching for some tools to build her own image website, so she can publish and manage all her drawings and photos. To my surprise after all these years there are still very few such tools that not sucks.</p>
+    <content type="html"><![CDATA[<p>Per my 13-years old daughter&rsquo;s request I&rsquo;m searching for some tools to build her own image website, so she can publish and manage all her drawings and photos. To my surprise after all these years there are still very few such tools that not sucks.</p>
 
 <p><a href="http://gallery.menalto.com/">Gallery</a>, <a href="http://piwigo.org/">Piwigo</a>, <a href="http://www.zenphoto.org/">Zenphoto</a>, <a href="http://www.e2interactive.com/e2_photo_gallery/">E2 Photo Gallery</a>, etc. They are old, powerful and actively developed. But all of them are so <em>last-century</em>. They are ancient content manage systems and just not work for modern creative artists, like  my daughter of cause. Here is <em>my requirements</em>:</p>
 
@@ -708,7 +708,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 <li>Free and open source (optional)</li>
 <li>Easy to deploy to shared hosting service and/or VPS</li>
 <li>Easy-to-use uploading tool which supports single and multiple files</li>
-<li>Support imagesets (&#8220;albums&#8221;)</li>
+<li>Support imagesets (&ldquo;albums&rdquo;)</li>
 <li>Support tags</li>
 <li>Manageable commenting and rating system (built-in or integration with Disqus)</li>
 <li>Support direct hyperlinks to the images (can be toggled on/off per album based)</li>
@@ -746,17 +746,17 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 <blockquote><p>- reuse, granularity, modularity, composability, componentization and interoperability.<br/>- standards-compliance (both common and industry-specific).<br/>- services identification and categorization, provisioning and delivery, and monitoring and tracking.</p><footer><strong>Wikipedia</strong> <cite><a href='http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles'>Service-oriented Architecture</a></cite></footer></blockquote>
 
 
-<p>All these are perfect software architectural styles(well, except those words your spell checker complains), our best dream. These can&#8217;t be wrong. The problem is in the implementations. Fortunately the rises of RESTful services on the open web prove that the spirit of SOA can really matters. Maybe one day similar architecture and implementation will eventually change enterprise computing in return.</p>
+<p>All these are perfect software architectural styles(well, except those words your spell checker complains), our best dream. These can&rsquo;t be wrong. The problem is in the implementations. Fortunately the rises of RESTful services on the open web prove that the spirit of SOA can really matters. Maybe one day similar architecture and implementation will eventually change enterprise computing in return.</p>
 
-<p>I always believe <strong>the service-oriented architecture will be the future of massive distributed software system</strong>. And <strong>RESTful services will replace web sites and eventually become the main body of the Internet</strong>. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol - it can be used as RPC protocol but it&#8217;s not RESTful and cannot provide key benefits which REST want to apply.</p>
+<p>I always believe <strong>the service-oriented architecture will be the future of massive distributed software system</strong>. And <strong>RESTful services will replace web sites and eventually become the main body of the Internet</strong>. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol &ndash; it can be used as RPC protocol but it&rsquo;s not RESTful and cannot provide key benefits which REST want to apply.</p>
 
 <!-- more -->
 
 
 <p><span class='pullquote-right' data-pullquote='&#8220;Try not to think of it in terms of right and wrong. She is a guide. She can help you to find the path.&#8221;'>
-Here it is. Below I&#8217;ll list a brief guide which can help you find the path, as in the Matrix movies Morpheus told Neo about the Oracle: &#8220;Try not to think of it in terms of right and wrong. She is a guide. She can help you to find the path.&#8221;</p>
+Here it is. Below I&rsquo;ll list a brief guide which can help you find the path, as in the Matrix movies Morpheus told Neo about the Oracle: &ldquo;Try not to think of it in terms of right and wrong. She is a guide. She can help you to find the path.&rdquo;</p>
 
-<p>Don&#8217;t get me wrong, I tried my best to keep it right and accurate, but it&#8217;s very complicated and cannot be completely covered and explained while keep it simple and readable. If you want more conceptual or technical details, I&#8217;ll leave you a bunch of references.</p>
+<p>Don&rsquo;t get me wrong, I tried my best to keep it right and accurate, but it&rsquo;s very complicated and cannot be completely covered and explained while keep it simple and readable. If you want more conceptual or technical details, I&rsquo;ll leave you a bunch of references.</p>
 
 <p>Even we have all these compromises this guide will still be too long for a single blog post, so I will divide it into 3 parts and complete them within a month or two.
 </span></p>
@@ -787,9 +787,9 @@ Here it is. Below I&#8217;ll list a brief guide which can help you find the path
 
 <p><strong>Layered:</strong> System is layered and no cross layer info exposures. Client cannot tell whether it is directly connecting to the service provider or some intermediate layer, giving the interface is the same.</p>
 
-<p><strong>Uniform interface</strong> which makes server and client decoupled on implementation, enables each part to evolve independently. It&#8217;s the most practical part so we will discuss it separately below.</p>
+<p><strong>Uniform interface</strong> which makes server and client decoupled on implementation, enables each part to evolve independently. It&rsquo;s the most practical part so we will discuss it separately below.</p>
 
-<p>All these 5 rules are required. If a service violet any of them it cannot be called &#8216;RESTful&#8217; - and more important, cannot get the benefits which RESTful styles declare to provide. So understanding all of them is the most important pre-requisite.</p>
+<p>All these 5 rules are required. If a service violet any of them it cannot be called &lsquo;RESTful&rsquo; &ndash; and more important, cannot get the benefits which RESTful styles declare to provide. So understanding all of them is the most important pre-requisite.</p>
 
 <h2>Level II: Define Your System</h2>
 
@@ -797,17 +797,17 @@ Here it is. Below I&#8217;ll list a brief guide which can help you find the path
 
 <h3>2.1 Business Abstraction</h3>
 
-<p>Business abstraction is <a href="http://paradigmx.net/blog/2011/12/24/back-end-is-hard/">very important but hard to routinize</a>. And it&#8217;s mostly beyond the realm which RESTful style can control. You should find the <em>essential</em> business concepts and make smart abstraction for high flexibility and extensibility. Yet we still can have some guideline. Probably will not solve the most difficult part of the problem but still give some help.</p>
+<p>Business abstraction is <a href="http://paradigmx.net/blog/2011/12/24/back-end-is-hard/">very important but hard to routinize</a>. And it&rsquo;s mostly beyond the realm which RESTful style can control. You should find the <em>essential</em> business concepts and make smart abstraction for high flexibility and extensibility. Yet we still can have some guideline. Probably will not solve the most difficult part of the problem but still give some help.</p>
 
 <p><strong>Find business objects.</strong> When the system complete, every business objects exposed to the public will be presented as an URI. Clients can issue <code>POST</code> <code>GET</code> <code>PATCH/PUT</code> <code>DELETE</code> requests to the URI to <code>CRUD</code>(create/read/update/delete) correlated object. <em>So any objects you want to exposed to the public for clients to do the <code>CRUD</code> things you should make them in the business object model, as essential objects.</em></p>
 
 <p><strong>Define the relations.</strong> Next step is to define the relations between objects. The classical entity-relation analysis methodology is very good at that. Find all <code>1-1</code> <code>1-*</code>  <code>*-*</code> etc. relations and make them clearly documented.</p>
 
-<p><strong>The object graph.</strong> It&#8217;s optional but very useful. In most case build an <a href="http://en.wikipedia.org/wiki/Object_graph">object graph</a> at this stage will help to clarify many potential obscure concepts in the business object model. Try fill some real data in the object model and understand the order and constrains of each operation. Refine the object-relation model if necessary.</p>
+<p><strong>The object graph.</strong> It&rsquo;s optional but very useful. In most case build an <a href="http://en.wikipedia.org/wiki/Object_graph">object graph</a> at this stage will help to clarify many potential obscure concepts in the business object model. Try fill some real data in the object model and understand the order and constrains of each operation. Refine the object-relation model if necessary.</p>
 
 <h3>2.2 Define Response Objects</h3>
 
-<p>Now define some response data formats. Some may feel weird to do that in such early stage but trust me it&#8217;s the best path you can choose.</p>
+<p>Now define some response data formats. Some may feel weird to do that in such early stage but trust me it&rsquo;s the best path you can choose.</p>
 
 <p>Firstly you should know that as highly recommended by RESTful style, the object and its <em>representation</em> are isolated. The same object can have many different <em>representations</em> which can be designated by the clients when issuing the request.</p>
 
@@ -979,7 +979,7 @@ Here it is. Below I&#8217;ll list a brief guide which can help you find the path
 
 <p><strong>Explicitly mark all required and optional fields.</strong> Not all data are equally important. As part of the protocol service providers should let clients know exactly which ones are optional. But remember HTTP is not a reliable communication protocol and the network status is even more complicated in mobile Internet, clients should do all error-tolerant things even for those fields marked as required.</p>
 
-<p><strong>To be continued&#8230;</strong></p>
+<p><strong>To be continued&hellip;</strong></p>
 
 <p>In the following parts we will talk about how to define the API specs and give general info about concerns in implementation.</p>
 ]]></content>
@@ -991,11 +991,11 @@ Here it is. Below I&#8217;ll list a brief guide which can help you find the path
     <updated>2012-03-31T16:56:00+08:00</updated>
     <id>http://paradigmx.net/blog/2012/03/31/soul-link</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://paradigmx.net/images/paper-by-fiftythree.jpg">
-Apple AppStore&#8217;s biggest news this week is that, <a href="http://www.fiftythree.com/paper">FiftyThree&#8217;s Paper</a> became the <a href="http://itunes.apple.com/app/paper-by-fiftythree/id506003812?mt=8">iPad App of the Week</a> in just 2 days. I think that it&#8217;s far from coincidence.</p>
+Apple AppStore&rsquo;s biggest news this week is that, <a href="http://www.fiftythree.com/paper">FiftyThree&rsquo;s Paper</a> became the <a href="http://itunes.apple.com/app/paper-by-fiftythree/id506003812?mt=8">iPad App of the Week</a> in just 2 days. I think that it&rsquo;s far from coincidence.</p>
 
-<p>I tried <em>Paper</em> for several hours. It offers no unique features. It&#8217;s much less powerful than <a href="http://itunes.apple.com/app/sketchbook-pro-for-ipad/id364253478?mt=8">AutoDesk&#8217;s SketchBook Pro</a>, a full-featured paint tool especially designed for the new iPad&#8217;s Retina Display which was showed off on Apple&#8217;s event. But I can predict that <em>Paper</em> will be much more popular. So why is it so special?</p>
+<p>I tried <em>Paper</em> for several hours. It offers no unique features. It&rsquo;s much less powerful than <a href="http://itunes.apple.com/app/sketchbook-pro-for-ipad/id364253478?mt=8">AutoDesk&rsquo;s SketchBook Pro</a>, a full-featured paint tool especially designed for the new iPad&rsquo;s Retina Display which was showed off on Apple&rsquo;s event. But I can predict that <em>Paper</em> will be much more popular. So why is it so special?</p>
 
-<p>Watch their <a href="http://vimeo.com/37254322">official trailer</a> and you can get some clues. The trailer spreads several important ideas: 1. <em>Paper</em> can be used anytime anywhere whenever people want to use pen and paper. 2. The User, the iPad, <em>Paper</em> and the stylus work together as a whole. 3. All these are all about the user&#8217;s lifestyle, becoming part to it.</p>
+<p>Watch their <a href="http://vimeo.com/37254322">official trailer</a> and you can get some clues. The trailer spreads several important ideas: 1. <em>Paper</em> can be used anytime anywhere whenever people want to use pen and paper. 2. The User, the iPad, <em>Paper</em> and the stylus work together as a whole. 3. All these are all about the user&rsquo;s lifestyle, becoming part to it.</p>
 
 <p>So what do you think while watching the video? Desire to light up your iPad at once and sketch something? Think about buying one <a href="http://wacom.com/en/Products/Bamboo/BambooStylus.aspx">Wacom Stylus</a> for your iPad? Or those <a href="http://www.youtube.com/watch?v=D2BvVcSkNkA">amazing</a> <a href="http://www.youtube.com/watch?v=9bYx3iEdzzc">ads</a> for the <a href="http://www.youtube.com/watch?v=btfbIVGES1I">original</a> <a href="http://www.youtube.com/watch?v=NMvETJ0bxEQ">iPad</a>? My answer is: all of them. And one more <del>thing</del> person, Don Draper.</p>
 
@@ -1003,23 +1003,23 @@ Apple AppStore&#8217;s biggest news this week is that, <a href="http://www.fifty
 
 
 <p><img class="right" src="http://paradigmx.net/images/don-draper.gif">
-In <em>Mad Men</em>&#8217;s season I finale, <em>The Wheel</em>, people from Eastman Kodak brought their new invention, a <a href="http://en.wikipedia.org/wiki/Carousel_slide_projector">slide projector</a> to Don Draper for a name and an ad campaign proposal. After a typical <a href="http://paradigmx.net/images/don-draper-inspiration.jpg"><em>Don&#8217;s inspiration routine</em></a> Don Draper dug up a vision from his childhood and proposed &#8217;<em>Carousel</em>&#8217; as the name of the projector, which made it a symbolic memento of everybody&#8217;s childhood. Don Drape explained this idea as below:</p>
+In <em>Mad Men</em>&rsquo;s season I finale, <em>The Wheel</em>, people from Eastman Kodak brought their new invention, a <a href="http://en.wikipedia.org/wiki/Carousel_slide_projector">slide projector</a> to Don Draper for a name and an ad campaign proposal. After a typical <a href="http://paradigmx.net/images/don-draper-inspiration.jpg"><em>Don&rsquo;s inspiration routine</em></a> Don Draper dug up a vision from his childhood and proposed &lsquo;<em>Carousel</em>&rsquo; as the name of the projector, which made it a symbolic memento of everybody&rsquo;s childhood. Don Drape explained this idea as below:</p>
 
 <blockquote><p>&#8220;Technology is a glittering lure. But there&#8217;s the rare occasion when the public can be engaged on a level beyond flash, if they have a sentimental bond with the product.&#8221;</p><footer><strong>Don Draper</strong> <cite>From Mad Men Season I Episode 13 &#8220;the Wheel&#8221;</cite></footer></blockquote>
 
 
 <p><img class="left" src="http://paradigmx.net/images/paper-in-action.jpg">
-Functional features are the <em>essence</em> of a product. But most product features are not so specific nor unique for the users. Thus they cannot differentiate your product from similar ones (either from you or your competitors). You&#8217;d find a way to lure the users to use it, and you have to guide your users to the perfect moment to use it. Under specific scenarios or circumstances some of your design will make your product unique, any design that plants the strong idea into people&#8217;s mind, that your product is made just for them and for THAT moment. Finally users will become to <strong>depend</strong> on your product at such moments. That&#8217;s the <em>sentimental bond</em> as Don told us, and the <em>soul link</em> between product and people.</p>
+Functional features are the <em>essence</em> of a product. But most product features are not so specific nor unique for the users. Thus they cannot differentiate your product from similar ones (either from you or your competitors). You&rsquo;d find a way to lure the users to use it, and you have to guide your users to the perfect moment to use it. Under specific scenarios or circumstances some of your design will make your product unique, any design that plants the strong idea into people&rsquo;s mind, that your product is made just for them and for THAT moment. Finally users will become to <strong>depend</strong> on your product at such moments. That&rsquo;s the <em>sentimental bond</em> as Don told us, and the <em>soul link</em> between product and people.</p>
 
-<p>There is a popular fallacious point among product guys, thinking that the well polished UI is the soul of product, which can make people be deeply <em>touched</em>. It&#8217;s <strong>WRONG</strong>. People may be touched, but that&#8217;s not your product&#8217;s purpose and people won&#8217;t love products just because they are touching. Try ask yourself:</p>
+<p>There is a popular fallacious point among product guys, thinking that the well polished UI is the soul of product, which can make people be deeply <em>touched</em>. It&rsquo;s <strong>WRONG</strong>. People may be touched, but that&rsquo;s not your product&rsquo;s purpose and people won&rsquo;t love products just because they are touching. Try ask yourself:</p>
 
 <blockquote><p>After showing off your product to someone, can they intuitively understand what purpose and moments the product for, then remember your product and desire to have a try ASAP the right moment comes?</p></blockquote>
 
 
 <p><img class="right" src="http://paradigmx.net/images/steve-jobs-and-iphone.jpg">
-If not, they won&#8217;t be bonded to your product. Go get someone else or re-think your product and find the <em>soul link</em>. <em>Seal</em> the <em>link</em> on each of every steps which give birth to your product: <code>designing</code>, <code>building</code>, <code>integrating</code>, <code>presenting</code> and <code>promoting</code>.</p>
+If not, they won&rsquo;t be bonded to your product. Go get someone else or re-think your product and find the <em>soul link</em>. <em>Seal</em> the <em>link</em> on each of every steps which give birth to your product: <code>designing</code>, <code>building</code>, <code>integrating</code>, <code>presenting</code> and <code>promoting</code>.</p>
 
-<p>It&#8217;s really simple rule. But in the history of technology very few people can make it. Steve Jobs is one perfect example and he had made Apple an organization talented to make products that way. I think that people in <a href="http://www.fiftythree.com/about">FiftyThree</a> also have such talents. <em>Paper</em> not only has strong soul link to people, but also to the iPad, Jobs&#8217; most favorite creation. I&#8217;m pretty sure that if Jobs were still alive, he would certainly love <em>Paper</em> and its creators, and invite them to join Apple.</p>
+<p>It&rsquo;s really simple rule. But in the history of technology very few people can make it. Steve Jobs is one perfect example and he had made Apple an organization talented to make products that way. I think that people in <a href="http://www.fiftythree.com/about">FiftyThree</a> also have such talents. <em>Paper</em> not only has strong soul link to people, but also to the iPad, Jobs&#8217; most favorite creation. I&rsquo;m pretty sure that if Jobs were still alive, he would certainly love <em>Paper</em> and its creators, and invite them to join Apple.</p>
 ]]></content>
   </entry>
   
@@ -1035,21 +1035,21 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 
 <ul>
 <li>There is no Android SDK for Go, so no system API nor GUI for Go program on Android.</li>
-<li>Go doesn&#8217;t support JNI for now. So Go programs have to be compiled as separate executables, wrapped as assets in apk and called within Java based apps.</li>
+<li>Go doesn&rsquo;t support JNI for now. So Go programs have to be compiled as separate executables, wrapped as assets in apk and called within Java based apps.</li>
 <li>Maybe cross-compiling is really hard. We cannot build Android applications which use Cgo(C bridge for Go) on our desktop computer for now, as shown below.</li>
 </ul>
 
 
-<p>But it&#8217;s not just a toy because of the following advantages:</p>
+<p>But it&rsquo;s not just a toy because of the following advantages:</p>
 
 <ul>
 <li>Go is <em>fast</em> and all C programmers just like it.</li>
 <li>Go language is bundled with high quality libraries, especially suitable for special tasks.</li>
-<li>Go is from Google! It does have a future! Well, at least let&#8217;s hope so.</li>
+<li>Go is from Google! It does have a future! Well, at least let&rsquo;s hope so.</li>
 </ul>
 
 
-<p>Go is a very young language, thus there&#8217;s few guides or tutorials out there. But it also makes earlier investion provide more return. My friend and colleague <a href="https://twitter.com/#!/rarnu">@rarnu</a> also likes the idea of writing Android program using Go and has written <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">a short tutorial</a>. I&#8217;d like to rewrite it here and fill all lost details which he was too lazy to include.</p>
+<p>Go is a very young language, thus there&rsquo;s few guides or tutorials out there. But it also makes earlier investion provide more return. My friend and colleague <a href="https://twitter.com/#!/rarnu">@rarnu</a> also likes the idea of writing Android program using Go and has written <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">a short tutorial</a>. I&rsquo;d like to rewrite it here and fill all lost details which he was too lazy to include.</p>
 
 <h3>Prerequisites</h3>
 
@@ -1103,11 +1103,11 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now check out <code>$GOBIN</code> folder, three commands <code>go</code> <code>godoc</code> <code>gofmt</code>(<code>go</code> command line tools) and a folder <code>linux_arm</code>(cross-compiling tools for Linux/ARM targets) should be in there. <strong>Line 2-5</strong> can be run multiple times by setting different <code>$GOOS</code> and <code>$GOARCH</code> combinations to support <code>amd64</code> <code>386</code> and <code>arm</code> instruction sets all in one install base. See &#8221;<a href="http://golang.org/doc/install/source">Installing Go from source</a>&#8221; for detail.</p>
+<p>Now check out <code>$GOBIN</code> folder, three commands <code>go</code> <code>godoc</code> <code>gofmt</code>(<code>go</code> command line tools) and a folder <code>linux_arm</code>(cross-compiling tools for Linux/ARM targets) should be in there. <strong>Line 2-5</strong> can be run multiple times by setting different <code>$GOOS</code> and <code>$GOARCH</code> combinations to support <code>amd64</code> <code>386</code> and <code>arm</code> instruction sets all in one install base. See &ldquo;<a href="http://golang.org/doc/install/source">Installing Go from source</a>&rdquo; for detail.</p>
 
 <h3>Hello Android from Go!</h3>
 
-<p>Now create Go source files for testing. Let&#8217;s start with the most favorite &#8216;Hello world!&#8217; one.</p>
+<p>Now create Go source files for testing. Let&rsquo;s start with the most favorite &lsquo;Hello world!&rsquo; one.</p>
 
 <figure class='code'><figcaption><span>hello.go </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1141,11 +1141,11 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>If all things go right it will generate output as expected. Using the same routine showed above, all code examples on <a href="http://golang.org/">Go&#8217;s homepage</a> can be verified working well on Android devices.</p>
+<p>If all things go right it will generate output as expected. Using the same routine showed above, all code examples on <a href="http://golang.org/">Go&rsquo;s homepage</a> can be verified working well on Android devices.</p>
 
 <h3>Real World Example</h3>
 
-<p>The following code example is borrowed from rarnu&#8217;s <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">blog post</a> and modified a bit.</p>
+<p>The following code example is borrowed from rarnu&rsquo;s <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">blog post</a> and modified a bit.</p>
 
 <figure class='code'><figcaption><span>checkupdate.go </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1228,11 +1228,11 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>When running it on my Galaxy Nexus (ARM v7 dual-core 1.2 GHz Cortex-A9, Android 4.0.2 with kernel 3.0.8) it crashed on <strong>line 14</strong> - the <code>http.Get</code> call failed. Because of some issues in the cross-compiling system, all calls using Cgo will cause failure like that, at least for now. Unfortunately the <code>net</code> package depend on Cgo and nearly all useful applications need <code>net</code> package.</p>
+<p>When running it on my Galaxy Nexus (ARM v7 dual-core 1.2 GHz Cortex-A9, Android 4.0.2 with kernel 3.0.8) it crashed on <strong>line 14</strong> &ndash; the <code>http.Get</code> call failed. Because of some issues in the cross-compiling system, all calls using Cgo will cause failure like that, at least for now. Unfortunately the <code>net</code> package depend on Cgo and nearly all useful applications need <code>net</code> package.</p>
 
 <h3>Call Go Code in Android Apps</h3>
 
-<p>Exactly the same as calling any native executables in Android apps, which fully explained in <a href="http://gimite.net/en/index.php?Run%20native%20executable%20in%20Android%20App">this guide</a>. I&#8217;ll list a more general and accurate solution below for convenience.</p>
+<p>Exactly the same as calling any native executables in Android apps, which fully explained in <a href="http://gimite.net/en/index.php?Run%20native%20executable%20in%20Android%20App">this guide</a>. I&rsquo;ll list a more general and accurate solution below for convenience.</p>
 
 <p>The following Java class shows how to invoke a process in Android apps (actually it is used by Google itself), which is the base of the following guide:</p>
 
@@ -1395,19 +1395,19 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 <p>RestKit provides several components:</p>
 
 <ol>
-<li><strong>An HTTP client component</strong> based on <code>NSURLConnection</code>. It&#8217;s not as feature-packed as ASIHTTPRequest<sup>[1]</sup>, but it does its part very well in most cases. It supports <code>GET</code> <code>POST</code> <code>PUT</code> <code>DELETE</code>, <code>SSL</code> &amp; <code>HTTP AUTH</code>, multi-part, etc. It even provides a request queue to manage the HTTP requests(mostly implicitly), making them more memory and bandwidth efficient.</li>
+<li><strong>An HTTP client component</strong> based on <code>NSURLConnection</code>. It&rsquo;s not as feature-packed as ASIHTTPRequest<sup>[1]</sup>, but it does its part very well in most cases. It supports <code>GET</code> <code>POST</code> <code>PUT</code> <code>DELETE</code>, <code>SSL</code> &amp; <code>HTTP AUTH</code>, multi-part, etc. It even provides a request queue to manage the HTTP requests(mostly implicitly), making them more memory and bandwidth efficient.</li>
 <li><strong>A powerful but elegant object mapping system</strong>, which uses idiomatic key-value coding mechanism to define and implement the round-trip transformation between <code>JSON</code> <sup>[2]</sup> string and native Objective-C class. Well, the magic behind it is called <a href="https://github.com/jverkoey/sockit">SOCKit</a> <sup>[3]</sup>.</li>
-<li><strong>A persistent layer</strong> built on top of the object mapping system, fully integrated with CoreData. Can be used as app&#8217;s primary data storage or just local cache.</li>
+<li><strong>A persistent layer</strong> built on top of the object mapping system, fully integrated with CoreData. Can be used as app&rsquo;s primary data storage or just local cache.</li>
 <li><strong>Miscellaneous helpers</strong> for better life. Reachability, database seeding, API environments switching, etc.<br/>
 <small><sup>[1]</sup> In fact ASIHTTPRequest has been <a href="http://allseeing-i.com/%5Brequest_release%5D">abandoned</a> since September 2011, and RestKit is one of replacements its author suggested.<br/>
-<sup>[2]</sup> The JSON parsing layer is pluggable, default to <a href="https://github.com/johnezang/JSONKit">JSONKit</a>. And I haven&#8217;t mentioned the <em>old</em> XML, have I?<br/>
-<sup>[3]</sup> Created by <a href="mailto:jverkoey@gmail.com">Jeff Verkoeyen</a>, the author of <a href="https://github.com/jverkoey/nimbus">Nimbus</a>, the highly improved successor of Facebook&#8217;s Three20.</small></li>
+<sup>[2]</sup> The JSON parsing layer is pluggable, default to <a href="https://github.com/johnezang/JSONKit">JSONKit</a>. And I haven&rsquo;t mentioned the <em>old</em> XML, have I?<br/>
+<sup>[3]</sup> Created by <a href="mailto:jverkoey@gmail.com">Jeff Verkoeyen</a>, the author of <a href="https://github.com/jverkoey/nimbus">Nimbus</a>, the highly improved successor of Facebook&rsquo;s Three20.</small></li>
 </ol>
 
 
-<p>Other than making another almighty monster its creators focus on the remote-local object (can be transient or persistent through CoreData) mapping. They made it through the &#8217;<em>common things simple, others possible</em>&#8217; philosophy, which I always love.</p>
+<p>Other than making another almighty monster its creators focus on the remote-local object (can be transient or persistent through CoreData) mapping. They made it through the &lsquo;<em>common things simple, others possible</em>&rsquo; philosophy, which I always love.</p>
 
-<p>RestKit has some <a href="https://github.com/RestKit/RestKit/wiki">documentations</a> but not very well organized. Maybe it&#8217;s the biggest problem for beginners. So I&#8217;d like to list below some most useful solution recipes I&#8217;ve used in real world project, updated progressively.</p>
+<p>RestKit has some <a href="https://github.com/RestKit/RestKit/wiki">documentations</a> but not very well organized. Maybe it&rsquo;s the biggest problem for beginners. So I&rsquo;d like to list below some most useful solution recipes I&rsquo;ve used in real world project, updated progressively.</p>
 
 <p><strong><strong><em>WARNING</em></strong></strong>: it will be incredibly long anyway.</p>
 
@@ -1522,11 +1522,11 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>By using <code>RKObjectManager</code> you&#8217;ll map the web resources to local Objective-C objects, so you need not (and cannot) handle the return data explicitly. Instead you should handle data through the mapping system, which will be discussed below.</p>
+<p>By using <code>RKObjectManager</code> you&rsquo;ll map the web resources to local Objective-C objects, so you need not (and cannot) handle the return data explicitly. Instead you should handle data through the mapping system, which will be discussed below.</p>
 
 <h3>Modeling and Mapping</h3>
 
-<p>Now the object mapping system. Let&#8217;s start with the best practice in RESTful API backed mobile app development:</p>
+<p>Now the object mapping system. Let&rsquo;s start with the best practice in RESTful API backed mobile app development:</p>
 
 <blockquote><p>1. Analyze the business and make abstraction.<br/>2. Design the RESTful API spec based on the first step, including all call endpoints, parameters and returning data in JSON format.<br/>3. Mapping the API spec to native code in designated mobile platform.</p></blockquote>
 
@@ -1560,7 +1560,7 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>It&#8217;s simple but not trivial, and very <em>representative</em>. What will the mapping work? Have a look at the code first:</p>
+<p>It&rsquo;s simple but not trivial, and very <em>representative</em>. What will the mapping work? Have a look at the code first:</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1725,8 +1725,8 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Line 1-35</strong>. Firstly we defined all needed model classes: fundamental ones first, ones that contain them next. Just follow the nature of the data structure within the API&#8217;s response data.<br/>
-<strong>Line 51-56</strong>. Use instances of <code>RKObjectMapping</code> class to define object mappings. Simple mappings are self explained. Note that <code>RKObjectMapping</code> provides several different <code>mapXXX</code> methods to suit different use cases. The key path in mapping definition fully follows Cocoa&#8217;s key path style (also support <a href="http://developer.apple.com/library/ios/#documentation/cocoa/conceptual/KeyValueCoding/Articles/CollectionOperators.html">collection operators</a>). Check <a href="http://restkit.org/api/master/Classes/RKObjectManager.html">its document</a> and Apple&#8217;s <a href="http://developer.apple.com/library/ios/#documentation/cocoa/conceptual/KeyValueCoding/Articles/KeyValueCoding.html">Key Value Coding Guide</a> for detail.<br/>
+<p><strong>Line 1-35</strong>. Firstly we defined all needed model classes: fundamental ones first, ones that contain them next. Just follow the nature of the data structure within the API&rsquo;s response data.<br/>
+<strong>Line 51-56</strong>. Use instances of <code>RKObjectMapping</code> class to define object mappings. Simple mappings are self explained. Note that <code>RKObjectMapping</code> provides several different <code>mapXXX</code> methods to suit different use cases. The key path in mapping definition fully follows Cocoa&rsquo;s key path style (also support <a href="http://developer.apple.com/library/ios/#documentation/cocoa/conceptual/KeyValueCoding/Articles/CollectionOperators.html">collection operators</a>). Check <a href="http://restkit.org/api/master/Classes/RKObjectManager.html">its document</a> and Apple&rsquo;s <a href="http://developer.apple.com/library/ios/#documentation/cocoa/conceptual/KeyValueCoding/Articles/KeyValueCoding.html">Key Value Coding Guide</a> for detail.<br/>
 <strong>Line 58-61</strong>. Complex object mappings are defined by <code>mapKeyPath:toRelationship:withMapping:</code> or similar methods. They map some key path to pre-defined object mappings. As seen in the code, the mapping to class <code>UsersLogin</code> contains simple mapping (<em>line 59</em>) and relationship mappings (<em>line 60-61</em>).<br/>
 <strong>Line 64-67</strong>. <code>RKObjectManager</code> provides <code>loadObjectsAtResourcePath:objectMapping:delegate:</code> method to do these steps in order: combine resource path with the global <code>BaseURL</code> (configured within the <code>RKObjectManager</code> singleton), load resource from web services, parse return data, transform to local objects according to pre-defined <code>RKObjectMapping</code> instance, at last call the delegate to handle result.<br/>
 <strong>Line 72-80</strong>. Delegate methods <code>didLoadObjects</code> and <code>didFailWithError</code> (<em>required</em>) are called after the object mapping process. Normally fetch the result object and do whatever you want.</p>
@@ -1735,7 +1735,7 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 
 <p>The previous code list is neat except one part. Note <strong>line 64-66</strong>, in which we hard-code the API endpoint and parameters. In our <code>login</code> scenario it may not be a big problem, but for highly reused objects, repeatedly constructing <code>GET</code> <code>POST</code> <code>PUT</code> <code>DELETE</code> URLs by hand could be real pain in the ass. How about more object-oriented and more elegant way, just like the <a href="http://guides.rubyonrails.org/routing.html">routing system in Ruby on Rails</a>?</p>
 
-<p>RestKit is most suitable for developers who has RoR background because of its <strong>Routing</strong> system which is highly alike to RoR&#8217;s, but built on Cocoa&#8217;s idiomatic key-value coding way. Here is the code sample:</p>
+<p>RestKit is most suitable for developers who has RoR background because of its <strong>Routing</strong> system which is highly alike to RoR&rsquo;s, but built on Cocoa&rsquo;s idiomatic key-value coding way. Here is the code sample:</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1768,18 +1768,18 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Line 4</strong> set the <em>default</em> route of <code>User</code> class, which means when you call object manager&#8217;s <code>getObject</code> <code>postObject</code> <code>putObject</code> <code>deleteObject</code> methods the requests will go to <code>@"/users/:id"</code>. This is a colon coded endpoint and what is after the colon is the name of a <em>method</em> in the route class, whose return value will replace the colon part.<br/>
+<p><strong>Line 4</strong> set the <em>default</em> route of <code>User</code> class, which means when you call object manager&rsquo;s <code>getObject</code> <code>postObject</code> <code>putObject</code> <code>deleteObject</code> methods the requests will go to <code>@"/users/:id"</code>. This is a colon coded endpoint and what is after the colon is the name of a <em>method</em> in the route class, whose return value will replace the colon part.<br/>
 <strong>Line 5</strong> set a special route for <code>postObject</code> method, which will override the setting in default route.<br/>
 <strong>Line 10</strong> requests <code>@"/users"</code> with HTTP <code>POST</code> method and RestKit will transform <code>me</code> object into post data form as the way defined in object mapper of class User.<br/>
 <strong>Line 14</strong> first call <code>[sb2nuke id]</code> method to get the value and replace <code>:id</code> with it, then requests <code>@"/users/13"</code> with HTTP <code>DELETE</code> method, which (should) remove the user object with id 13 from the server.</p>
 
-<p>So you see, RestKit provides very flexible tools for RESTful web services integration: you can use the network layer and do all data mapping by hand, or you can use the object mapping to do it completely within local object system, or you can tuning it in some intermediate way. No matter which solution you choose remember to align the protocol between the server and client side, and don&#8217;t forget to verify them to the Android platform if necessary (there is no RestKit over there for now -_-).</p>
+<p>So you see, RestKit provides very flexible tools for RESTful web services integration: you can use the network layer and do all data mapping by hand, or you can use the object mapping to do it completely within local object system, or you can tuning it in some intermediate way. No matter which solution you choose remember to align the protocol between the server and client side, and don&rsquo;t forget to verify them to the Android platform if necessary (there is no RestKit over there for now &ndash;_&ndash;).</p>
 
-<p>Thus we&#8217;ve completed the first part of this introduction guide. Below we will discuss some facilities bundled in RestKit to make our life better.</p>
+<p>Thus we&rsquo;ve completed the first part of this introduction guide. Below we will discuss some facilities bundled in RestKit to make our life better.</p>
 
 <h3>The Request Queue</h3>
 
-<p>Request queue is the most important support player under the hood. <code>RKRequestQueue</code> is behind nearly all network access within RestKit and provides elegant solution for critical memory and bandwidth problems. <code>RKRequestQueue</code> wraps memory management within RestKit framework so you&#8217;ll never see any <code>retain</code> <code>release</code> <code>autorelease</code> for <code>RKRequest</code> <code>RKResponse</code> instances. It let us developers focus on the business with very little concern about the memory management.</p>
+<p>Request queue is the most important support player under the hood. <code>RKRequestQueue</code> is behind nearly all network access within RestKit and provides elegant solution for critical memory and bandwidth problems. <code>RKRequestQueue</code> wraps memory management within RestKit framework so you&rsquo;ll never see any <code>retain</code> <code>release</code> <code>autorelease</code> for <code>RKRequest</code> <code>RKResponse</code> instances. It let us developers focus on the business with very little concern about the memory management.</p>
 
 <p><code>RKRequestQueue</code> also provides seamless integration with Reachability API (in iOS System Configuration framework), pooling all requests when network is unavailable, and limiting concurrent requests when network becomes reachable to prevent overburden as well.</p>
 
@@ -1802,9 +1802,9 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The <code>cancelRequestsWithDelegate:</code> method cancel all requests that current controller is delegate for. If there are no one processing it&#8217;ll do nothing.</p>
+<p>The <code>cancelRequestsWithDelegate:</code> method cancel all requests that current controller is delegate for. If there are no one processing it&rsquo;ll do nothing.</p>
 
-<p>The last but not least. What <code>[RKRequestQueue sharedQueue]</code> returns is the default queue which created automatically when the RestKit client initialized. In most real world apps it&#8217;s not enough. For example we may need a queue to handle special resource intensive tasks in a background thread, such as data uploading/downloading, while the default queue keep working for  responding user actions. It&#8217;s easy:</p>
+<p>The last but not least. What <code>[RKRequestQueue sharedQueue]</code> returns is the default queue which created automatically when the RestKit client initialized. In most real world apps it&rsquo;s not enough. For example we may need a queue to handle special resource intensive tasks in a background thread, such as data uploading/downloading, while the default queue keep working for  responding user actions. It&rsquo;s easy:</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1957,7 +1957,7 @@ If not, they won&#8217;t be bonded to your product. Go get someone else or re-th
 
 <h3>Background Upload/Download</h3>
 
-<p>iOS supported multi-tasking since 4.0 but it&#8217;s a highly restricted support and there are so many misconceptions among the users and even developers. I would strongly suggest Fraser Speirs&#8217; <a href="http://speirs.org/blog/2012/1/2/misconceptions-about-ios-multitasking.html">excellent blog</a> which explains all about iOS multi-tasking.</p>
+<p>iOS supported multi-tasking since 4.0 but it&rsquo;s a highly restricted support and there are so many misconceptions among the users and even developers. I would strongly suggest Fraser Speirs&#8217; <a href="http://speirs.org/blog/2012/1/2/misconceptions-about-ios-multitasking.html">excellent blog</a> which explains all about iOS multi-tasking.</p>
 
 <p>RestKit can seamlessly facilitate multi-tasking to prevent important long-time requests being interrupted by user switching out of the app. The key is the <code>backgroundPolicy</code> property of <code>RKRequest</code> which can be one of 4 enum values:</p>
 

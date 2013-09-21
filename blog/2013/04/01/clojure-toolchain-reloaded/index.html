@@ -143,7 +143,7 @@
 
 <p><img src="/images/emacs-live.png" title="My custom Emacs Live in working" ></p>
 
-<p><em>Emacs Live</em> also provides modular customization mechanism called <em>packs</em>. As you can see in the above screenshot, I don&#8217;t like the font and color theme bundled with Emacs Live so I use my favorite <a href="http://www.fsd.it/fonts/pragmatapro.htm">Pragmata Pro coding font</a> and <a href="http://ethanschoonover.com/solarized">Solarized color theme</a>. For people who like a really powerful yet beautiful and elegant developing environment for Clojure, I&#8217;ll describe below how I set up all on Mac OS X in half an hour, step by step.</p>
+<p><em>Emacs Live</em> also provides modular customization mechanism called <em>packs</em>. As you can see in the above screenshot, I don&rsquo;t like the font and color theme bundled with Emacs Live so I use my favorite <a href="http://www.fsd.it/fonts/pragmatapro.htm">Pragmata Pro coding font</a> and <a href="http://ethanschoonover.com/solarized">Solarized color theme</a>. For people who like a really powerful yet beautiful and elegant developing environment for Clojure, I&rsquo;ll describe below how I set up all on Mac OS X in half an hour, step by step.</p>
 
 <h2>Pre-requisites</h2>
 
@@ -171,7 +171,7 @@
 
 <ul>
 <li>Download pre-built universal binary from <a href="http://emacsformacosx.com">emacsformacosx.com</a>, mount the image and copy Emacs.app to <code>/Applications</code>.</li>
-<li>Use <a href="http://mxcl.github.com/homebrew/">Homebrew</a>, the best package manager for OS X. It&#8217;s as simple as <code>brew install emacs --cocoa</code>.</li>
+<li>Use <a href="http://mxcl.github.com/homebrew/">Homebrew</a>, the best package manager for OS X. It&rsquo;s as simple as <code>brew install emacs --cocoa</code>.</li>
 <li>Download source from GNU Emacs site and build it:</li>
 </ul>
 
@@ -237,7 +237,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>That&#8217;s it. Now you can try it by simply launching <code>Emacs.app</code> from your <code>/Applications</code> folder. You&#8217;d better not touch the <code>~/.emacs.d</code> folder from now on, so you can update <em>Emacs Live</em> anytime you want by issuing <code>git pull</code> in this folder.</p>
+<p>That&rsquo;s it. Now you can try it by simply launching <code>Emacs.app</code> from your <code>/Applications</code> folder. You&rsquo;d better not touch the <code>~/.emacs.d</code> folder from now on, so you can update <em>Emacs Live</em> anytime you want by issuing <code>git pull</code> in this folder.</p>
 
 <p>All following steps are for more customization, and <em>optional</em>.</p>
 
@@ -252,7 +252,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The folder name <code>yourname-pack</code> can be anything you&#8217;d like. Mine is <code>neo-pack</code> and you can have it as reference on <a href="https://github.com/neolee/neo-pack">GitHub</a>.</p>
+<p>The folder name <code>yourname-pack</code> can be anything you&rsquo;d like. Mine is <code>neo-pack</code> and you can have it as reference on <a href="https://github.com/neolee/neo-pack">GitHub</a>.</p>
 
 <h3>User Pack Structure</h3>
 
@@ -409,14 +409,14 @@ A: Modify <code>default-frame-alist</code> in <code>conf/yourname-conf.el</code>
 
 
 <p><strong>Q: I want the highlight current line feature back!</strong> <br/>
-A: After disabling the built-in <code>live/colour-pack</code> (see the first question above) you will lose the <em>highlight current line</em> feature as a side effect (since it&#8217;s defined in that pack). But it&#8217;s very easy to add it back, by adding the following line to <code>conf/yourname-conf.el</code> under your user pack:</p>
+A: After disabling the built-in <code>live/colour-pack</code> (see the first question above) you will lose the <em>highlight current line</em> feature as a side effect (since it&rsquo;s defined in that pack). But it&rsquo;s very easy to add it back, by adding the following line to <code>conf/yourname-conf.el</code> under your user pack:</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">global-hl-line-mode</span> <span class="mi">1</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>&#8211;</p>
+<p>&mdash;</p>
 
 <div class="footnotes">
     <ol>
@@ -470,7 +470,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://paradigmx.net/blog/2013/04/01/clojure-toolchain-reloaded/" data-via="" data-counturl="http://paradigmx.net/blog/2013/04/01/clojure-toolchain-reloaded/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://paradigmx.net/blog/2013/04/01/clojure-toolchain-reloaded/" data-via="" data-counturl="http://paradigmx.net/blog/2013/04/01/clojure-toolchain-reloaded/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -618,7 +618,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

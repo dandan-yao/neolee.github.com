@@ -118,17 +118,17 @@
 <blockquote><p>- reuse, granularity, modularity, composability, componentization and interoperability.<br/>- standards-compliance (both common and industry-specific).<br/>- services identification and categorization, provisioning and delivery, and monitoring and tracking.</p><footer><strong>Wikipedia</strong> <cite><a href='http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles'>Service-oriented Architecture</a></cite></footer></blockquote>
 
 
-<p>All these are perfect software architectural styles(well, except those words your spell checker complains), our best dream. These can&#8217;t be wrong. The problem is in the implementations. Fortunately the rises of RESTful services on the open web prove that the spirit of SOA can really matters. Maybe one day similar architecture and implementation will eventually change enterprise computing in return.</p>
+<p>All these are perfect software architectural styles(well, except those words your spell checker complains), our best dream. These can&rsquo;t be wrong. The problem is in the implementations. Fortunately the rises of RESTful services on the open web prove that the spirit of SOA can really matters. Maybe one day similar architecture and implementation will eventually change enterprise computing in return.</p>
 
-<p>I always believe <strong>the service-oriented architecture will be the future of massive distributed software system</strong>. And <strong>RESTful services will replace web sites and eventually become the main body of the Internet</strong>. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol - it can be used as RPC protocol but it&#8217;s not RESTful and cannot provide key benefits which REST want to apply.</p>
+<p>I always believe <strong>the service-oriented architecture will be the future of massive distributed software system</strong>. And <strong>RESTful services will replace web sites and eventually become the main body of the Internet</strong>. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol &ndash; it can be used as RPC protocol but it&rsquo;s not RESTful and cannot provide key benefits which REST want to apply.</p>
 
 <!-- more -->
 
 
 <p><span class='pullquote-right' data-pullquote='&#8220;Try not to think of it in terms of right and wrong. She is a guide. She can help you to find the path.&#8221;'>
-Here it is. Below I&#8217;ll list a brief guide which can help you find the path, as in the Matrix movies Morpheus told Neo about the Oracle: &#8220;Try not to think of it in terms of right and wrong. She is a guide. She can help you to find the path.&#8221;</p>
+Here it is. Below I&rsquo;ll list a brief guide which can help you find the path, as in the Matrix movies Morpheus told Neo about the Oracle: &ldquo;Try not to think of it in terms of right and wrong. She is a guide. She can help you to find the path.&rdquo;</p>
 
-<p>Don&#8217;t get me wrong, I tried my best to keep it right and accurate, but it&#8217;s very complicated and cannot be completely covered and explained while keep it simple and readable. If you want more conceptual or technical details, I&#8217;ll leave you a bunch of references.</p>
+<p>Don&rsquo;t get me wrong, I tried my best to keep it right and accurate, but it&rsquo;s very complicated and cannot be completely covered and explained while keep it simple and readable. If you want more conceptual or technical details, I&rsquo;ll leave you a bunch of references.</p>
 
 <p>Even we have all these compromises this guide will still be too long for a single blog post, so I will divide it into 3 parts and complete them within a month or two.
 </span></p>
@@ -159,9 +159,9 @@ Here it is. Below I&#8217;ll list a brief guide which can help you find the path
 
 <p><strong>Layered:</strong> System is layered and no cross layer info exposures. Client cannot tell whether it is directly connecting to the service provider or some intermediate layer, giving the interface is the same.</p>
 
-<p><strong>Uniform interface</strong> which makes server and client decoupled on implementation, enables each part to evolve independently. It&#8217;s the most practical part so we will discuss it separately below.</p>
+<p><strong>Uniform interface</strong> which makes server and client decoupled on implementation, enables each part to evolve independently. It&rsquo;s the most practical part so we will discuss it separately below.</p>
 
-<p>All these 5 rules are required. If a service violet any of them it cannot be called &#8216;RESTful&#8217; - and more important, cannot get the benefits which RESTful styles declare to provide. So understanding all of them is the most important pre-requisite.</p>
+<p>All these 5 rules are required. If a service violet any of them it cannot be called &lsquo;RESTful&rsquo; &ndash; and more important, cannot get the benefits which RESTful styles declare to provide. So understanding all of them is the most important pre-requisite.</p>
 
 <h2>Level II: Define Your System</h2>
 
@@ -169,17 +169,17 @@ Here it is. Below I&#8217;ll list a brief guide which can help you find the path
 
 <h3>2.1 Business Abstraction</h3>
 
-<p>Business abstraction is <a href="/blog/2011/12/24/back-end-is-hard/">very important but hard to routinize</a>. And it&#8217;s mostly beyond the realm which RESTful style can control. You should find the <em>essential</em> business concepts and make smart abstraction for high flexibility and extensibility. Yet we still can have some guideline. Probably will not solve the most difficult part of the problem but still give some help.</p>
+<p>Business abstraction is <a href="/blog/2011/12/24/back-end-is-hard/">very important but hard to routinize</a>. And it&rsquo;s mostly beyond the realm which RESTful style can control. You should find the <em>essential</em> business concepts and make smart abstraction for high flexibility and extensibility. Yet we still can have some guideline. Probably will not solve the most difficult part of the problem but still give some help.</p>
 
 <p><strong>Find business objects.</strong> When the system complete, every business objects exposed to the public will be presented as an URI. Clients can issue <code>POST</code> <code>GET</code> <code>PATCH/PUT</code> <code>DELETE</code> requests to the URI to <code>CRUD</code>(create/read/update/delete) correlated object. <em>So any objects you want to exposed to the public for clients to do the <code>CRUD</code> things you should make them in the business object model, as essential objects.</em></p>
 
 <p><strong>Define the relations.</strong> Next step is to define the relations between objects. The classical entity-relation analysis methodology is very good at that. Find all <code>1-1</code> <code>1-*</code>  <code>*-*</code> etc. relations and make them clearly documented.</p>
 
-<p><strong>The object graph.</strong> It&#8217;s optional but very useful. In most case build an <a href="http://en.wikipedia.org/wiki/Object_graph">object graph</a> at this stage will help to clarify many potential obscure concepts in the business object model. Try fill some real data in the object model and understand the order and constrains of each operation. Refine the object-relation model if necessary.</p>
+<p><strong>The object graph.</strong> It&rsquo;s optional but very useful. In most case build an <a href="http://en.wikipedia.org/wiki/Object_graph">object graph</a> at this stage will help to clarify many potential obscure concepts in the business object model. Try fill some real data in the object model and understand the order and constrains of each operation. Refine the object-relation model if necessary.</p>
 
 <h3>2.2 Define Response Objects</h3>
 
-<p>Now define some response data formats. Some may feel weird to do that in such early stage but trust me it&#8217;s the best path you can choose.</p>
+<p>Now define some response data formats. Some may feel weird to do that in such early stage but trust me it&rsquo;s the best path you can choose.</p>
 
 <p>Firstly you should know that as highly recommended by RESTful style, the object and its <em>representation</em> are isolated. The same object can have many different <em>representations</em> which can be designated by the clients when issuing the request.</p>
 
@@ -351,7 +351,7 @@ Here it is. Below I&#8217;ll list a brief guide which can help you find the path
 
 <p><strong>Explicitly mark all required and optional fields.</strong> Not all data are equally important. As part of the protocol service providers should let clients know exactly which ones are optional. But remember HTTP is not a reliable communication protocol and the network status is even more complicated in mobile Internet, clients should do all error-tolerant things even for those fields marked as required.</p>
 
-<p><strong>To be continued&#8230;</strong></p>
+<p><strong>To be continued&hellip;</strong></p>
 
 <p>In the following parts we will talk about how to define the API specs and give general info about concerns in implementation.</p>
 </div>
@@ -390,7 +390,7 @@ Here it is. Below I&#8217;ll list a brief guide which can help you find the path
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/" data-via="" data-counturl="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/" data-via="" data-counturl="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -540,7 +540,7 @@ Here it is. Below I&#8217;ll list a brief guide which can help you find the path
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

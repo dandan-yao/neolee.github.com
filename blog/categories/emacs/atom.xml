@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Emacs | Paradigm X]]></title>
   <link href="http://paradigmx.net/blog/categories/emacs/atom.xml" rel="self"/>
   <link href="http://paradigmx.net/"/>
-  <updated>2013-06-02T23:35:45+08:00</updated>
+  <updated>2013-09-21T16:31:01+08:00</updated>
   <id>http://paradigmx.net/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
@@ -25,7 +25,7 @@
 
 <p><em>Emacs Live</em> is brought to us by <a href="https://github.com/samaaron">Sam Aaron</a>, a major developer of <a href="https://github.com/overtone/overtone/">Overtone</a>, the Clojure-based open source live-programmable music exploration &amp; collaboration toolkit<sup id='fnref:2'>[<a href='#fn:2' rel='footnote'>2</a>]</sup>. From <em>Emacs Live</em> documentation:</p>
 
-<p><blockquote><p>Emacs Live is a carefully curated Emacs config which transforms vanilla Emacs from simply an incredible editor into an intense experience. The key is in the curation. Unlike other exemplary Emacs config tools such as the Starter Kit and Prelude which are very modular, Emacs Live embodies a holistic approach creating an all-round package. We build on the shoulders of giants and incorporate many independent projects, ensuring that they all work together seamlessly.</p><footer><strong>Emacs Live</strong> <cite><a href='http://overtone.github.com/emacs-live/'>A Curated Emacs Experience</a></cite></footer></blockquote></p>
+<p><blockquote><p>Emacs Live is a carefully curated Emacs config which transforms vanilla Emacs from simply an incredible editor into an intense experience. The key is in the curation. Unlike other exemplary Emacs config tools such as the Starter Kit and Prelude which are very modular, Emacs Live embodies a holistic approach creating an all-round package. We build on the shoulders of giants and incorporate many independent projects, ensuring that they all work together seamlessly.</p><footer><strong>Emacs Live <a href="http://overtone.github.com/emacs-live/">http://overtone.github.com/emacs-live/</a> A curated Emacs experience</strong></footer></blockquote></p>
 
 <p><em>Emacs Live</em> emphasizes the <em>curation</em> of the whole bundle, providing great experiences for out-of-box usage. Some of the best features it packs include:</p>
 
@@ -47,7 +47,7 @@
 
 <p><img src="/images/emacs-live.png" title="My custom Emacs Live in working" ></p>
 
-<p><em>Emacs Live</em> also provides modular customization mechanism called <em>packs</em>. As you can see in the above screenshot, I don't like the font and color theme bundled with Emacs Live so I use my favorite <a href="http://www.fsd.it/fonts/pragmatapro.htm">Pragmata Pro coding font</a> and <a href="http://ethanschoonover.com/solarized">Solarized color theme</a>. For people who like a really powerful yet beautiful and elegant developing environment for Clojure, I'll describe below how I set up all on Mac OS X in half an hour, step by step.</p>
+<p><em>Emacs Live</em> also provides modular customization mechanism called <em>packs</em>. As you can see in the above screenshot, I don&rsquo;t like the font and color theme bundled with Emacs Live so I use my favorite <a href="http://www.fsd.it/fonts/pragmatapro.htm">Pragmata Pro coding font</a> and <a href="http://ethanschoonover.com/solarized">Solarized color theme</a>. For people who like a really powerful yet beautiful and elegant developing environment for Clojure, I&rsquo;ll describe below how I set up all on Mac OS X in half an hour, step by step.</p>
 
 <h2>Pre-requisites</h2>
 
@@ -62,9 +62,9 @@
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>% uname -a
 </span><span class='line'>Darwin matrix.local 12.3.0 Darwin Kernel Version 12.3.0: Sun Jan  6 22:37:10 PST 2013; root:xnu-2050.22.13~1/RELEASE_X86_64 x86_64
 </span><span class='line'>% java -version
-</span><span class='line'>java version <span class="s2">&quot;1.6.0_43&quot;</span>
-</span><span class='line'>Java<span class="o">(</span>TM<span class="o">)</span> SE Runtime Environment <span class="o">(</span>build 1.6.0_43-b01-447-11M4203<span class="o">)</span>
-</span><span class='line'>Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM <span class="o">(</span>build 20.14-b01-447, mixed mode<span class="o">)</span>
+</span><span class='line'>java version &amp;ldquo;1.6.0_43&amp;rdquo;
+</span><span class='line'>Java&amp;trade; SE Runtime Environment <span class="o">(</span>build 1.6.0_43-b01-447-11M4203<span class="o">)</span>
+</span><span class='line'>Java HotSpot&amp;trade; 64-Bit Server VM <span class="o">(</span>build 20.14-b01-447, mixed mode<span class="o">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>Emacs</h3>
@@ -73,7 +73,7 @@
 
 <ul>
 <li>Download pre-built universal binary from <a href="http://emacsformacosx.com">emacsformacosx.com</a>, mount the image and copy Emacs.app to <code>/Applications</code>.</li>
-<li>Use <a href="http://mxcl.github.com/homebrew/">Homebrew</a>, the best package manager for OS X. It's as simple as <code>brew install emacs --cocoa</code>.</li>
+<li>Use <a href="http://mxcl.github.com/homebrew/">Homebrew</a>, the best package manager for OS X. It&rsquo;s as simple as <code>brew install emacs --cocoa</code>.</li>
 <li>Download source from GNU Emacs site and build it:
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -81,10 +81,10 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>bzr branch http://bzr.savannah.gnu.org/r/emacs/trunk
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bzr branch &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;http://bzr.savannah.gnu.org/r/emacs/trunk&quot;</span>&gt;http://bzr.savannah.gnu.org/r/emacs/trunk&lt;/a&gt;
 </span><span class='line'><span class="nb">cd </span>trunk
 </span><span class='line'>./autogen.sh
-</span><span class='line'>./configure --with-ns
+</span><span class='line'>./configure &amp;mdash;with-ns
 </span><span class='line'>make bootstrap &amp;amp;&amp;amp; make install
 </span><span class='line'>mv nextstep/Emacs.app /Applications
 </span></code></pre></td></tr></table></div></figure></notextile></div></li>
@@ -110,7 +110,7 @@
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>% lein -v
-</span><span class='line'>Leiningen 2.1.2 on Java 1.6.0_43 Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM
+</span><span class='line'>Leiningen 2.1.2 on Java 1.6.0_43 Java HotSpot&amp;trade; 64-Bit Server VM
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>Cleanup</h3>
@@ -131,7 +131,7 @@
 </span><span class='line'>git clone git://github.com/overtone/emacs-live.git ~/.emacs.d
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>That's it. Now you can try it by simply launching <code>Emacs.app</code> from your <code>/Applications</code> folder. You'd better not touch the <code>~/.emacs.d</code> folder from now on, so you can update <em>Emacs Live</em> anytime you want by issuing <code>git pull</code> in this folder.</p>
+<p>That&rsquo;s it. Now you can try it by simply launching <code>Emacs.app</code> from your <code>/Applications</code> folder. You&rsquo;d better not touch the <code>~/.emacs.d</code> folder from now on, so you can update <em>Emacs Live</em> anytime you want by issuing <code>git pull</code> in this folder.</p>
 
 <p>All following steps are for more customization, and <em>optional</em>.</p>
 
@@ -145,7 +145,7 @@
 </span><span class='line'>cp -R ~/.emacs.d/packs/template/user-template-pack ~/.live-packs/yourname-pack
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>The folder name <code>yourname-pack</code> can be anything you'd like. Mine is <code>neo-pack</code> and you can have it as reference on <a href="https://github.com/neolee/neo-pack">GitHub</a>.</p>
+<p>The folder name <code>yourname-pack</code> can be anything you&rsquo;d like. Mine is <code>neo-pack</code> and you can have it as reference on <a href="https://github.com/neolee/neo-pack">GitHub</a>.</p>
 
 <h3>User Pack Structure</h3>
 
@@ -155,8 +155,8 @@
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">live-add-pack-lib</span> <span class="s">&quot;some-great-mod&quot;</span><span class="p">)</span> <span class="c1">; some-great-mod is sub-folder under lib folder</span>
-</span><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;great-mod-init</span><span class="p">)</span>            <span class="c1">; great-mod-init.el is script under sub-folder some-great-mod</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">live-add-pack-lib</span> <span class="o">&amp;</span><span class="nv">ldquo</span><span class="c1">;some-great-mod&amp;rdquo;) ; some-great-mod is sub-folder under lib folder</span>
+</span><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="o">&amp;</span><span class="nv">lsquo</span><span class="c1">;great-mod-init)            ; great-mod-init.el is script under sub-folder some-great-mod</span>
 </span><span class='line'><span class="p">(</span><span class="nf">great-mod</span><span class="p">)</span>                          <span class="c1">; great-mod is some function in great-mod-init.el</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></li>
 <li><code>init.el</code>: Entry script of the pack. Mostly something like:
@@ -169,15 +169,15 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; Load bindings config</span>
-</span><span class='line'><span class="p">(</span><span class="nf">live-load-config-file</span> <span class="s">&quot;bindings.el&quot;</span><span class="p">)</span><span class="nv">&lt;/li&gt;</span>
+</span><span class='line'><span class="p">(</span><span class="nf">live-load-config-file</span> <span class="o">&amp;</span><span class="nv">ldquo</span><span class="c1">;bindings.el&amp;rdquo;)&lt;/li&gt;</span>
 </span><span class='line'><span class="nv">&lt;/ul&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="nv">&lt;p&gt;</span><span class="c1">;; Custom settings</span>
-</span><span class='line'><span class="p">(</span><span class="nf">live-load-config-file</span> <span class="s">&quot;yourname-conf.el&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nf">live-load-config-file</span> <span class="o">&amp;</span><span class="nv">ldquo</span><span class="c1">;yourname-conf.el&amp;rdquo;)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-- <code>info.el</code>: Meta data of the user pack.
-- <code>README.md</code>: Helpful info for user pack customization.</p>
+&ndash; <code>info.el</code>: Meta data of the user pack.
+&ndash; <code>README.md</code>: Helpful info for user pack customization.</p>
 
 <h3>Import 3rd Party Pack</h3>
 
@@ -212,7 +212,7 @@
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">live-use-packs</span> <span class="o">&#39;</span><span class="p">(</span><span class="nf">live/foundation-pack</span>     <span class="c1">; Use live-use-packs to control which built-in packs should be loaded&lt;/p&gt;</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">live-use-packs</span> <span class="o">&amp;</span><span class="nv">lsquo</span><span class="c1">;(live/foundation-pack     ; Use live-use-packs to control which built-in packs should be loaded&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nv">&lt;pre&gt;&lt;code&gt;</span>              <span class="c1">; live/colour-pack       ; This built-in pack MUST be disabled if you want to use 3rd party color theme pack</span>
 </span><span class='line'>              <span class="nv">live/clojure-pack</span>
@@ -220,7 +220,7 @@
 </span><span class='line'>              <span class="nv">live/power-pack</span><span class="p">))</span>
 </span><span class='line'><span class="nv">&lt;/code&gt;&lt;/pre&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nf">live-add-packs</span> <span class="o">&#39;</span><span class="p">(</span><span class="o">~</span><span class="nv">/.live-packs/neo-pack</span>   <span class="c1">; Use live-add-packs to load custom packs&lt;/p&gt;</span>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="p">(</span><span class="nf">live-add-packs</span> <span class="o">&amp;</span><span class="nv">lsquo</span><span class="c1">;(~/.live-packs/neo-pack   ; Use live-add-packs to load custom packs&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nv">&lt;pre&gt;&lt;code&gt;</span>              <span class="o">~</span><span class="nv">/.live-packs/solarized-pack</span><span class="p">))</span>
 </span><span class='line'><span class="nv">&lt;/code&gt;&lt;/pre&gt;</span>
@@ -235,8 +235,8 @@
 <p><em>Emacs Live</em> is extremely powerful and thus cause rather long Emacs starting time as trade-off. Fortunately Emacs has standard solution for this problem: the Emacs daemon and <code>emacsclient</code>. Just add these aliases in your shell startup script (e.g. my <code>~/.zshrc</code>):
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">alias </span><span class="nv">es</span><span class="o">=</span><span class="s1">&#39;/Applications/Emacs.app/Contents/MacOS/Emacs --daemon&#39;</span>
-</span><span class='line'><span class="nb">alias </span><span class="nv">emacs</span><span class="o">=</span><span class="s1">&#39;/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n&#39;</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">alias </span><span class="nv">es</span><span class="o">=</span>&amp;lsquo;/Applications/Emacs.app/Contents/MacOS/Emacs &amp;mdash;daemon&amp;rsquo;
+</span><span class='line'><span class="nb">alias </span><span class="nv">emacs</span><span class="o">=</span>&amp;lsquo;/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n&amp;rsquo;
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 Then you can firstly launch the Emacs server daemon by issuing <code>es</code> in shell (only once), after which you can instantly open Emacs editor by <code>emacs &lt;filename&gt;</code>.</p>
 
@@ -268,7 +268,7 @@ Then you can firstly launch the Emacs server daemon by issuing <code>es</code> i
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:live-repl</span> <span class="p">{</span><span class="ss">:repl-options</span> <span class="p">{</span><span class="ss">:port</span> <span class="mi">4555</span><span class="p">}}</span>
-</span><span class='line'> <span class="ss">:user</span> <span class="p">{</span><span class="ss">:aliases</span> <span class="p">{</span><span class="s">&quot;live&quot;</span> <span class="p">[</span><span class="s">&quot;with-profile&quot;</span> <span class="s">&quot;default,live-repl&quot;</span> <span class="s">&quot;repl&quot;</span><span class="p">]}</span><span class="nv">&lt;/p&gt;</span>
+</span><span class='line'> <span class="ss">:user</span> <span class="p">{</span><span class="ss">:aliases</span> <span class="p">{</span><span class="o">&amp;</span><span class="nv">ldquo</span><span class="c1">;live&amp;rdquo; [&amp;ldquo;with-profile&amp;rdquo; &amp;ldquo;default,live-repl&amp;rdquo; &amp;ldquo;repl&amp;rdquo;]}&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nv">&lt;pre&gt;&lt;code&gt;</span>    <span class="ss">:dependencies</span> <span class="p">[</span><span class="nv">...</span><span class="p">]}</span>
 </span><span class='line'><span class="nv">&lt;/code&gt;&lt;/pre&gt;</span>
@@ -288,22 +288,22 @@ A: You have to disable the built-in <code>live/colour-pack</code> to use custom 
 <p><strong>Q: How to use my favorite font instead of the default one?</strong> <br/>
 A: Modify <code>default-frame-alist</code> in <code>conf/yourname-conf.el</code> under your user pack (<code>~/.live-packs/yourname-pack</code>):
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">add-to-list</span> <span class="ss">&#39;default-frame-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="nf">font</span> <span class="k">. </span><span class="s">&quot;PragmataPro 14&quot;</span><span class="p">))</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">add-to-list</span> <span class="o">&amp;</span><span class="nv">lsquo</span><span class="c1">;default-frame-alist &amp;rsquo;(font . &amp;ldquo;PragmataPro 14&amp;rdquo;))</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong>Q: How to customize my cursor color?</strong> <br/>
 A: Modify <code>default-frame-alist</code> in <code>conf/yourname-conf.el</code> under your user pack:
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">add-to-list</span> <span class="ss">&#39;default-frame-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="nf">cursor-color</span> <span class="k">. </span><span class="s">&quot;palegoldenrod&quot;</span><span class="p">))</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">add-to-list</span> <span class="o">&amp;</span><span class="nv">lsquo</span><span class="c1">;default-frame-alist &amp;rsquo;(cursor-color . &amp;ldquo;palegoldenrod&amp;rdquo;))</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong>Q: I want the highlight current line feature back!</strong> <br/>
-A: After disabling the built-in <code>live/colour-pack</code> (see the first question above) you will lose the <em>highlight current line</em> feature as a side effect (since it's defined in that pack). But it's very easy to add it back, by adding the following line to <code>conf/yourname-conf.el</code> under your user pack:
+A: After disabling the built-in <code>live/colour-pack</code> (see the first question above) you will lose the <em>highlight current line</em> feature as a side effect (since it&rsquo;s defined in that pack). But it&rsquo;s very easy to add it back, by adding the following line to <code>conf/yourname-conf.el</code> under your user pack:
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">global-hl-line-mode</span> <span class="mi">1</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>--
+<p>&mdash;
 <div class="footnotes">
 	<ol>
 		<li id='fn:1'><p> See the <a href="http://dev.clojure.org/display/doc/Getting+Started">Getting Started</a> guide in the official dev wiki for more. But note that many info in it are deprecated (e.g. Netbeans and Enclojure, Swank Clojure for Emacs, VimClojure, etc.).

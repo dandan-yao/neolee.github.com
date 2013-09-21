@@ -117,7 +117,7 @@
 
 <h2>Level III: Define and Tune the API</h2>
 
-<p>Defining API specs is the most important part of all and it&#8217;s a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as <a href="http://www.mediawiki.org/">MediaWiki</a> or <a href="http://daringfireball.net/projects/markdown/">Markdown</a> + <a href="https://github.com">GitHub</a> etc. Then you can follow these sections below.</p>
+<p>Defining API specs is the most important part of all and it&rsquo;s a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as <a href="http://www.mediawiki.org/">MediaWiki</a> or <a href="http://daringfireball.net/projects/markdown/">Markdown</a> + <a href="https://github.com">GitHub</a> etc. Then you can follow these sections below.</p>
 
 <!-- more -->
 
@@ -147,7 +147,7 @@
 <li>There are 2 types of <strong>services</strong> in most <strong>platform</strong>: (A) services related to a specific <em>user</em> in the platform; (B) services independent to <em>users</em>. They need different kinds of tokens:
 
 <ul>
-<li>For type (A): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET, correlated user&#8217;s ID and expected access profile (commonly called &#8217;<em>scope</em>&#8217;) to request the access token.</li>
+<li>For type (A): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET, correlated user&rsquo;s ID and expected access profile (commonly called &lsquo;<em>scope</em>&rsquo;) to request the access token.</li>
 <li>For type (B): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET and <em>scope</em> to request the access token.</li>
 </ul>
 </li>
@@ -155,7 +155,7 @@
 </ul>
 
 
-<p>In many cases the <strong>platform</strong> cannot issue type (A) token to an <strong>app</strong> unless correlated user explicitly approve the request. That&#8217;s where OAuth-like mechanisms make sense. In such cases, when <strong>platform</strong> receives request for issuing a token to some user, it will redirect the user to a page showing Approve/Decline buttons and continue the flow after the user explicitly approve the request. For detail info about the widely uses OAuth v2 protocol refer to the official <a href="http://tools.ietf.org/html/rfc6749">IETF RFC6749 document</a>.</p>
+<p>In many cases the <strong>platform</strong> cannot issue type (A) token to an <strong>app</strong> unless correlated user explicitly approve the request. That&rsquo;s where OAuth-like mechanisms make sense. In such cases, when <strong>platform</strong> receives request for issuing a token to some user, it will redirect the user to a page showing Approve/Decline buttons and continue the flow after the user explicitly approve the request. For detail info about the widely uses OAuth v2 protocol refer to the official <a href="http://tools.ietf.org/html/rfc6749">IETF RFC6749 document</a>.</p>
 
 <p>A platform should choose mechanism wisely and make the flows (app registration, token issuing/revoking/managing, etc.) clean, flexible and friendly to all potential client apps. Useful tutorials about all these flows are required.</p>
 
@@ -171,7 +171,7 @@
 </ol>
 
 
-<p>So let&#8217;s look at some typical RESTful URI patterns.</p>
+<p>So let&rsquo;s look at some typical RESTful URI patterns.</p>
 
 <ul>
 <li><strong>Object</strong>
@@ -190,7 +190,7 @@
 <li><strong>Aspect</strong> or <strong>Attribute</strong>
 
 <ul>
-<li><code>/:type/:id/:aspect</code> e.g. <code>/user/1532/friends</code> <code>/user/1532/pets</code>: Return zero or more objects of some type related to designated object. In our examples, user #1532&#8217;s friends should be zero or more <em>user</em> objects, and user #1532&#8217;s pets should be zero or more <em>pet</em> objects.</li>
+<li><code>/:type/:id/:aspect</code> e.g. <code>/user/1532/friends</code> <code>/user/1532/pets</code>: Return zero or more objects of some type related to designated object. In our examples, user #1532&rsquo;s friends should be zero or more <em>user</em> objects, and user #1532&rsquo;s pets should be zero or more <em>pet</em> objects.</li>
 </ul>
 </li>
 <li><strong>Action</strong>
@@ -236,7 +236,7 @@
 </table></p>
 
 
-<p>Well, some special APIs will be hard to classify. Here are the most commonly used two (we won&#8217;t discuss more, just list them here):</p>
+<p>Well, some special APIs will be hard to classify. Here are the most commonly used two (we won&rsquo;t discuss more, just list them here):</p>
 
 <ul>
 <li><code>compound</code>: combine several API requests into a batch and response the batch results altogether.</li>
@@ -260,11 +260,11 @@
 
 <h3>3.5 Test the Specs</h3>
 
-<p>To give app developers&#8217; and yourself a better life, you need an API test console from the first day. It can be a command line tool or a GUI tool or, the easiest and most convenient way, a browser based tool. In the test console user can input token and API endpoint, choose HTTP verb, input parameters and get 100% real response data, in nicely formatted JSON format. It can save tons of time and money. Have a look at foursquare&#8217;s <a href="https://developer.foursquare.com/docs/explore#req=users/self">online API explorer</a> for some real world example.</p>
+<p>To give app developers&#8217; and yourself a better life, you need an API test console from the first day. It can be a command line tool or a GUI tool or, the easiest and most convenient way, a browser based tool. In the test console user can input token and API endpoint, choose HTTP verb, input parameters and get 100% real response data, in nicely formatted JSON format. It can save tons of time and money. Have a look at foursquare&rsquo;s <a href="https://developer.foursquare.com/docs/explore#req=users/self">online API explorer</a> for some real world example.</p>
 
 <p>Further more, an automatic regressive testing solution should be considered as early as possible. Web services are entries of your business and API implementation will surely be in a continuously developing progress. After any changes a series of strict tests must be automatically executed to confirm that all APIs are still working as intended. Use a high productivity dynamic language such as Ruby or Python to write a simple but complete client lib for your APIs and build test case for every defined API endpoints. Personally I like Ruby w/ RSpec but many other languages and frameworks also work fine.</p>
 
-<p><strong>To be continued&#8230;</strong></p>
+<p><strong>To be continued&hellip;</strong></p>
 
 <p>In the final part of this series we will talk about implementation of the API specs.</p>
 </div>
@@ -303,7 +303,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://paradigmx.net/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/" data-via="" data-counturl="http://paradigmx.net/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://paradigmx.net/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/" data-via="" data-counturl="http://paradigmx.net/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -453,7 +453,7 @@
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
