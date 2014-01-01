@@ -4,7 +4,7 @@
   <title><![CDATA[Paradigm X]]></title>
   <link href="http://paradigmx.net/atom.xml" rel="self"/>
   <link href="http://paradigmx.net/"/>
-  <updated>2014-01-01T23:22:18+08:00</updated>
+  <updated>2014-01-01T23:24:16+08:00</updated>
   <id>http://paradigmx.net/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
@@ -1115,13 +1115,13 @@ adb shell
 <p>RestKit provides several components: </p>
 
 <ol>
-  <li><strong>An HTTP client component</strong> based on <code>NSURLConnection</code>. It’s not as feature-packed as ASIHTTPRequest<sup>[1]</sup>, but it does its part very well in most cases. It supports <code>GET</code> <code>POST</code> <code>PUT</code> <code>DELETE</code>, <code>SSL</code> &amp; <code>HTTP AUTH</code>, multi-part, etc. It even provides a request queue to manage the HTTP requests(mostly implicitly), making them more memory and bandwidth efficient.</li>
+  <li><strong>An HTTP client component</strong> based on <code>NSURLConnection</code>. It’s not as feature-packed as ASIHTTPRequest[^1], but it does its part very well in most cases. It supports <code>GET</code> <code>POST</code> <code>PUT</code> <code>DELETE</code>, <code>SSL</code> &amp; <code>HTTP AUTH</code>, multi-part, etc. It even provides a request queue to manage the HTTP requests(mostly implicitly), making them more memory and bandwidth efficient.</li>
   <li><strong>A powerful but elegant object mapping system</strong>, which uses idiomatic key-value coding mechanism to define and implement the round-trip transformation between <code>JSON</code> <sup>[2]</sup> string and native Objective-C class. Well, the magic behind it is called <a href="https://github.com/jverkoey/sockit">SOCKit</a> <sup>[3]</sup>.</li>
   <li><strong>A persistent layer</strong> built on top of the object mapping system, fully integrated with CoreData. Can be used as app’s primary data storage or just local cache.</li>
   <li><strong>Miscellaneous helpers</strong> for better life. Reachability, database seeding, API environments switching, etc.<br />
-<small><sup>[1]</sup> In fact ASIHTTPRequest has been <a href="http://allseeing-i.com/%5Brequest_release%5D">abandoned</a> since September 2011, and RestKit is one of replacements its author suggested.<br />
+[^1]: In fact ASIHTTPRequest has been <a href="http://allseeing-i.com/%5Brequest_release%5D">abandoned</a> since September 2011, and RestKit is one of replacements its author suggested.<br />
 <sup>[2]</sup> The JSON parsing layer is pluggable, default to <a href="https://github.com/johnezang/JSONKit">JSONKit</a>. And I haven’t mentioned the <em>old</em> XML, have I?<br />
-<sup>[3]</sup> Created by <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#106;&#118;&#101;&#114;&#107;&#111;&#101;&#121;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;">Jeff Verkoeyen</a>, the author of <a href="https://github.com/jverkoey/nimbus">Nimbus</a>, the highly improved successor of Facebook’s Three20.</small></li>
+<sup>[3]</sup> Created by <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#106;&#118;&#101;&#114;&#107;&#111;&#101;&#121;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;">Jeff Verkoeyen</a>, the author of <a href="https://github.com/jverkoey/nimbus">Nimbus</a>, the highly improved successor of Facebook’s Three20.&lt;/small&gt;</li>
 </ol>
 
 <p>Other than making another almighty monster its creators focus on the remote-local object (can be transient or persistent through CoreData) mapping. They made it through the ‘<em>common things simple, others possible</em>’ philosophy, which I always love.</p>
