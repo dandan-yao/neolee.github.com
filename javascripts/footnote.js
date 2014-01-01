@@ -36,15 +36,15 @@ var Footnotes = {
     div.css({
       position: 'absolute',
       width: '400px',
-      padding: '5px 10px 0px 10px',
+      padding: '10px 10px 0px 10px',
       border: 'solid 1px',
-      background: '#f6f6c3',
+      background: '#e2e2e2',
       'font-size': '80%',
       'line-height': 1.4,
       '-moz-border-radius': '.5em',
       '-webkit-border-radius': '.5em',
       'border-radius': '.5em',
-      opacity: '0.95'
+      opacity: '0.90'
     });
     jQuery(document.body).append(div);
 

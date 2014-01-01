@@ -115,66 +115,60 @@
 
 <div class="entry-content"><p><a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">Part I</a> <a href="/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">Part II</a></p>
 
-<p>In the final part of this article we will discuss several common topics of RESTful web service implementation. I will not dig deep here because all these topics are all quite complicated.</p>
-
+<p>In the final part of this article we will discuss several common topics of RESTful web service implementation. I will not dig deep here because all these topics are all quite complicated.
 <!-- more -->
+## Level IV: RESTful Service Implementation</p>
 
+<h3 id="reference-architecture">4.1 Reference Architecture</h3>
 
-<h2>Level IV: RESTful Service Implementation</h2>
-
-<h3>4.1 Reference Architecture</h3>
-
-<p><img class="left" src="/images/restful-service-architecture-01.jpg" width="512" height="384" title="Reference Architecture" ></p>
+<p><img class="left" src="/images/restful-service-architecture-01.jpg" width="512" height="384" title="Reference Architecture" /></p>
 
 <p>The architecture shows several good start points:</p>
 
 <ul>
-<li><strong>Layered system</strong>: simple but strict layered system gives reusable and loose-coupled architecture. Every layer in this architecture should able to scale independently.</li>
-<li><strong>Representation layer</strong>: a <em>facade</em> to handle all API requests consistently. Nearly all the common tasks can be centralised here. See section 4.2 below for detail.</li>
-<li><strong>State/transfer layer</strong>: a mid-tier to contain all business logic, including business object and flow abstraction, and the access layers for all back-end resource.</li>
-<li><strong>Resource layer</strong>: can be any resource used in the system. e.g. platform data (structured or unstructured), external data port, adaptors to other resource APIs, etc.</li>
-<li><strong>Caches</strong>: cache any cacheable things. Design a consistent mechanism to manage the caches.</li>
-<li><strong>Workers</strong>: many things should be handled automatically and asynchronously. Build a job system to schedule and manage all automatic workers.</li>
+  <li><strong>Layered system</strong>: simple but strict layered system gives reusable and loose-coupled architecture. Every layer in this architecture should able to scale independently.</li>
+  <li><strong>Representation layer</strong>: a <em>facade</em> to handle all API requests consistently. Nearly all the common tasks can be centralised here. See section 4.2 below for detail.</li>
+  <li><strong>State/transfer layer</strong>: a mid-tier to contain all business logic, including business object and flow abstraction, and the access layers for all back-end resource.</li>
+  <li><strong>Resource layer</strong>: can be any resource used in the system. e.g. platform data (structured or unstructured), external data port, adaptors to other resource APIs, etc.</li>
+  <li><strong>Caches</strong>: cache any cacheable things. Design a consistent mechanism to manage the caches.</li>
+  <li><strong>Workers</strong>: many things should be handled automatically and asynchronously. Build a job system to schedule and manage all automatic workers.</li>
 </ul>
 
-
-<h3>4.2 Facade</h3>
+<h3 id="facade">4.2 Facade</h3>
 
 <p>An API facade is a centralised entry for all API requests. Requests are pre-processed here and routed to proper business handlers. Return data are also rendered here, as exactly described in the API specs, and response to the client.</p>
 
 <p>Nearly all the common tasks can be centralised here:</p>
 
 <ul>
-<li><em>Authentication</em>, <em>authorisation</em> and <em>auditing</em> (3A)</li>
-<li>Rate limiting</li>
-<li>Parameters parsing and checking</li>
-<li>Return data rendering</li>
-<li>Statistics and analysis</li>
+  <li><em>Authentication</em>, <em>authorisation</em> and <em>auditing</em> (3A)</li>
+  <li>Rate limiting</li>
+  <li>Parameters parsing and checking</li>
+  <li>Return data rendering</li>
+  <li>Statistics and analysis</li>
 </ul>
-
 
 <p>All these tasks are business independent. Actually they are mostly <a href="http://en.wikipedia.org/wiki/Cross-cutting_concern">cross-cutting concerns</a>. For better <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a> they should be separated from the main business part and consolidated to a centralised place.</p>
 
 <p>Note that for performance reason some should run asynchronously from the main request/response flow.</p>
 
-<h3>4.3 Scaling</h3>
+<h3 id="scaling">4.3 Scaling</h3>
 
-<p><img class="right" src="/images/restful-service-architecture-05.jpg" width="512" height="384" title="Scaling" ></p>
+<p><img class="right" src="/images/restful-service-architecture-05.jpg" width="512" height="384" title="Scaling" /></p>
 
 <p>A well-designed layer system can guarantee independent scaling per every layer. In the reference architecture:</p>
 
 <ul>
-<li>The front-end can be horizontally extended by adding a front-end load balancer.</li>
-<li>The business logic can be horizontally extended by adding a service router and coordinator. By doing this you can even make some intelligent system to dynamic adjust service load via requests stats.</li>
-<li>The data is the hardest part to be extended, especially for traditional RDBMS. But you can use any mature mechanism to make life better: partitioning, sharding, clustering etc. Another very popular solution is to separate some highly active data and put them into Redis (or other NoSQL system).</li>
+  <li>The front-end can be horizontally extended by adding a front-end load balancer.</li>
+  <li>The business logic can be horizontally extended by adding a service router and coordinator. By doing this you can even make some intelligent system to dynamic adjust service load via requests stats.</li>
+  <li>The data is the hardest part to be extended, especially for traditional RDBMS. But you can use any mature mechanism to make life better: partitioning, sharding, clustering etc. Another very popular solution is to separate some highly active data and put them into Redis (or other NoSQL system).</li>
 </ul>
-
 
 <p>Most best practices on Internet-scale services are fully applicable to RESTful services. Just remember to keep an eye on the <a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">core principles</a> of REST all the time.</p>
 
-<h2>Extended Readings</h2>
+<h2 id="extended-readings">Extended Readings</h2>
 
-<p>RESTful web services are not traditional web sites but they share most characteristic features of Internet software architecture. If you are an architect but new to Internet-scale services architecture James Hamilton&rsquo;s <a href="http://static.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">classic thesis</a> is a must-read.</p>
+<p>RESTful web services are not traditional web sites but they share most characteristic features of Internet software architecture. If you are an architect but new to Internet-scale services architecture James Hamilton’s <a href="http://static.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">classic thesis</a> is a must-read. </p>
 
 <p>For new software architects this <a href="http://gorban.org/post/32873465932/software-architecture-cheat-sheet">cheat sheet</a> is a good start.</p>
 
@@ -314,7 +308,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - soulhacker -
+  Copyright &copy; 2014 - soulhacker -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

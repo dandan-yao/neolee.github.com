@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Architecture | Paradigm X]]></title>
   <link href="http://paradigmx.net/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://paradigmx.net/"/>
-  <updated>2013-09-21T16:31:01+08:00</updated>
+  <updated>2014-01-01T23:22:18+08:00</updated>
   <id>http://paradigmx.net/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
@@ -20,66 +20,60 @@
     <id>http://paradigmx.net/blog/2012/10/18/a-brief-guide-of-restful-soa</id>
     <content type="html"><![CDATA[<p><a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">Part I</a> <a href="/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">Part II</a></p>
 
-<p>In the final part of this article we will discuss several common topics of RESTful web service implementation. I will not dig deep here because all these topics are all quite complicated.</p>
-
+<p>In the final part of this article we will discuss several common topics of RESTful web service implementation. I will not dig deep here because all these topics are all quite complicated.
 <!-- more -->
+## Level IV: RESTful Service Implementation</p>
 
-
-<h2>Level IV: RESTful Service Implementation</h2>
-
-<h3>4.1 Reference Architecture</h3>
+<h3 id="reference-architecture">4.1 Reference Architecture</h3>
 
 <p><img class="left" src="/images/restful-service-architecture-01.jpg" width="512" height="384" title="Reference Architecture" ></p>
 
 <p>The architecture shows several good start points:</p>
 
 <ul>
-<li><strong>Layered system</strong>: simple but strict layered system gives reusable and loose-coupled architecture. Every layer in this architecture should able to scale independently.</li>
-<li><strong>Representation layer</strong>: a <em>facade</em> to handle all API requests consistently. Nearly all the common tasks can be centralised here. See section 4.2 below for detail.</li>
-<li><strong>State/transfer layer</strong>: a mid-tier to contain all business logic, including business object and flow abstraction, and the access layers for all back-end resource.</li>
-<li><strong>Resource layer</strong>: can be any resource used in the system. e.g. platform data (structured or unstructured), external data port, adaptors to other resource APIs, etc.</li>
-<li><strong>Caches</strong>: cache any cacheable things. Design a consistent mechanism to manage the caches.</li>
-<li><strong>Workers</strong>: many things should be handled automatically and asynchronously. Build a job system to schedule and manage all automatic workers.</li>
+  <li><strong>Layered system</strong>: simple but strict layered system gives reusable and loose-coupled architecture. Every layer in this architecture should able to scale independently.</li>
+  <li><strong>Representation layer</strong>: a <em>facade</em> to handle all API requests consistently. Nearly all the common tasks can be centralised here. See section 4.2 below for detail.</li>
+  <li><strong>State/transfer layer</strong>: a mid-tier to contain all business logic, including business object and flow abstraction, and the access layers for all back-end resource.</li>
+  <li><strong>Resource layer</strong>: can be any resource used in the system. e.g. platform data (structured or unstructured), external data port, adaptors to other resource APIs, etc.</li>
+  <li><strong>Caches</strong>: cache any cacheable things. Design a consistent mechanism to manage the caches.</li>
+  <li><strong>Workers</strong>: many things should be handled automatically and asynchronously. Build a job system to schedule and manage all automatic workers.</li>
 </ul>
 
-
-<h3>4.2 Facade</h3>
+<h3 id="facade">4.2 Facade</h3>
 
 <p>An API facade is a centralised entry for all API requests. Requests are pre-processed here and routed to proper business handlers. Return data are also rendered here, as exactly described in the API specs, and response to the client.</p>
 
 <p>Nearly all the common tasks can be centralised here:</p>
 
 <ul>
-<li><em>Authentication</em>, <em>authorisation</em> and <em>auditing</em> (3A)</li>
-<li>Rate limiting</li>
-<li>Parameters parsing and checking</li>
-<li>Return data rendering</li>
-<li>Statistics and analysis</li>
+  <li><em>Authentication</em>, <em>authorisation</em> and <em>auditing</em> (3A)</li>
+  <li>Rate limiting</li>
+  <li>Parameters parsing and checking</li>
+  <li>Return data rendering</li>
+  <li>Statistics and analysis</li>
 </ul>
-
 
 <p>All these tasks are business independent. Actually they are mostly <a href="http://en.wikipedia.org/wiki/Cross-cutting_concern">cross-cutting concerns</a>. For better <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a> they should be separated from the main business part and consolidated to a centralised place.</p>
 
 <p>Note that for performance reason some should run asynchronously from the main request/response flow.</p>
 
-<h3>4.3 Scaling</h3>
+<h3 id="scaling">4.3 Scaling</h3>
 
 <p><img class="right" src="/images/restful-service-architecture-05.jpg" width="512" height="384" title="Scaling" ></p>
 
 <p>A well-designed layer system can guarantee independent scaling per every layer. In the reference architecture:</p>
 
 <ul>
-<li>The front-end can be horizontally extended by adding a front-end load balancer.</li>
-<li>The business logic can be horizontally extended by adding a service router and coordinator. By doing this you can even make some intelligent system to dynamic adjust service load via requests stats.</li>
-<li>The data is the hardest part to be extended, especially for traditional RDBMS. But you can use any mature mechanism to make life better: partitioning, sharding, clustering etc. Another very popular solution is to separate some highly active data and put them into Redis (or other NoSQL system).</li>
+  <li>The front-end can be horizontally extended by adding a front-end load balancer.</li>
+  <li>The business logic can be horizontally extended by adding a service router and coordinator. By doing this you can even make some intelligent system to dynamic adjust service load via requests stats.</li>
+  <li>The data is the hardest part to be extended, especially for traditional RDBMS. But you can use any mature mechanism to make life better: partitioning, sharding, clustering etc. Another very popular solution is to separate some highly active data and put them into Redis (or other NoSQL system).</li>
 </ul>
-
 
 <p>Most best practices on Internet-scale services are fully applicable to RESTful services. Just remember to keep an eye on the <a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">core principles</a> of REST all the time.</p>
 
-<h2>Extended Readings</h2>
+<h2 id="extended-readings">Extended Readings</h2>
 
-<p>RESTful web services are not traditional web sites but they share most characteristic features of Internet software architecture. If you are an architect but new to Internet-scale services architecture James Hamilton&rsquo;s <a href="http://static.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">classic thesis</a> is a must-read.</p>
+<p>RESTful web services are not traditional web sites but they share most characteristic features of Internet software architecture. If you are an architect but new to Internet-scale services architecture James Hamilton’s <a href="http://static.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">classic thesis</a> is a must-read. </p>
 
 <p>For new software architects this <a href="http://gorban.org/post/32873465932/software-architecture-cheat-sheet">cheat sheet</a> is a good start.</p>
 
@@ -94,94 +88,82 @@
     <id>http://paradigmx.net/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii</id>
     <content type="html"><![CDATA[<p>In the <a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part of this series</a> we have discussed the core concepts of RESTful architectural style and gives some guideline in how to define the system and prepare for defining the APIs specs, which will be covered in this part.</p>
 
-<h2>Level III: Define and Tune the API</h2>
+<h2 id="level-iii-define-and-tune-the-api">Level III: Define and Tune the API</h2>
 
-<p>Defining API specs is the most important part of all and it&rsquo;s a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as <a href="http://www.mediawiki.org/">MediaWiki</a> or <a href="http://daringfireball.net/projects/markdown/">Markdown</a> + <a href="https://github.com">GitHub</a> etc. Then you can follow these sections below.</p>
-
+<p>Defining API specs is the most important part of all and it’s a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as <a href="http://www.mediawiki.org/">MediaWiki</a> or <a href="http://daringfireball.net/projects/markdown/">Markdown</a> + <a href="https://github.com">GitHub</a> etc. Then you can follow these sections below.
 <!-- more -->
-
-
-<h3>3.1 API Basics</h3>
+### 3.1 API Basics</p>
 
 <p>Use one or two pages to list basic information of the API system, including (but not constrained to):</p>
 
 <ul>
-<li><strong>General</strong>: general style and policy, versioning, request and response methods, i18n, etc.</li>
-<li><strong>Authorisation</strong>: step by step tutorial on connecting to the service (see section 3.2 below).</li>
-<li><strong>Request</strong>: all acceptable request formats w/ examples.</li>
-<li><strong>Response</strong>: response format w/ examples, error codes.</li>
-<li><strong>Misc</strong>: rate limits, auditing, etc.</li>
+  <li><strong>General</strong>: general style and policy, versioning, request and response methods, i18n, etc.</li>
+  <li><strong>Authorisation</strong>: step by step tutorial on connecting to the service (see section 3.2 below).</li>
+  <li><strong>Request</strong>: all acceptable request formats w/ examples.</li>
+  <li><strong>Response</strong>: response format w/ examples, error codes.</li>
+  <li><strong>Misc</strong>: rate limits, auditing, etc.</li>
 </ul>
 
-
-<h3>3.2 One Token to Rule Them All</h3>
+<h3 id="one-token-to-rule-them-all">3.2 One Token to Rule Them All</h3>
 
 <p>Remember that for most developers using your APIs the most tricky part is the authentication and authorisation. For some reasons (compromise of security, performance and convenience) most web service systems use <code>token</code> to identify service clients. Here are some fundamental concepts:</p>
 
 <ul>
-<li><strong>Service</strong>, or the <strong>platform</strong> is the system hold the key resources and make resources accessible via some open APIs.</li>
-<li><strong>Client</strong>, or <strong>app</strong> is client application sending request to the <strong>service</strong>.</li>
-<li>Each of every <strong>client</strong> should <em>register</em> itself on the <strong>service platform</strong> and gain a pair of CLIENT_ID and CLIENT_SECRET to identify itself.</li>
-<li>After registration <strong>apps</strong> can request tokens from the <strong>platform</strong></li>
-<li>There are 2 types of <strong>services</strong> in most <strong>platform</strong>: (A) services related to a specific <em>user</em> in the platform; (B) services independent to <em>users</em>. They need different kinds of tokens:
-
-<ul>
-<li>For type (A): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET, correlated user&rsquo;s ID and expected access profile (commonly called &lsquo;<em>scope</em>&rsquo;) to request the access token.</li>
-<li>For type (B): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET and <em>scope</em> to request the access token.</li>
+  <li><strong>Service</strong>, or the <strong>platform</strong> is the system hold the key resources and make resources accessible via some open APIs.</li>
+  <li><strong>Client</strong>, or <strong>app</strong> is client application sending request to the <strong>service</strong>.</li>
+  <li>Each of every <strong>client</strong> should <em>register</em> itself on the <strong>service platform</strong> and gain a pair of CLIENT_ID and CLIENT_SECRET to identify itself.</li>
+  <li>After registration <strong>apps</strong> can request tokens from the <strong>platform</strong></li>
+  <li>There are 2 types of <strong>services</strong> in most <strong>platform</strong>: (A) services related to a specific <em>user</em> in the platform; (B) services independent to <em>users</em>. They need different kinds of tokens:
+    <ul>
+      <li>For type (A): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET, correlated user’s ID and expected access profile (commonly called ‘<em>scope</em>’) to request the access token.</li>
+      <li>For type (B): <strong>app</strong> should use its CLIENT_ID/CLIENT_SECRET and <em>scope</em> to request the access token.</li>
+    </ul>
+  </li>
+  <li>As long as the access token issued to the <strong>app</strong>, <strong>app</strong> can use it to request designated service APIs， until the token expires or revoked by <strong>platform</strong> or <strong>app</strong> or the <em>user</em>.</li>
 </ul>
-</li>
-<li>As long as the access token issued to the <strong>app</strong>, <strong>app</strong> can use it to request designated service APIs， until the token expires or revoked by <strong>platform</strong> or <strong>app</strong> or the <em>user</em>.</li>
-</ul>
 
-
-<p>In many cases the <strong>platform</strong> cannot issue type (A) token to an <strong>app</strong> unless correlated user explicitly approve the request. That&rsquo;s where OAuth-like mechanisms make sense. In such cases, when <strong>platform</strong> receives request for issuing a token to some user, it will redirect the user to a page showing Approve/Decline buttons and continue the flow after the user explicitly approve the request. For detail info about the widely uses OAuth v2 protocol refer to the official <a href="http://tools.ietf.org/html/rfc6749">IETF RFC6749 document</a>.</p>
+<p>In many cases the <strong>platform</strong> cannot issue type (A) token to an <strong>app</strong> unless correlated user explicitly approve the request. That’s where OAuth-like mechanisms make sense. In such cases, when <strong>platform</strong> receives request for issuing a token to some user, it will redirect the user to a page showing Approve/Decline buttons and continue the flow after the user explicitly approve the request. For detail info about the widely uses OAuth v2 protocol refer to the official <a href="http://tools.ietf.org/html/rfc6749">IETF RFC6749 document</a>.</p>
 
 <p>A platform should choose mechanism wisely and make the flows (app registration, token issuing/revoking/managing, etc.) clean, flexible and friendly to all potential client apps. Useful tutorials about all these flows are required.</p>
 
-<h3>3.3 API Taxonomy</h3>
+<h3 id="api-taxonomy">3.3 API Taxonomy</h3>
 
-<p><strong>An API taxonomy</strong> can help to organise all APIs. It gives you and your clients' developers very clean and structural view of your continuously evolving APIs. It also gives you a way to normalise the API endpoints' URI patterns.</p>
+<p><strong>An API taxonomy</strong> can help to organise all APIs. It gives you and your clients’ developers very clean and structural view of your continuously evolving APIs. It also gives you a way to normalise the API endpoints’ URI patterns. </p>
 
 <p>API taxonomy is highly dependent to the business. But some general rules certainly helps:</p>
 
 <ol>
-<li>The response objects, which are defined in the <a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part</a> of this article, are usually the <em>first dimension</em> of the taxonomy.</li>
-<li>The <em>second dimension</em> is usually related to the API URI patterns, which will described below.</li>
+  <li>The response objects, which are defined in the <a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part</a> of this article, are usually the <em>first dimension</em> of the taxonomy.</li>
+  <li>The <em>second dimension</em> is usually related to the API URI patterns, which will described below.</li>
 </ol>
 
-
-<p>So let&rsquo;s look at some typical RESTful URI patterns.</p>
-
-<ul>
-<li><strong>Object</strong>
+<p>So let’s look at some typical RESTful URI patterns.</p>
 
 <ul>
-<li><code>/:type</code> e.g. <code>/user</code>: Request this URI by <code>POST</code> will create a new object of designated type and return the object if succeeded.</li>
-<li><code>/:type/:id</code> e.g. <code>/user/2234</code>: Request this URI by <code>GET</code> <code>PUT</code> <code>DELETE</code> will fetch, change or delete designated object.</li>
+  <li><strong>Object</strong>
+    <ul>
+      <li><code>/:type</code> e.g. <code>/user</code>: Request this URI by <code>POST</code> will create a new object of designated type and return the object if succeeded.</li>
+      <li><code>/:type/:id</code> e.g. <code>/user/2234</code>: Request this URI by <code>GET</code> <code>PUT</code> <code>DELETE</code> will fetch, change or delete designated object.</li>
+    </ul>
+  </li>
+  <li><strong>Query</strong>
+    <ul>
+      <li><code>/:type/:catalog</code> e.g. <code>/user/all</code> <code>/user/query?name=foo</code>: Return one or more objects of designated type (using criteria in query string if needed).</li>
+    </ul>
+  </li>
+  <li><strong>Aspect</strong> or <strong>Attribute</strong>
+    <ul>
+      <li><code>/:type/:id/:aspect</code> e.g. <code>/user/1532/friends</code> <code>/user/1532/pets</code>: Return zero or more objects of some type related to designated object. In our examples, user #1532’s friends should be zero or more <em>user</em> objects, and user #1532’s pets should be zero or more <em>pet</em> objects.</li>
+    </ul>
+  </li>
+  <li><strong>Action</strong>
+    <ul>
+      <li><code>/:type/:id/:action</code> e.g. <code>/user/1532/follow</code> <code>/user/1532/report</code>: Perform certain action (<em>follow</em> somebody or <em>report</em> them as spam) to designated object.</li>
+    </ul>
+  </li>
 </ul>
-</li>
-<li><strong>Query</strong>
 
-<ul>
-<li><code>/:type/:catalog</code> e.g. <code>/user/all</code> <code>/user/query?name=foo</code>: Return one or more objects of designated type (using criteria in query string if needed).</li>
-</ul>
-</li>
-<li><strong>Aspect</strong> or <strong>Attribute</strong>
-
-<ul>
-<li><code>/:type/:id/:aspect</code> e.g. <code>/user/1532/friends</code> <code>/user/1532/pets</code>: Return zero or more objects of some type related to designated object. In our examples, user #1532&rsquo;s friends should be zero or more <em>user</em> objects, and user #1532&rsquo;s pets should be zero or more <em>pet</em> objects.</li>
-</ul>
-</li>
-<li><strong>Action</strong>
-
-<ul>
-<li><code>/:type/:id/:action</code> e.g. <code>/user/1532/follow</code> <code>/user/1532/report</code>: Perform certain action (<em>follow</em> somebody or <em>report</em> them as spam) to designated object.</li>
-</ul>
-</li>
-</ul>
-
-
-<p>As you can see, The last pattern is not so RESTful. A far more RESTful way to do things like <em>following somebody</em> may be: define an object type <code>relationship</code> and provide <code>POST /relationship</code> (with user A and B as parameters) to add a new relationship.</p>
+<p>As you can see, The last pattern is not so RESTful. A far more RESTful way to do things like <em>following somebody</em> may be: define an object type <code>relationship</code> and provide <code>POST /relationship</code> (with user A and B as parameters) to add a new relationship. </p>
 
 <p>All I can say is that both ways will work fine in most systems and I leave the decision up to you.</p>
 
@@ -210,40 +192,37 @@
     <td>house</td>
     <td>search</td>
     <td>residents</td>
-    <td></td>
+    <td />
   </tr>
 </table></p>
 
-
-<p>Well, some special APIs will be hard to classify. Here are the most commonly used two (we won&rsquo;t discuss more, just list them here):</p>
+<p>Well, some special APIs will be hard to classify. Here are the most commonly used two (we won’t discuss more, just list them here):</p>
 
 <ul>
-<li><code>compound</code>: combine several API requests into a batch and response the batch results altogether.</li>
-<li><code>realtime</code> or <code>stream</code>: stream realtime activity logs to the client, which needs very different mechanism to work out.</li>
+  <li><code>compound</code>: combine several API requests into a batch and response the batch results altogether.</li>
+  <li><code>realtime</code> or <code>stream</code>: stream realtime activity logs to the client, which needs very different mechanism to work out.</li>
 </ul>
 
-
-<h3>3.4 API Specs</h3>
+<h3 id="api-specs">3.4 API Specs</h3>
 
 <p>For every endpoints in the API matrix you need a consistent and clean spec which follows these rules:</p>
 
 <ul>
-<li><strong>Endpoint</strong>: basic info for calling the endpoint (complete URI, HTTP verbs, security options, etc.).</li>
-<li><strong>Parameters</strong>: list of all parameters, each of which should include <em>name</em>, <em>example</em>, <em>description</em>, <em>required or optional</em> and other useful information.</li>
-<li><strong>Response</strong>: all data fields in the response data. Each fields can be some plain value or a pre-defined business object structure, as described in the <a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part</a> of this article.</li>
-<li><strong>Examples</strong>: clickable examples of calling this endpoint (see section 3.5 below).</li>
+  <li><strong>Endpoint</strong>: basic info for calling the endpoint (complete URI, HTTP verbs, security options, etc.).</li>
+  <li><strong>Parameters</strong>: list of all parameters, each of which should include <em>name</em>, <em>example</em>, <em>description</em>, <em>required or optional</em> and other useful information.</li>
+  <li><strong>Response</strong>: all data fields in the response data. Each fields can be some plain value or a pre-defined business object structure, as described in the <a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part</a> of this article.</li>
+  <li><strong>Examples</strong>: clickable examples of calling this endpoint (see section 3.5 below).</li>
 </ul>
-
 
 <p>Here is a good documentation example from <a href="https://foursquare.com">foursquare</a> platform: <a href="https://developer.foursquare.com/docs/checkins/add">create a check-in</a>.</p>
 
-<h3>3.5 Test the Specs</h3>
+<h3 id="test-the-specs">3.5 Test the Specs</h3>
 
-<p>To give app developers' and yourself a better life, you need an API test console from the first day. It can be a command line tool or a GUI tool or, the easiest and most convenient way, a browser based tool. In the test console user can input token and API endpoint, choose HTTP verb, input parameters and get 100% real response data, in nicely formatted JSON format. It can save tons of time and money. Have a look at foursquare&rsquo;s <a href="https://developer.foursquare.com/docs/explore#req=users/self">online API explorer</a> for some real world example.</p>
+<p>To give app developers’ and yourself a better life, you need an API test console from the first day. It can be a command line tool or a GUI tool or, the easiest and most convenient way, a browser based tool. In the test console user can input token and API endpoint, choose HTTP verb, input parameters and get 100% real response data, in nicely formatted JSON format. It can save tons of time and money. Have a look at foursquare’s <a href="https://developer.foursquare.com/docs/explore#req=users/self">online API explorer</a> for some real world example.</p>
 
 <p>Further more, an automatic regressive testing solution should be considered as early as possible. Web services are entries of your business and API implementation will surely be in a continuously developing progress. After any changes a series of strict tests must be automatically executed to confirm that all APIs are still working as intended. Use a high productivity dynamic language such as Ruby or Python to write a simple but complete client lib for your APIs and build test case for every defined API endpoints. Personally I like Ruby w/ RSpec but many other languages and frameworks also work fine.</p>
 
-<p><strong>To be continued&hellip;</strong></p>
+<p><strong>To be continued…</strong></p>
 
 <p>In the final part of this series we will talk about implementation of the API specs.</p>
 ]]></content>
@@ -256,22 +235,19 @@
     <id>http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i</id>
     <content type="html"><![CDATA[<p>Many say that <code>XML</code> <code>SOAP</code> <code>WS-\*</code> suck and SOA is over or becoming profit tool for big consultant companies. But I would say: SOA is <em>not</em> evil, IBM is. Look at these principles of SOA:</p>
 
-<p><blockquote><p>&ndash; reuse, granularity, modularity, composability, componentization and interoperability.<br/>&ndash; standards-compliance (both common and industry-specific).<br/>&ndash; services identification and categorization, provisioning and delivery, and monitoring and tracking.</p><footer><strong>Wikipedia <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles">http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles</a> Service-oriented architecture</strong></footer></blockquote></p>
+<p><blockquote><p>- reuse, granularity, modularity, composability, componentization and interoperability.<br/>- standards-compliance (both common and industry-specific).<br/>- services identification and categorization, provisioning and delivery, and monitoring and tracking.</p><footer><strong>Wikipedia</strong> <cite><a href='http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles'>Service-oriented Architecture</a></cite></footer></blockquote></p>
 
-<p>All these are perfect software architectural styles(well, except those words your spell checker complains), our best dream. These can&rsquo;t be wrong. The problem is in the implementations. Fortunately the rises of RESTful services on the open web prove that the spirit of SOA can really matters. Maybe one day similar architecture and implementation will eventually change enterprise computing in return.</p>
+<p>All these are perfect software architectural styles(well, except those words your spell checker complains), our best dream. These can’t be wrong. The problem is in the implementations. Fortunately the rises of RESTful services on the open web prove that the spirit of SOA can really matters. Maybe one day similar architecture and implementation will eventually change enterprise computing in return.</p>
 
-<p>I always believe <strong>the service-oriented architecture will be the future of massive distributed software system</strong>. And <strong>RESTful services will replace web sites and eventually become the main body of the Internet</strong>. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol &ndash; it can be used as RPC protocol but it&rsquo;s not RESTful and cannot provide key benefits which REST want to apply.</p>
-
+<p>I always believe <strong>the service-oriented architecture will be the future of massive distributed software system</strong>. And <strong>RESTful services will replace web sites and eventually become the main body of the Internet</strong>. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol - it can be used as RPC protocol but it’s not RESTful and cannot provide key benefits which REST want to apply. 
 <!-- more -->
-
-
-<p>Surround your pullquote like this {" text to be quoted "}</p>
+Surround your pullquote like this {" text to be quoted "}</p>
 
 <p><strong>NOTE:</strong> In this guide, <em>service oriented architecture</em> and <em>RESTful architecture style</em> are nearly the same concept. I will use the term <em>RESTful</em> from here on.</p>
 
-<h2>Level I: Basic Definitions and Rules</h2>
+<h2 id="level-i-basic-definitions-and-rules">Level I: Basic Definitions and Rules</h2>
 
-<h3>1.1 Objectives</h3>
+<h3 id="objectives">1.1 Objectives</h3>
 
 <p>First of all you should know the purpose, why your service should follow the RESTful style and what benefits you can get. So when you get some trouble making architectural decision you can use these high level objectives to test all options: which one is the best for these objective?</p>
 
@@ -281,7 +257,7 @@
 
 <p><strong>Easier integration and mash-up:</strong> All services have uniform interfaces and similar behaviors. Clients to same service are exchangeable. Service integration, inter-op and mash-up are easier to implement.</p>
 
-<h3>1.2 Core Principles</h3>
+<h3 id="core-principles">1.2 Core Principles</h3>
 
 <p>RESTful style requires:</p>
 
@@ -293,220 +269,133 @@
 
 <p><strong>Layered:</strong> System is layered and no cross layer info exposures. Client cannot tell whether it is directly connecting to the service provider or some intermediate layer, giving the interface is the same.</p>
 
-<p><strong>Uniform interface</strong> which makes server and client decoupled on implementation, enables each part to evolve independently. It&rsquo;s the most practical part so we will discuss it separately below.</p>
+<p><strong>Uniform interface</strong> which makes server and client decoupled on implementation, enables each part to evolve independently. It’s the most practical part so we will discuss it separately below.</p>
 
-<p>All these 5 rules are required. If a service violet any of them it cannot be called &lsquo;RESTful&rsquo; &ndash; and more important, cannot get the benefits which RESTful styles declare to provide. So understanding all of them is the most important pre-requisite.</p>
+<p>All these 5 rules are required. If a service violet any of them it cannot be called ‘RESTful’ - and more important, cannot get the benefits which RESTful styles declare to provide. So understanding all of them is the most important pre-requisite.</p>
 
-<h2>Level II: Define Your System</h2>
+<h2 id="level-ii-define-your-system">Level II: Define Your System</h2>
 
-<p>Before defining the APIs you should define your system first. You can do it through 2 steps:</p>
+<p>Before defining the APIs you should define your system first. You can do it through 2 steps: </p>
 
-<h3>2.1 Business Abstraction</h3>
+<h3 id="business-abstraction">2.1 Business Abstraction</h3>
 
-<p>Business abstraction is <a href="/blog/2011/12/24/back-end-is-hard/">very important but hard to routinize</a>. And it&rsquo;s mostly beyond the realm which RESTful style can control. You should find the <em>essential</em> business concepts and make smart abstraction for high flexibility and extensibility. Yet we still can have some guideline. Probably will not solve the most difficult part of the problem but still give some help.</p>
+<p>Business abstraction is <a href="/blog/2011/12/24/back-end-is-hard/">very important but hard to routinize</a>. And it’s mostly beyond the realm which RESTful style can control. You should find the <em>essential</em> business concepts and make smart abstraction for high flexibility and extensibility. Yet we still can have some guideline. Probably will not solve the most difficult part of the problem but still give some help.</p>
 
 <p><strong>Find business objects.</strong> When the system complete, every business objects exposed to the public will be presented as an URI. Clients can issue <code>POST</code> <code>GET</code> <code>PATCH/PUT</code> <code>DELETE</code> requests to the URI to <code>CRUD</code>(create/read/update/delete) correlated object. <em>So any objects you want to exposed to the public for clients to do the <code>CRUD</code> things you should make them in the business object model, as essential objects.</em></p>
 
-<p><strong>Define the relations.</strong> Next step is to define the relations between objects. The classical entity-relation analysis methodology is very good at that. Find all <code>1-1</code> <code>1-*</code>  <code>*-*</code> etc. relations and make them clearly documented.</p>
+<p><strong>Define the relations.</strong> Next step is to define the relations between objects. The classical entity-relation analysis methodology is very good at that. Find all <code>1-1</code> <code>1-*</code>  <code>*-*</code> etc. relations and make them clearly documented. </p>
 
-<p><strong>The object graph.</strong> It&rsquo;s optional but very useful. In most case build an <a href="http://en.wikipedia.org/wiki/Object_graph">object graph</a> at this stage will help to clarify many potential obscure concepts in the business object model. Try fill some real data in the object model and understand the order and constrains of each operation. Refine the object-relation model if necessary.</p>
+<p><strong>The object graph.</strong> It’s optional but very useful. In most case build an <a href="http://en.wikipedia.org/wiki/Object_graph">object graph</a> at this stage will help to clarify many potential obscure concepts in the business object model. Try fill some real data in the object model and understand the order and constrains of each operation. Refine the object-relation model if necessary.</p>
 
-<h3>2.2 Define Response Objects</h3>
+<h3 id="define-response-objects">2.2 Define Response Objects</h3>
 
-<p>Now define some response data formats. Some may feel weird to do that in such early stage but trust me it&rsquo;s the best path you can choose.</p>
+<p>Now define some response data formats. Some may feel weird to do that in such early stage but trust me it’s the best path you can choose.</p>
 
-<p>Firstly you should know that as highly recommended by RESTful style, the object and its <em>representation</em> are isolated. The same object can have many different <em>representations</em> which can be designated by the clients when issuing the request.</p>
+<p>Firstly you should know that as highly recommended by RESTful style, the object and its <em>representation</em> are isolated. The same object can have many different <em>representations</em> which can be designated by the clients when issuing the request. </p>
 
 <p>Second, do <em>NOT</em> try to invent your own <em>representation</em> type system, just use the well defined exist Internet media types(originally called MIME types), as defined in <a href="http://tools.ietf.org/html/rfc2046">RFC 2046</a>. Every system on the Internet have built-in support to it and all developers are familiar with <code>text/html</code> <code>application/json</code> <code>image/jpeg</code> <code>multipart/form-data</code> etc.</p>
 
 <p>Now define the <em>core</em> response objects, in JSON format. Normally when clients request for a business object e.g. <code>GET /user/:uid</code> the service will return a <code>user</code> object in JSON format(<code>application/json</code>). JSON has become the most widely used cross platform data exchange format these days. You can provide support for responses in other media types such as <code>text/html</code> <code>application/pdf</code> later. And here are some best practices for that:</p>
 
-<p><strong>Separate core attributes and other attributes.</strong> In most cases you should provide two versions of the same object type:</p>
+<p><strong>Separate core attributes and other attributes.</strong> In most cases you should provide two versions of the same object type: </p>
 
 <ul>
-<li>The <em>compact</em> version which only contains the most frequently used core attributes of the object and very lightweight(for bandwidth and for parsing), which is often used embedded within other object or in arrays.</li>
-<li>The <em>detailed</em> version which contains all fields in the <em>compact</em> version plus more detail info, such as attributes not so frequently used and other objects related to this object, which is often used for clients retrieving a single object.</li>
+  <li>The <em>compact</em> version which only contains the most frequently used core attributes of the object and very lightweight(for bandwidth and for parsing), which is often used embedded within other object or in arrays.</li>
+  <li>The <em>detailed</em> version which contains all fields in the <em>compact</em> version plus more detail info, such as attributes not so frequently used and other objects related to this object, which is often used for clients retrieving a single object.</li>
 </ul>
-
 
 <p>Below is a demo:
 <img src="/images/restful-soa-define-json-data.png"></p>
 
 <p><strong>Use embedded object not the object id.</strong> Assuming you are working on a online comment system and you have objects <code>user</code> and <code>post</code>. In <code>post</code> object there is an attribute <code>author</code> pointing to a <code>user</code> object. You should embedded a <em>compact</em> version of <code>user</code> object in the <code>post</code> object instead of only the user id. As shown in the snippet below:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// BAD style</span>
-</span><span class='line'><span class="nx">post</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">id</span><span class="o">:</span> <span class="mi">10010</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">title</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Hello</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;,</span>
-</span><span class='line'>  <span class="nx">body</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Hi</span> <span class="nx">there</span><span class="o">!&amp;</span><span class="nx">rdquo</span><span class="p">;,</span>
-</span><span class='line'>  <span class="nx">createdAt</span><span class="o">:</span> <span class="mi">1333250513</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">author</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>  <span class="o">&amp;</span><span class="nx">hellip</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="c1">// GOOD style</span>
-</span><span class='line'><span class="nx">post</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">id</span><span class="o">:</span> <span class="mi">10010</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">title</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Hello</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;,</span>
-</span><span class='line'>  <span class="nx">body</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Hi</span> <span class="nx">there</span><span class="o">!&amp;</span><span class="nx">rdquo</span><span class="p">;,</span>
-</span><span class='line'>  <span class="nx">createdAt</span><span class="o">:</span> <span class="mi">1333250513</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">author</span><span class="o">:</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'><span class="nx">nickName</span><span class="o">:</span> <span class="s2">&quot;soulhacker&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="nx">avatar</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="nx">status</span><span class="o">:</span> <span class="s2">&quot;Doing something matters&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="nx">online</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'><span class="p">...</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">},</span>
-</span><span class='line'>  <span class="o">&amp;</span><span class="nx">hellip</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
+  <div class="code"><pre><span class="comment">// BAD style</span>
+post: {
+  <span class="key">id</span>: <span class="integer">10010</span>,
+  <span class="key">title</span>: <span class="error">“</span>Hello<span class="error">”</span>,
+  <span class="key">body</span>: <span class="error">“</span>Hi there!<span class="error">”</span>,
+  <span class="key">createdAt</span>: <span class="integer">1333250513</span>,
+  <span class="key">author</span>: <span class="integer">1</span>,
+  <span class="error">…</span>
+}&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;</span><span class="delimiter">/</span></span>/ GOOD style
+post: {
+  <span class="key">id</span>: <span class="integer">10010</span>,
+  <span class="key">title</span>: <span class="error">“</span>Hello<span class="error">”</span>,
+  <span class="key">body</span>: <span class="error">“</span>Hi there!<span class="error">”</span>,
+  <span class="key">createdAt</span>: <span class="integer">1333250513</span>,
+  <span class="key">author</span>: {
+    <span class="key">id</span>: <span class="integer">1</span>,
+    <span class="key">nickName</span>: <span class="error">“</span>soulhacker<span class="error">”</span>,
+    <span class="key">avatar</span>: <span class="error">“</span><span class="error">”</span>,
+    <span class="key">status</span>: <span class="error">“</span>Doing something matters<span class="error">”</span>,
+    <span class="key">online</span>: <span class="predefined-constant">true</span>,
+    <span class="error">…</span>
+  },
+  <span class="error">…</span>
+}</pre></div>
+</div>
+ </figure></notextile></div></p>
 
 <p>In many cases this strategy will bring data redundancy but make client-side parsing and handling more convenient. Server-side implementation will be more structural and reusable as well.</p>
 
 <p><strong>Normalize array representation</strong> so clients can parse them using one single handler. Below is return data of some user search API:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">users</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">total</span><span class="o">:</span> <span class="mi">126</span><span class="p">,</span> <span class="c1">// totally 126 users match this request</span>
-</span><span class='line'>  <span class="nx">count</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="c1">// but we just return the first 10 records</span>
-</span><span class='line'>  <span class="nx">items</span><span class="o">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="p">{</span>
-</span><span class='line'>  <span class="p">...</span> <span class="c1">// a compact user object inside </span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="p">...</span> <span class="c1">// 9 more user objects here</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">]</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
+  <div class="code"><pre>users: {
+  <span class="key">total</span>: <span class="integer">126</span>, <span class="comment">// totally 126 users match this request</span>
+  <span class="key">count</span>: <span class="integer">10</span>, <span class="comment">// but we just return the first 10 records</span>
+  <span class="key">items</span>: [
+    {
+      <span class="error">…</span> <span class="comment">// a compact user object inside </span>
+    }
+    <span class="error">…</span> <span class="comment">// 9 more user objects here</span>
+  ]
+}</pre></div>
+</div>
+ </figure></notextile></div></p>
 
 <p>Client-side handling can be very simple and reusable. Snippet below shows how it goes in Ruby:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;h1&gt;Utitlity methods&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">countFromJSONCollection</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</span><span class='line'>  <span class="c1"># data is a JSON object return from JSON.parse(response)</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="kp">nil</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;  total = data[&amp;lsquo;total&amp;rsquo;]</span>
-</span><span class='line'><span class="sr">  count = data[&amp;lsquo;count&amp;rsquo;]</span>
-</span><span class='line'><span class="sr">  return Integer(total), Integer(count)</span>
-</span><span class='line'><span class="sr">end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">itemsFromJSONCollection</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-</span><span class='line'>  <span class="c1"># c is a class with class method named fromJSON to init object</span>
-</span><span class='line'>  <span class="k">return</span> <span class="kp">nil</span> <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="kp">nil</span> <span class="ow">or</span> <span class="n">data</span> <span class="o">==</span> <span class="kp">nil</span> <span class="ow">or</span> <span class="n">data</span><span class="o">[&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">items</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span><span class="o">]</span> <span class="o">==</span> <span class="kp">nil</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;  count = data[&amp;lsquo;items&amp;rsquo;].size</span>
-</span><span class='line'><span class="sr">  array = Array.new(count) { |i| c.fromJSON(data[&amp;lsquo;items&amp;rsquo;][i]) }</span>
-</span><span class='line'><span class="sr">end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="k">class</span> <span class="nc">Collection</span>
-</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:total</span><span class="p">,</span> <span class="ss">:count</span><span class="p">,</span> <span class="ss">:items</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;  def self.fromJSON(data=nil, c=nil)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="kp">nil</span> <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="kp">nil</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="kp">nil</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">coll</span> <span class="o">=</span> <span class="nb">self</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'><span class="n">coll</span><span class="o">.</span><span class="n">total</span><span class="p">,</span> <span class="n">coll</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">countFromJSONCollection</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</span><span class='line'><span class="n">coll</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="n">itemsFromJSONCollection</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">coll</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
+  <div class="code"><pre><span class="comment"># Utitlity methods</span>
+<span class="keyword">def</span> <span class="function">countFromJSONCollection</span>(data)
+  <span class="comment"># data is a JSON object return from JSON.parse(response)</span>
+  <span class="keyword">return</span> <span class="integer">0</span> <span class="keyword">if</span> data == <span class="predefined-constant">nil</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;total = data[‘total’]
+  count = data[‘count’]
+  return Integer(total), Integer(count)
+end&lt;</span><span class="delimiter">/</span></span>p&gt;
+
+&lt;p&gt;<span class="keyword">def</span> <span class="function">itemsFromJSONCollection</span>(data, c)
+  <span class="comment"># c is a class with class method named fromJSON to init object</span>
+  <span class="keyword">return</span> <span class="predefined-constant">nil</span> <span class="keyword">if</span> c == <span class="predefined-constant">nil</span> <span class="keyword">or</span> data == <span class="predefined-constant">nil</span> <span class="keyword">or</span> data[‘items’] == <span class="predefined-constant">nil</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;count = data[‘items’].size
+  array = Array.new(count) { |i| c.fromJSON(data[‘items’][i]) }
+end&lt;</span><span class="delimiter">/</span></span>p&gt;
+
+&lt;p&gt;<span class="keyword">class</span> <span class="class">Collection</span>
+  attr_accessor <span class="symbol">:total</span>, <span class="symbol">:count</span>, <span class="symbol">:items</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;def self.fromJSON(data=nil, c=nil)
+    return nil if data == nil or c == nil&lt;</span><span class="delimiter">/</span></span>p&gt;
+
+&lt;pre&gt;&lt;code&gt;coll = <span class="predefined-constant">self</span>.new
+coll.total, coll.count = countFromJSONCollection(data)
+coll.items = itemsFromJSONCollection(data, c)
+
+coll   <span class="keyword">end</span> <span class="keyword">end</span></pre></div>
+</div>
+ </figure></notextile></div>
+</code></pre>
 
 <p><strong>Explicitly mark all required and optional fields.</strong> Not all data are equally important. As part of the protocol service providers should let clients know exactly which ones are optional. But remember HTTP is not a reliable communication protocol and the network status is even more complicated in mobile Internet, clients should do all error-tolerant things even for those fields marked as required.</p>
 
-<p><strong>To be continued&hellip;</strong></p>
+<p><strong>To be continued…</strong></p>
 
 <p>In the following parts we will talk about how to define the API specs and give general info about concerns in implementation.</p>
 ]]></content>
@@ -519,17 +408,18 @@
     <id>http://paradigmx.net/blog/2011/12/24/back-end-is-hard</id>
     <content type="html"><![CDATA[<p>Some of of my colleagues are talking about the difficulties of web front-end developing: the <a href="http://browsershots.org/">browser compatibility</a>, the <a href="https://twitter.com/soulhacker/status/145344139251286016">infuriatingly awful JavaScript language</a>, the pain when glueing DOM, CSS and JavaScript, and so on.</p>
 
-<p>I agree that all these are a pain in the ass. But they are NOTHING compared to back-end architecture. During my over 10 years career as a software architect, I’ve seen significant improvements in nearly every parts of back-end architecture but it’s still very hard. The fundamental difficulties are still there, nearly unchanged all the time. Let me list some of the major ones.</p>
-
+<p>I agree that all these are a pain in the ass. But they are NOTHING compared to back-end architecture. During my over 10 years career as a software architect, I’ve seen significant improvements in nearly every parts of back-end architecture but it’s still very hard. The fundamental difficulties are still there, nearly unchanged all the time. Let me list some of the major ones.
 <!-- more -->
-
+1. <strong>Design for failure.</strong> Nearly half of the back-end code are not for ‘common’ situation. They are <a href="http://www.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">designed for failures</a>. They are designed for letting the system provide acceptable response under special or extreme conditions (and within specific budget): too many concurrent requests, the memory runs out, a new node is being hot-plugged in to the system, the load balancing device stops working, the long connection breaks every several minutes for no reason, etc. To maintain such functionality the design should contain many compromises: sync or async? Scale out or scale up? Realtime transaction or batch job? etc. All these tradeoffs cannot be determined through any simple rules and must be considered via all aspects of environment and requirements of a dynamic system. It nearly always leads to some kind of mistakes.</p>
 
 <ol>
-<li><p><strong>Design for failure.</strong> Nearly half of the back-end code are not for ‘common’ situation. They are <a href="http://www.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">designed for failures</a>. They are designed for letting the system provide acceptable response under special or extreme conditions (and within specific budget): too many concurrent requests, the memory runs out, a new node is being hot-plugged in to the system, the load balancing device stops working, the long connection breaks every several minutes for no reason, etc. To maintain such functionality the design should contain many compromises: sync or async? Scale out or scale up? Realtime transaction or batch job? etc. All these tradeoffs cannot be determined through any simple rules and must be considered via all aspects of environment and requirements of a dynamic system. It nearly always leads to some kind of mistakes.</p></li>
-<li><p><strong>Architecture is about abstraction.</strong> Why abstract? Because abstract concept/mechanism/pattern/methodology provide far more flexibility and reusability. The progress of abstraction distills the essence of the problem and wrap it as reusable component which can be used to solve similar problems in completely different system/context. Seems beautiful isn’t it? But unfortunately, abstraction is hard. More unfortunately, inappropriate abstraction is incredibly disastrous. And the most unfortunately, we have very few working methodology to do abstraction. Abstraction is a kind of art, remember? Mostly we begin with several general models, walk through a series of key rules and continually test our design for the lifetime of the system. Very experience based. In many cases when we find an architectural mistake it is too late. All we can do is to choose from the options between rebuilding the system from ground up or doing the yucky patchwork until we are exhausted.</p></li>
-<li><p><strong>Architecture IS product.</strong> A software product contains many different point of views. Two of the most important are the end-user point of view and the architecture point of view. The end-user POV is like a black box, described by system input and output, can be (relatively) precisely defined and tested. The architecture POV is from inside the software system, the blueprint of the system as a whole, mainly describes each of every parts of the system and the connections between them. In most cases there is no direct link between these POVs. So those are very different POVs but they belong to the SAME product. They must be kept aligned and consistent. So the architect must deeply understand the soul of the product and the product designer must know the capability and limit of the architecture. Otherwise (i.e. the common situations), either the architecture has to be changed tremendously to meet some normal new product feature request, or after implementing a high cost product feature it appears that this feature can be replaced by another easy one which can bring the end-user nearly the same value and experience.</p></li>
+  <li>
+    <p><strong>Architecture is about abstraction.</strong> Why abstract? Because abstract concept/mechanism/pattern/methodology provide far more flexibility and reusability. The progress of abstraction distills the essence of the problem and wrap it as reusable component which can be used to solve similar problems in completely different system/context. Seems beautiful isn’t it? But unfortunately, abstraction is hard. More unfortunately, inappropriate abstraction is incredibly disastrous. And the most unfortunately, we have very few working methodology to do abstraction. Abstraction is a kind of art, remember? Mostly we begin with several general models, walk through a series of key rules and continually test our design for the lifetime of the system. Very experience based. In many cases when we find an architectural mistake it is too late. All we can do is to choose from the options between rebuilding the system from ground up or doing the yucky patchwork until we are exhausted.</p>
+  </li>
+  <li>
+    <p><strong>Architecture IS product.</strong> A software product contains many different point of views. Two of the most important are the end-user point of view and the architecture point of view. The end-user POV is like a black box, described by system input and output, can be (relatively) precisely defined and tested. The architecture POV is from inside the software system, the blueprint of the system as a whole, mainly describes each of every parts of the system and the connections between them. In most cases there is no direct link between these POVs. So those are very different POVs but they belong to the SAME product. They must be kept aligned and consistent. So the architect must deeply understand the soul of the product and the product designer must know the capability and limit of the architecture. Otherwise (i.e. the common situations), either the architecture has to be changed tremendously to meet some normal new product feature request, or after implementing a high cost product feature it appears that this feature can be replaced by another easy one which can bring the end-user nearly the same value and experience.</p>
+  </li>
 </ol>
-
 
 <p>Well, there are more but that’s enough. I consider all the above are the ‘essential difficulties’ as defined by Frederick Brooks in his epic <a href="http://www.cs.nott.ac.uk/~cah/G51ISS/Documents/NoSilverBullet.html"><em>No Silver Bullet</em></a>, which means no quick solver in the coming future.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Apple | Paradigm X]]></title>
   <link href="http://paradigmx.net/blog/categories/apple/atom.xml" rel="self"/>
   <link href="http://paradigmx.net/"/>
-  <updated>2013-09-21T16:31:01+08:00</updated>
+  <updated>2014-01-01T23:22:18+08:00</updated>
   <id>http://paradigmx.net/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
@@ -18,18 +18,15 @@
     <link href="http://paradigmx.net/blog/2013/01/29/ios-7/"/>
     <updated>2013-01-29T23:55:00+08:00</updated>
     <id>http://paradigmx.net/blog/2013/01/29/ios-7</id>
-    <content type="html"><![CDATA[<p>In my opinion, the major tasks for Apple in this year are all about software, especially in the iOS eco-system.</p>
+    <content type="html"><![CDATA[<p>In my opinion, the major tasks for Apple in this year are all about software, especially in the iOS eco-system. </p>
 
-<p>iOS has very solid Unix foundation and decent application framework. For a long time iOS had incontrovertible advantages over its rivals: performance, security, smooth user interaction, etc., most of which are still advantages today. But we all know that some incapabilities in iOS, especially compared to Android, are becoming more and more important aspects that Apple cannot ignore. Consider the following facts: Android may not be rendering the UI animation as smoothly as iOS always does, but it&rsquo;s been getting better and better since Android 4.0, while iOS still doesn&rsquo;t allow third-party apps customize the lock screen or put widgets on any part of the main UI. See the difference? Android&rsquo;s problems are &lsquo;not as good as iOS&rsquo; and iOS has some <em>incapabilities</em>. If Apple want more people to choose iOS it should persuade the swing people (not the fans) that <em>iOS is better in all aspects</em>. It&rsquo;s a prerequisite to eliminate those incapabilities ASAP.</p>
+<p>iOS has very solid Unix foundation and decent application framework. For a long time iOS had incontrovertible advantages over its rivals: performance, security, smooth user interaction, etc., most of which are still advantages today. But we all know that some incapabilities in iOS, especially compared to Android, are becoming more and more important aspects that Apple cannot ignore. Consider the following facts: Android may not be rendering the UI animation as smoothly as iOS always does, but it’s been getting better and better since Android 4.0, while iOS still doesn’t allow third-party apps customize the lock screen or put widgets on any part of the main UI. See the difference? Android’s problems are ‘not as good as iOS’ and iOS has some <em>incapabilities</em>. If Apple want more people to choose iOS it should persuade the swing people (not the fans) that <em>iOS is better in all aspects</em>. It’s a prerequisite to eliminate those incapabilities ASAP.</p>
 
-<p>Ars Technica <a href="http://arstechnica.com/apple/2013/01/bring-us-the-features-an-ars-staff-wish-list-for-ios-7/">posted their staff wish list for iOS 7</a> last week. Most features in their list are <em>good</em> ones but not the <em>critical</em> ones. Base on the above <em>eliminating incapabilities</em> theory I&rsquo;ll list mine below, divided to developer and user categories.</p>
-
+<p>Ars Technica <a href="http://arstechnica.com/apple/2013/01/bring-us-the-features-an-ars-staff-wish-list-for-ios-7/">posted their staff wish list for iOS 7</a> last week. Most features in their list are <em>good</em> ones but not the <em>critical</em> ones. Base on the above <em>eliminating incapabilities</em> theory I’ll list mine below, divided to developer and user categories.
 <!-- more -->
+##Wish List as a Developer</p>
 
-
-<h2>Wish List as a Developer</h2>
-
-<h3>1. Inter-app Communication</h3>
+<h3 id="inter-app-communication">1. Inter-app Communication</h3>
 
 <p><img class="left" src="/images/ios-7-wishlist/cameraplus.png" width="180" height="284" title="Calling Camera+ from Tweetbot" ></p>
 
@@ -37,64 +34,62 @@
 
 <p><img class="right" src="/images/ios-7-wishlist/share-panels.jpg" width="360" title="Share Panel in iOS and Android" ></p>
 
-<p>The <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivityViewController_Class/Reference/Reference.html#//apple_ref/occ/cl/UIActivityViewController">UIActivityViewController</a> API introduced in iOS 6 is a high level interface for inter-app data sharing. It&rsquo;s similar to Android&rsquo;s &ldquo;Share&hellip;via&rdquo; interface, but not allow third-party apps to add system level services (app level services are allowed, see this <a href="http://stackoverflow.com/questions/12546574/using-apple-icons-with-ios-6">StackOverflow question</a> for details). This is another improvement opportunity for Apple.</p>
+<p>The <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivityViewController_Class/Reference/Reference.html#//apple_ref/occ/cl/UIActivityViewController">UIActivityViewController</a> API introduced in iOS 6 is a high level interface for inter-app data sharing. It’s similar to Android’s “Share…via” interface, but not allow third-party apps to add system level services (app level services are allowed, see this <a href="http://stackoverflow.com/questions/12546574/using-apple-icons-with-ios-6">StackOverflow question</a> for details). This is another improvement opportunity for Apple.</p>
 
-<h3>2. Widget API</h3>
+<h3 id="widget-api">2. Widget API</h3>
 
-<p>Widgets may bring trouble (drained battery, inconsistent user interaction, etc.) but still useful and sometimes very attractive. There are several parts of iOS&rsquo;s system UI that are calling for custom widgets: the lock screen, the notification center, and the multitasking bar (actually we already have some <a href="http://www.theverge.com/2012/10/4/3451322/rethinking-the-app-switcher-for-the-iphone-5-mockups">impressive mockup</a> for this one).</p>
+<p>Widgets may bring trouble (drained battery, inconsistent user interaction, etc.) but still useful and sometimes very attractive. There are several parts of iOS’s system UI that are calling for custom widgets: the lock screen, the notification center, and the multitasking bar (actually we already have some <a href="http://www.theverge.com/2012/10/4/3451322/rethinking-the-app-switcher-for-the-iphone-5-mockups">impressive mockup</a> for this one).</p>
 
 <p>For now all these UI parts are running inside the Springboard process. Apple must move them into independent processes before allowing third-party widgets running within them. Then Apple should push some strict guideline for widget development (just like multitasking). Finally open a front page section in the App Store and Boom! Everybody will be happy with it.</p>
 
 <p><img src="/images/ios-7-wishlist/widgets.jpg" width="600" title="iOS Widgets?" ></p>
 
-<h3>3. Siri API</h3>
+<h3 id="siri-api">3. Siri API</h3>
 
-<p>This one is easy to describe: open APIs of Siri, let us develop plugins for Siri and make her a real goddess. Third-party apps can facilitate Siri&rsquo;s advanced voice recognition and text-to-speech engine, response to Siri commands and integrate content into Siri&rsquo;s search result. It will bring a whole new world in.</p>
+<p>This one is easy to describe: open APIs of Siri, let us develop plugins for Siri and make her a real goddess. Third-party apps can facilitate Siri’s advanced voice recognition and text-to-speech engine, response to Siri commands and integrate content into Siri’s search result. It will bring a whole new world in.</p>
 
-<h3>4. A Better App Store</h3>
+<h3 id="a-better-app-store">4. A Better App Store</h3>
 
 <p>App Store is good, App Store changed the world, App Store brings money to the happy developers. But App Store desperately needs these (thank <a href="https://twitter.com/GossipSama">@GossipSama</a> for insightful addition):</p>
 
 <ul>
-<li><strong>Incremental update for apps</strong>. Enough said.</li>
-<li><strong>Better IAP flow</strong>. The standard flow today is fragile: app connect to iTunes to let user purchase; app connect to its own server to log the purchased token; app server connect to Apple&rsquo;s IAP server for verification; etc. If user quits app during some steps or app server fails on IAP server, the transaction will fail and may leave incomplete state in the system. A one step server-to-server workflow will be life changer for developers who highly rely on the IAP mechanism.</li>
-<li><strong>Account statement</strong>. Developers need detail account statements for many reasons: fix failed payments, find cheating users, etc.</li>
-<li><strong>App promoting policy</strong>. Developers need more transparency on app recommendation and sorting mechanism, and a clean policy for app promoting (can and cannot do, good and evil behaviors and so on).</li>
+  <li><strong>Incremental update for apps</strong>. Enough said.</li>
+  <li><strong>Better IAP flow</strong>. The standard flow today is fragile: app connect to iTunes to let user purchase; app connect to its own server to log the purchased token; app server connect to Apple’s IAP server for verification; etc. If user quits app during some steps or app server fails on IAP server, the transaction will fail and may leave incomplete state in the system. A one step server-to-server workflow will be life changer for developers who highly rely on the IAP mechanism.</li>
+  <li><strong>Account statement</strong>. Developers need detail account statements for many reasons: fix failed payments, find cheating users, etc.</li>
+  <li><strong>App promoting policy</strong>. Developers need more transparency on app recommendation and sorting mechanism, and a clean policy for app promoting (can and cannot do, good and evil behaviors and so on).</li>
 </ul>
 
+<h2 id="wish-list-as-a-user">Wish List as a User</h2>
 
-<h2>Wish List as a User</h2>
-
-<p>First of all, most features listed in the previous part can extremely benefit all users. Users will get a shiny new iOS with powerful new features like:</p>
+<p>First of all, most features listed in the previous part can extremely benefit all users. Users will get a shiny new iOS with powerful new features like: </p>
 
 <ul>
-<li>Bluetooth/WiFi/3G/Screen Rotation Lock toggles right in the multitasking bar.</li>
-<li>Event and weather display in the lock screen.</li>
-<li>Sending any link from any apps to Instapaper (even the apps without builtin support for Instapaper).</li>
-<li>Beautiful, secure, reliable widgets in App Store to customize iOS.</li>
-<li>Much more apps in the App Store with Siri integration.</li>
-<li>Faster app updating and more robust IAP purchase.</li>
-<li>More easily to find good apps.</li>
+  <li>Bluetooth/WiFi/3G/Screen Rotation Lock toggles right in the multitasking bar.</li>
+  <li>Event and weather display in the lock screen.</li>
+  <li>Sending any link from any apps to Instapaper (even the apps without builtin support for Instapaper).</li>
+  <li>Beautiful, secure, reliable widgets in App Store to customize iOS.</li>
+  <li>Much more apps in the App Store with Siri integration.</li>
+  <li>Faster app updating and more robust IAP purchase.</li>
+  <li>More easily to find good apps.</li>
 </ul>
-
 
 <p>Beside these we also have the following:</p>
 
-<h3>1. iTunes Account Merge</h3>
+<h3 id="itunes-account-merge">1. iTunes Account Merge</h3>
 
-<p>If you have more than one iTunes account (e.g. Japanese have many exclusive, excellent music and games!) you are in trouble. You have to manually log off and log on to each of your accounts to check app updates. And when you want to do some IAP you have to confirm (manually again) that you are currently logged on to the account from which you originally bought the app.</p>
+<p>If you have more than one iTunes account (e.g. Japanese have many exclusive, excellent music and games!) you are in trouble. You have to manually log off and log on to each of your accounts to check app updates. And when you want to do some IAP you have to confirm (manually again) that you are currently logged on to the account from which you originally bought the app. </p>
 
 <p>iOS and iTunes should make it better.</p>
 
-<h3>2. Better Arranged System Setting</h3>
+<h3 id="better-arranged-system-setting">2. Better Arranged System Setting</h3>
 
 <p>Tell me where is the Auto-Lock setting in 5 seconds. Can you do that? Yes? And how to turn off iCloud sync for document and iTunes Match under cellular network, huh?</p>
 
-<h3>3. More Useful Gestures</h3>
+<h3 id="more-useful-gestures">3. More Useful Gestures</h3>
 
 <p><a href="http://gigaom.com/2012/04/02/how-to-use-ipad-multitasking-gestures-and-why-you-should/">Multitasking Gestures</a> on iPad is good, please fine-tune and bring them to iPhone. Further more, Apple should seriously consider the jailbreak system add-on Activator and bring more useful gestures to iOS. So people can forget the ugly AssistiveTouch button.</p>
 
-<h3>4. Multiple User Profiles on a Device</h3>
+<h3 id="multiple-user-profiles-on-a-device">4. Multiple User Profiles on a Device</h3>
 
 <p>Sharing iPad in a family is very common. By supporting multiple profile and user switch the children will have more chance to use the iDevice, and more likely buy their own sooner or later.</p>
 
