@@ -2,22 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Architecture | Paradigm X]]></title>
-  <link href="http://paradigmx.net/blog/categories/architecture/atom.xml" rel="self"/>
-  <link href="http://paradigmx.net/"/>
-  <updated>2014-01-01T23:44:18+08:00</updated>
-  <id>http://paradigmx.net/</id>
+  <link href="http://soulhacker.me/blog/categories/architecture/atom.xml" rel="self"/>
+  <link href="http://soulhacker.me/"/>
+  <updated>2014-02-27T23:38:03+08:00</updated>
+  <id>http://soulhacker.me/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
-    <email><![CDATA[neo@paradigmx.net]]></email>
+    <email><![CDATA[neo@soulhacker.me]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
     <title type="html"><![CDATA[A Brief Guide of (RESTful) SOA, Part III]]></title>
-    <link href="http://paradigmx.net/blog/2012/10/18/a-brief-guide-of-restful-soa/"/>
+    <link href="http://soulhacker.me/blog/2012/10/18/a-brief-guide-of-restful-soa/"/>
     <updated>2012-10-18T15:47:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/10/18/a-brief-guide-of-restful-soa</id>
+    <id>http://soulhacker.me/blog/2012/10/18/a-brief-guide-of-restful-soa</id>
     <content type="html"><![CDATA[<p><a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">Part I</a> <a href="/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">Part II</a></p>
 
 <p>In the final part of this article we will discuss several common topics of RESTful web service implementation. I will not dig deep here because all these topics are all quite complicated.
@@ -83,9 +83,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Brief Guide of (RESTful) SOA, Part II]]></title>
-    <link href="http://paradigmx.net/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/"/>
+    <link href="http://soulhacker.me/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/"/>
     <updated>2012-10-17T20:53:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii</id>
+    <id>http://soulhacker.me/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii</id>
     <content type="html"><![CDATA[<p>In the <a href="/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part of this series</a> we have discussed the core concepts of RESTful architectural style and gives some guideline in how to define the system and prepare for defining the APIs specs, which will be covered in this part.</p>
 
 <h2 id="level-iii-define-and-tune-the-api">Level III: Define and Tune the API</h2>
@@ -230,9 +230,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Brief Guide of (RESTful) SOA, Part I]]></title>
-    <link href="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/"/>
+    <link href="http://soulhacker.me/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/"/>
     <updated>2012-04-27T16:53:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i</id>
+    <id>http://soulhacker.me/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i</id>
     <content type="html"><![CDATA[<p>Many say that <code>XML</code> <code>SOAP</code> <code>WS-\*</code> suck and SOA is over or becoming profit tool for big consultant companies. But I would say: SOA is <em>not</em> evil, IBM is. Look at these principles of SOA:</p>
 
 <p><blockquote><p>- reuse, granularity, modularity, composability, componentization and interoperability.<br/>- standards-compliance (both common and industry-specific).<br/>- services identification and categorization, provisioning and delivery, and monitoring and tracking.</p><footer><strong>Wikipedia</strong> <cite><a href='http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles'>Service-oriented Architecture</a></cite></footer></blockquote></p>
@@ -403,9 +403,9 @@ coll   <span class="keyword">end</span> <span class="keyword">end</span></pre></
   
   <entry>
     <title type="html"><![CDATA[Back-end is Hard]]></title>
-    <link href="http://paradigmx.net/blog/2011/12/24/back-end-is-hard/"/>
+    <link href="http://soulhacker.me/blog/2011/12/24/back-end-is-hard/"/>
     <updated>2011-12-24T20:07:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2011/12/24/back-end-is-hard</id>
+    <id>http://soulhacker.me/blog/2011/12/24/back-end-is-hard</id>
     <content type="html"><![CDATA[<p>Some of of my colleagues are talking about the difficulties of web front-end developing: the <a href="http://browsershots.org/">browser compatibility</a>, the <a href="https://twitter.com/soulhacker/status/145344139251286016">infuriatingly awful JavaScript language</a>, the pain when glueing DOM, CSS and JavaScript, and so on.</p>
 
 <p>I agree that all these are a pain in the ass. But they are NOTHING compared to back-end architecture. During my over 10 years career as a software architect, I’ve seen significant improvements in nearly every parts of back-end architecture but it’s still very hard. The fundamental difficulties are still there, nearly unchanged all the time. Let me list some of the major ones.

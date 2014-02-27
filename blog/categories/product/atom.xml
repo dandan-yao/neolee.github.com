@@ -2,22 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Product | Paradigm X]]></title>
-  <link href="http://paradigmx.net/blog/categories/product/atom.xml" rel="self"/>
-  <link href="http://paradigmx.net/"/>
-  <updated>2014-01-01T23:44:18+08:00</updated>
-  <id>http://paradigmx.net/</id>
+  <link href="http://soulhacker.me/blog/categories/product/atom.xml" rel="self"/>
+  <link href="http://soulhacker.me/"/>
+  <updated>2014-02-27T23:38:03+08:00</updated>
+  <id>http://soulhacker.me/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
-    <email><![CDATA[neo@paradigmx.net]]></email>
+    <email><![CDATA[neo@soulhacker.me]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
     <title type="html"><![CDATA[Soul Link]]></title>
-    <link href="http://paradigmx.net/blog/2012/03/31/soul-link/"/>
+    <link href="http://soulhacker.me/blog/2012/03/31/soul-link/"/>
     <updated>2012-03-31T16:56:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/03/31/soul-link</id>
+    <id>http://soulhacker.me/blog/2012/03/31/soul-link</id>
     <content type="html"><![CDATA[<p><img class="left" src="/images/paper-by-fiftythree.jpg">
 Apple AppStore’s biggest news this week is that, <a href="http://www.fiftythree.com/paper">FiftyThree’s Paper</a> became the <a href="http://itunes.apple.com/app/paper-by-fiftythree/id506003812?mt=8">iPad App of the Week</a> in just 2 days. I think that it’s far from coincidence.</p>
 

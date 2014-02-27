@@ -2,22 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Paradigm X]]></title>
-  <link href="http://paradigmx.net/atom.xml" rel="self"/>
-  <link href="http://paradigmx.net/"/>
-  <updated>2014-01-01T23:44:18+08:00</updated>
-  <id>http://paradigmx.net/</id>
+  <link href="http://soulhacker.me/atom.xml" rel="self"/>
+  <link href="http://soulhacker.me/"/>
+  <updated>2014-02-27T23:38:03+08:00</updated>
+  <id>http://soulhacker.me/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
-    <email><![CDATA[neo@paradigmx.net]]></email>
+    <email><![CDATA[neo@soulhacker.me]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
     <title type="html"><![CDATA[Clojure Toolchain Reloaded]]></title>
-    <link href="http://paradigmx.net/blog/2013/04/01/clojure-toolchain-reloaded/"/>
+    <link href="http://soulhacker.me/blog/2013/04/01/clojure-toolchain-reloaded/"/>
     <updated>2013-04-01T23:45:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2013/04/01/clojure-toolchain-reloaded</id>
+    <id>http://soulhacker.me/blog/2013/04/01/clojure-toolchain-reloaded</id>
     <content type="html"><![CDATA[<p><a href="http://clojure.org">Clojure</a> keeps <a href="http://wit.io/posts/clojure-all-grown-up">growning up</a>, and my 2.5-years old <a href="http://7thgen.info/blog/2010/12/clojure-for-mac-os-x/">guide for setting up Clojure environment on Mac OS X</a> had been out-of-date for quite a while. The toolchains based on <a href="https://github.com/technomancy/leiningen">Leiningen 2</a> and <a href="https://github.com/clojure/tools.nrepl">nREPL</a> rise from underground, become really powerful and easy (even joyful for most of us) to use, and de facto standard. Nearly all main stream developing environments provide solutions for serious Clojure developers: <a href="http://eclipse.org">Eclipse</a> + <a href="http://code.google.com/p/counterclockwise/">Counter Clockwise</a>, <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> + <a href="http://www.jetbrains.com/idea/">La Clojure</a>, <a href="http://www.sublimetext.com/2">Sublime Text 2</a> + <a href="http://github.com/wuub/SublimeREPL">SublimeREPL</a>, Vim with <a href="http://clojure-doc.org/articles/tutorials/vim_fireplace.html">fireplace.vim</a>, etc.<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, and the favorite I finally found several months ago, <a href="https://github.com/overtone/emacs-live">Emacs Live</a>.</p>
 
 <!-- more -->
@@ -41,7 +41,7 @@
   <li>Amazing powerful features like: <a href="http://www.emacswiki.org/emacs/UndoTree">undo-tree</a>, Textmate-like snippets, <a href="http://www.emacswiki.org/emacs/quick-jump.el">quick jump</a> and <a href="http://www.emacswiki.org/emacs/AceJump">Ace Jump</a> mode</li>
 </ul>
 
-<p><img src="http://paradigmx.net/images/emacs-live.png" title="My custom Emacs Live in working" /></p>
+<p><img src="http://soulhacker.me/images/emacs-live.png" title="My custom Emacs Live in working" /></p>
 
 <p><em>Emacs Live</em> also provides modular customization mechanism called <em>packs</em>. As you can see in the above screenshot, I don’t like the font and color theme bundled with Emacs Live so I use my favorite <a href="http://www.fsd.it/fonts/pragmatapro.htm">Pragmata Pro coding font</a> and <a href="http://ethanschoonover.com/solarized">Solarized color theme</a>. For people who like a really powerful yet beautiful and elegant developing environment for Clojure, I’ll describe below how I set up all on Mac OS X in half an hour, step by step.</p>
 
@@ -303,9 +303,9 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
   
   <entry>
     <title type="html"><![CDATA[iOS 7]]></title>
-    <link href="http://paradigmx.net/blog/2013/01/29/ios-7/"/>
+    <link href="http://soulhacker.me/blog/2013/01/29/ios-7/"/>
     <updated>2013-01-29T23:55:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2013/01/29/ios-7</id>
+    <id>http://soulhacker.me/blog/2013/01/29/ios-7</id>
     <content type="html"><![CDATA[<p>In my opinion, the major tasks for Apple in this year are all about software, especially in the iOS eco-system. </p>
 
 <p>iOS has very solid Unix foundation and decent application framework. For a long time iOS had incontrovertible advantages over its rivals: performance, security, smooth user interaction, etc., most of which are still advantages today. But we all know that some incapabilities in iOS, especially compared to Android, are becoming more and more important aspects that Apple cannot ignore. Consider the following facts: Android may not be rendering the UI animation as smoothly as iOS always does, but it’s been getting better and better since Android 4.0, while iOS still doesn’t allow third-party apps customize the lock screen or put widgets on any part of the main UI. See the difference? Android’s problems are ‘not as good as iOS’ and iOS has some <em>incapabilities</em>. If Apple want more people to choose iOS it should persuade the swing people (not the fans) that <em>iOS is better in all aspects</em>. It’s a prerequisite to eliminate those incapabilities ASAP.</p>
@@ -316,11 +316,11 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 
 <h3 id="inter-app-communication">1. Inter-app Communication</h3>
 
-<p><img class="left" src="http://paradigmx.net/images/ios-7-wishlist/cameraplus.png" width="180" height="284" title="Calling Camera+ from Tweetbot" /></p>
+<p><img class="left" src="http://soulhacker.me/images/ios-7-wishlist/cameraplus.png" width="180" height="284" title="Calling Camera+ from Tweetbot" /></p>
 
 <p>Cocoa provides very powerful and elegant inter-process communication solution on Mac OS X: <code>NSDistributedNotificationCenter</code> and <code>NSPortNameServer</code>, but none is available on iOS (for third-party apps at least). <a href="http://api.camerapl.us/app-api">Inspired by</a> the popular photography app Camera+, many apps use shared system clipboard and <a href="http://developer.apple.com/library/ios/#DOCUMENTATION/iPhone/Conceptual/iPhoneOSProgrammingGuide/AdvancedAppTricks/AdvancedAppTricks.html#//apple_ref/doc/uid/TP40007072-CH7-SW50">custom URL schemes</a> to <em>simulate</em> a cross-app call with custom data. Following this approach Apple can easily develop a secure, simple but powerful solution.</p>
 
-<p><img class="right" src="http://paradigmx.net/images/ios-7-wishlist/share-panels.jpg" width="360" title="Share Panel in iOS and Android" /></p>
+<p><img class="right" src="http://soulhacker.me/images/ios-7-wishlist/share-panels.jpg" width="360" title="Share Panel in iOS and Android" /></p>
 
 <p>The <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivityViewController_Class/Reference/Reference.html#//apple_ref/occ/cl/UIActivityViewController">UIActivityViewController</a> API introduced in iOS 6 is a high level interface for inter-app data sharing. It’s similar to Android’s “Share…via” interface, but not allow third-party apps to add system level services (app level services are allowed, see this <a href="http://stackoverflow.com/questions/12546574/using-apple-icons-with-ios-6">StackOverflow question</a> for details). This is another improvement opportunity for Apple.</p>
 
@@ -330,7 +330,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 
 <p>For now all these UI parts are running inside the Springboard process. Apple must move them into independent processes before allowing third-party widgets running within them. Then Apple should push some strict guideline for widget development (just like multitasking). Finally open a front page section in the App Store and Boom! Everybody will be happy with it.</p>
 
-<p><img src="http://paradigmx.net/images/ios-7-wishlist/widgets.jpg" width="600" title="iOS Widgets?" /></p>
+<p><img src="http://soulhacker.me/images/ios-7-wishlist/widgets.jpg" width="600" title="iOS Widgets?" /></p>
 
 <h3 id="siri-api">3. Siri API</h3>
 
@@ -387,10 +387,10 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
   
   <entry>
     <title type="html"><![CDATA[A Brief Guide of (RESTful) SOA, Part III]]></title>
-    <link href="http://paradigmx.net/blog/2012/10/18/a-brief-guide-of-restful-soa/"/>
+    <link href="http://soulhacker.me/blog/2012/10/18/a-brief-guide-of-restful-soa/"/>
     <updated>2012-10-18T15:47:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/10/18/a-brief-guide-of-restful-soa</id>
-    <content type="html"><![CDATA[<p><a href="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">Part I</a> <a href="http://paradigmx.net/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">Part II</a></p>
+    <id>http://soulhacker.me/blog/2012/10/18/a-brief-guide-of-restful-soa</id>
+    <content type="html"><![CDATA[<p><a href="http://soulhacker.me/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">Part I</a> <a href="http://soulhacker.me/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">Part II</a></p>
 
 <p>In the final part of this article we will discuss several common topics of RESTful web service implementation. I will not dig deep here because all these topics are all quite complicated.
 <!-- more -->
@@ -398,7 +398,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 
 <h3 id="reference-architecture">4.1 Reference Architecture</h3>
 
-<p><img class="left" src="http://paradigmx.net/images/restful-service-architecture-01.jpg" width="512" height="384" title="Reference Architecture" /></p>
+<p><img class="left" src="http://soulhacker.me/images/restful-service-architecture-01.jpg" width="512" height="384" title="Reference Architecture" /></p>
 
 <p>The architecture shows several good start points:</p>
 
@@ -431,7 +431,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 
 <h3 id="scaling">4.3 Scaling</h3>
 
-<p><img class="right" src="http://paradigmx.net/images/restful-service-architecture-05.jpg" width="512" height="384" title="Scaling" /></p>
+<p><img class="right" src="http://soulhacker.me/images/restful-service-architecture-05.jpg" width="512" height="384" title="Scaling" /></p>
 
 <p>A well-designed layer system can guarantee independent scaling per every layer. In the reference architecture:</p>
 
@@ -441,7 +441,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
   <li>The data is the hardest part to be extended, especially for traditional RDBMS. But you can use any mature mechanism to make life better: partitioning, sharding, clustering etc. Another very popular solution is to separate some highly active data and put them into Redis (or other NoSQL system).</li>
 </ul>
 
-<p>Most best practices on Internet-scale services are fully applicable to RESTful services. Just remember to keep an eye on the <a href="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">core principles</a> of REST all the time.</p>
+<p>Most best practices on Internet-scale services are fully applicable to RESTful services. Just remember to keep an eye on the <a href="http://soulhacker.me/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">core principles</a> of REST all the time.</p>
 
 <h2 id="extended-readings">Extended Readings</h2>
 
@@ -455,10 +455,10 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
   
   <entry>
     <title type="html"><![CDATA[A Brief Guide of (RESTful) SOA, Part II]]></title>
-    <link href="http://paradigmx.net/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/"/>
+    <link href="http://soulhacker.me/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/"/>
     <updated>2012-10-17T20:53:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii</id>
-    <content type="html"><![CDATA[<p>In the <a href="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part of this series</a> we have discussed the core concepts of RESTful architectural style and gives some guideline in how to define the system and prepare for defining the APIs specs, which will be covered in this part.</p>
+    <id>http://soulhacker.me/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii</id>
+    <content type="html"><![CDATA[<p>In the <a href="http://soulhacker.me/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part of this series</a> we have discussed the core concepts of RESTful architectural style and gives some guideline in how to define the system and prepare for defining the APIs specs, which will be covered in this part.</p>
 
 <h2 id="level-iii-define-and-tune-the-api">Level III: Define and Tune the API</h2>
 
@@ -505,7 +505,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 <p>API taxonomy is highly dependent to the business. But some general rules certainly helps:</p>
 
 <ol>
-  <li>The response objects, which are defined in the <a href="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part</a> of this article, are usually the <em>first dimension</em> of the taxonomy.</li>
+  <li>The response objects, which are defined in the <a href="http://soulhacker.me/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part</a> of this article, are usually the <em>first dimension</em> of the taxonomy.</li>
   <li>The <em>second dimension</em> is usually related to the API URI patterns, which will described below.</li>
 </ol>
 
@@ -582,7 +582,7 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
 <ul>
   <li><strong>Endpoint</strong>: basic info for calling the endpoint (complete URI, HTTP verbs, security options, etc.).</li>
   <li><strong>Parameters</strong>: list of all parameters, each of which should include <em>name</em>, <em>example</em>, <em>description</em>, <em>required or optional</em> and other useful information.</li>
-  <li><strong>Response</strong>: all data fields in the response data. Each fields can be some plain value or a pre-defined business object structure, as described in the <a href="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part</a> of this article.</li>
+  <li><strong>Response</strong>: all data fields in the response data. Each fields can be some plain value or a pre-defined business object structure, as described in the <a href="http://soulhacker.me/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/">first part</a> of this article.</li>
   <li><strong>Examples</strong>: clickable examples of calling this endpoint (see section 3.5 below).</li>
 </ul>
 
@@ -602,9 +602,9 @@ A: After disabling the built-in <code>live/colour-pack</code> (see the first que
   
   <entry>
     <title type="html"><![CDATA[Europe Summer 2012 and 500px]]></title>
-    <link href="http://paradigmx.net/blog/2012/09/18/europe-summer-2012-and-500px/"/>
+    <link href="http://soulhacker.me/blog/2012/09/18/europe-summer-2012-and-500px/"/>
     <updated>2012-09-18T14:18:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/09/18/europe-summer-2012-and-500px</id>
+    <id>http://soulhacker.me/blog/2012/09/18/europe-summer-2012-and-500px</id>
     <content type="html"><![CDATA[<p>I spent my summer vacation with my family in Germany, Austria and Switzerland. It’s the first time I visit Europe. Had bunch of photos, most of which are taken by my Fujifilm Finepix X100 with its wide conversion lens WCL-X100. After one and half months I finally picked up <a href="http://500px.com/soulhacker/sets/europe_tour_2012">~150 photos</a> and uploaded them to 500px. </p>
 
 <p>X100 is a really amazing camera. Its <a href="http://www.dxomark.com/index.php/en.../Cameras/Camera-Sensor-Database/Fujifilm/FinePix-X100">top-of-the-line</a> APS-C sized CMOS sensor provides great resolution and SNR. Its prime lens (with field of view equivalent to 35mm and 28mm lens on full frame) are especially suitable for landscape and cultural photography. iPhone 4S is a great backup, provide fairly good photos even in some typically difficult scenarios for compact DCs. Remember all these are very lightweight. Farewell my big DSLRs. <em>The best cameras are the ones you always take with you.</em></p>
@@ -627,9 +627,9 @@ First of all, please provide full support to all high DPI displays, i.e. iPhone 
   
   <entry>
     <title type="html"><![CDATA[WANTED: Image Website Tool Not Suck]]></title>
-    <link href="http://paradigmx.net/blog/2012/05/01/wanted-image-website-tool-not-suck/"/>
+    <link href="http://soulhacker.me/blog/2012/05/01/wanted-image-website-tool-not-suck/"/>
     <updated>2012-05-01T12:28:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/05/01/wanted-image-website-tool-not-suck</id>
+    <id>http://soulhacker.me/blog/2012/05/01/wanted-image-website-tool-not-suck</id>
     <content type="html"><![CDATA[<p>Per my 13-years old daughter’s request I’m searching for some tools to build her own image website, so she can publish and manage all her drawings and photos. To my surprise after all these years there are still very few such tools that not sucks. </p>
 
 <p><a href="http://gallery.menalto.com/">Gallery</a>, <a href="http://piwigo.org/">Piwigo</a>, <a href="http://www.zenphoto.org/">Zenphoto</a>, <a href="http://www.e2interactive.com/e2_photo_gallery/">E2 Photo Gallery</a>, etc. They are old, powerful and actively developed. But all of them are so <em>last-century</em>. They are ancient content manage systems and just not work for modern creative artists, like  my daughter of cause. Here is <em>my requirements</em>:</p>
@@ -664,9 +664,9 @@ I think these requirements are very normal and reasonable for thousands of users
   
   <entry>
     <title type="html"><![CDATA[A Brief Guide of (RESTful) SOA, Part I]]></title>
-    <link href="http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/"/>
+    <link href="http://soulhacker.me/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/"/>
     <updated>2012-04-27T16:53:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i</id>
+    <id>http://soulhacker.me/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i</id>
     <content type="html"><![CDATA[<p>Many say that <code>XML</code> <code>SOAP</code> <code>WS-\*</code> suck and SOA is over or becoming profit tool for big consultant companies. But I would say: SOA is <em>not</em> evil, IBM is. Look at these principles of SOA:</p>
 
 <blockquote><p>- reuse, granularity, modularity, composability, componentization and interoperability.<br />- standards-compliance (both common and industry-specific).<br />- services identification and categorization, provisioning and delivery, and monitoring and tracking.</p><footer><strong>Wikipedia</strong> <cite><a href="http://en.wikipedia.org/wiki/Service-oriented_architecture#Principles">Service-oriented Architecture</a></cite></footer></blockquote>
@@ -719,7 +719,7 @@ Here it is. Below I’ll list a brief guide which can help you find the path, as
 
 <h3 id="business-abstraction">2.1 Business Abstraction</h3>
 
-<p>Business abstraction is <a href="http://paradigmx.net/blog/2011/12/24/back-end-is-hard/">very important but hard to routinize</a>. And it’s mostly beyond the realm which RESTful style can control. You should find the <em>essential</em> business concepts and make smart abstraction for high flexibility and extensibility. Yet we still can have some guideline. Probably will not solve the most difficult part of the problem but still give some help.</p>
+<p>Business abstraction is <a href="http://soulhacker.me/blog/2011/12/24/back-end-is-hard/">very important but hard to routinize</a>. And it’s mostly beyond the realm which RESTful style can control. You should find the <em>essential</em> business concepts and make smart abstraction for high flexibility and extensibility. Yet we still can have some guideline. Probably will not solve the most difficult part of the problem but still give some help.</p>
 
 <p><strong>Find business objects.</strong> When the system complete, every business objects exposed to the public will be presented as an URI. Clients can issue <code>POST</code> <code>GET</code> <code>PATCH/PUT</code> <code>DELETE</code> requests to the URI to <code>CRUD</code>(create/read/update/delete) correlated object. <em>So any objects you want to exposed to the public for clients to do the <code>CRUD</code> things you should make them in the business object model, as essential objects.</em></p>
 
@@ -745,7 +745,7 @@ Here it is. Below I’ll list a brief guide which can help you find the path, as
 </ul>
 
 <p>Below is a demo:
-<img src="http://paradigmx.net/images/restful-soa-define-json-data.png" /></p>
+<img src="http://soulhacker.me/images/restful-soa-define-json-data.png" /></p>
 
 <p><strong>Use embedded object not the object id.</strong> Assuming you are working on a online comment system and you have objects <code>user</code> and <code>post</code>. In <code>post</code> object there is an attribute <code>author</code> pointing to a <code>user</code> object. You should embedded a <em>compact</em> version of <code>user</code> object in the <code>post</code> object instead of only the user id. As shown in the snippet below:</p>
 
@@ -844,10 +844,10 @@ post: {
   
   <entry>
     <title type="html"><![CDATA[Soul Link]]></title>
-    <link href="http://paradigmx.net/blog/2012/03/31/soul-link/"/>
+    <link href="http://soulhacker.me/blog/2012/03/31/soul-link/"/>
     <updated>2012-03-31T16:56:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/03/31/soul-link</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://paradigmx.net/images/paper-by-fiftythree.jpg" />
+    <id>http://soulhacker.me/blog/2012/03/31/soul-link</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://soulhacker.me/images/paper-by-fiftythree.jpg" />
 Apple AppStore’s biggest news this week is that, <a href="http://www.fiftythree.com/paper">FiftyThree’s Paper</a> became the <a href="http://itunes.apple.com/app/paper-by-fiftythree/id506003812?mt=8">iPad App of the Week</a> in just 2 days. I think that it’s far from coincidence.</p>
 
 <p>I tried <em>Paper</em> for several hours. It offers no unique features. It’s much less powerful than <a href="http://itunes.apple.com/app/sketchbook-pro-for-ipad/id364253478?mt=8">AutoDesk’s SketchBook Pro</a>, a full-featured paint tool especially designed for the new iPad’s Retina Display which was showed off on Apple’s event. But I can predict that <em>Paper</em> will be much more popular. So why is it so special?</p>
@@ -856,15 +856,15 @@ Apple AppStore’s biggest news this week is that, <a href="http://www.fiftythre
 
 <p>So what do you think while watching the video? Desire to light up your iPad at once and sketch something? Think about buying one <a href="http://wacom.com/en/Products/Bamboo/BambooStylus.aspx">Wacom Stylus</a> for your iPad? Or those <a href="http://www.youtube.com/watch?v=D2BvVcSkNkA">amazing</a> <a href="http://www.youtube.com/watch?v=9bYx3iEdzzc">ads</a> for the <a href="http://www.youtube.com/watch?v=btfbIVGES1I">original</a> <a href="http://www.youtube.com/watch?v=NMvETJ0bxEQ">iPad</a>? My answer is: all of them. And one more ~~thing~~ person, Don Draper.
 <!-- more -->
-<img class="right" src="http://paradigmx.net/images/don-draper.gif" />
-In <em>Mad Men</em>’s season I finale, <em>The Wheel</em>, people from Eastman Kodak brought their new invention, a <a href="http://en.wikipedia.org/wiki/Carousel_slide_projector">slide projector</a> to Don Draper for a name and an ad campaign proposal. After a typical <a href="http://paradigmx.net/images/don-draper-inspiration.jpg"><em>Don’s inspiration routine</em></a> Don Draper dug up a vision from his childhood and proposed ‘<em>Carousel</em>’ as the name of the projector, which made it a symbolic memento of everybody’s childhood. Don Drape explained this idea as below:</p>
+<img class="right" src="http://soulhacker.me/images/don-draper.gif" />
+In <em>Mad Men</em>’s season I finale, <em>The Wheel</em>, people from Eastman Kodak brought their new invention, a <a href="http://en.wikipedia.org/wiki/Carousel_slide_projector">slide projector</a> to Don Draper for a name and an ad campaign proposal. After a typical <a href="http://soulhacker.me/images/don-draper-inspiration.jpg"><em>Don’s inspiration routine</em></a> Don Draper dug up a vision from his childhood and proposed ‘<em>Carousel</em>’ as the name of the projector, which made it a symbolic memento of everybody’s childhood. Don Drape explained this idea as below:</p>
 <blockquote><p>&#8220;Technology is a glittering lure. But there&#8217;s the rare occasion when the public can be engaged on a level beyond flash, if they have a sentimental bond with the product.&#8221;</p><footer><strong>Don Draper</strong> <cite>From Mad Men Season I Episode 13 &#8220;the Wheel&#8221;</cite></footer></blockquote>
-<p><img class="left" src="http://paradigmx.net/images/paper-in-action.jpg" />
+<p><img class="left" src="http://soulhacker.me/images/paper-in-action.jpg" />
 Functional features are the <em>essence</em> of a product. But most product features are not so specific nor unique for the users. Thus they cannot differentiate your product from similar ones (either from you or your competitors). You’d find a way to lure the users to use it, and you have to guide your users to the perfect moment to use it. Under specific scenarios or circumstances some of your design will make your product unique, any design that plants the strong idea into people’s mind, that your product is made just for them and for THAT moment. Finally users will become to <strong>depend</strong> on your product at such moments. That’s the <em>sentimental bond</em> as Don told us, and the <em>soul link</em> between product and people.</p>
 
 <p>There is a popular fallacious point among product guys, thinking that the well polished UI is the soul of product, which can make people be deeply <em>touched</em>. It’s <strong>WRONG</strong>. People may be touched, but that’s not your product’s purpose and people won’t love products just because they are touching. Try ask yourself: </p>
 <blockquote><p>After showing off your product to someone, can they intuitively understand what purpose and moments the product for, then remember your product and desire to have a try ASAP the right moment comes?</p></blockquote>
-<p><img class="right" src="http://paradigmx.net/images/steve-jobs-and-iphone.jpg" />
+<p><img class="right" src="http://soulhacker.me/images/steve-jobs-and-iphone.jpg" />
 If not, they won’t be bonded to your product. Go get someone else or re-think your product and find the <em>soul link</em>. <em>Seal</em> the <em>link</em> on each of every steps which give birth to your product: <code>designing</code>, <code>building</code>, <code>integrating</code>, <code>presenting</code> and <code>promoting</code>. </p>
 
 <p>It’s really simple rule. But in the history of technology very few people can make it. Steve Jobs is one perfect example and he had made Apple an organization talented to make products that way. I think that people in <a href="http://www.fiftythree.com/about">FiftyThree</a> also have such talents. <em>Paper</em> not only has strong soul link to people, but also to the iPad, Jobs’ most favorite creation. I’m pretty sure that if Jobs were still alive, he would certainly love <em>Paper</em> and its creators, and invite them to join Apple.</p>
@@ -873,9 +873,9 @@ If not, they won’t be bonded to your product. Go get someone else or re-think 
   
   <entry>
     <title type="html"><![CDATA[Go for Android]]></title>
-    <link href="http://paradigmx.net/blog/2012/02/05/go-for-android/"/>
+    <link href="http://soulhacker.me/blog/2012/02/05/go-for-android/"/>
     <updated>2012-02-05T19:42:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/02/05/go-for-android</id>
+    <id>http://soulhacker.me/blog/2012/02/05/go-for-android</id>
     <content type="html"><![CDATA[<p><a href="http://golang.org/">Go</a> is <em>the</em> language from Google and Android is <em>the</em> mobile OS from Google. The bond between them are just born with. So there should be no surprise that we can use Go to write Android programs, though some important restricts for now:
 <!-- more -->
 - There is no Android SDK for Go, so no system API nor GUI for Go program on Android.
@@ -1105,9 +1105,9 @@ adb shell
   
   <entry>
     <title type="html"><![CDATA[Introducing RestKit]]></title>
-    <link href="http://paradigmx.net/blog/2012/01/31/introducing-restkit/"/>
+    <link href="http://soulhacker.me/blog/2012/01/31/introducing-restkit/"/>
     <updated>2012-01-31T18:59:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/01/31/introducing-restkit</id>
+    <id>http://soulhacker.me/blog/2012/01/31/introducing-restkit</id>
     <content type="html"><![CDATA[<p><a href="http://restkit.org/">RestKit</a> is an amazing <strong>Objective-C framework for iOS</strong> that aims to make interacting with RESTful web services simple, fast and fun. As said on its homepage:</p>
 
 <blockquote><p>It combines a clean, simple HTTP request/response API with a powerful object mapping system that reduces the amount of code you need to write to get stuff done.</p></blockquote>
@@ -1700,9 +1700,9 @@ adb shell
   
   <entry>
     <title type="html"><![CDATA[Back-end is Hard]]></title>
-    <link href="http://paradigmx.net/blog/2011/12/24/back-end-is-hard/"/>
+    <link href="http://soulhacker.me/blog/2011/12/24/back-end-is-hard/"/>
     <updated>2011-12-24T20:07:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2011/12/24/back-end-is-hard</id>
+    <id>http://soulhacker.me/blog/2011/12/24/back-end-is-hard</id>
     <content type="html"><![CDATA[<p>Some of of my colleagues are talking about the difficulties of web front-end developing: the <a href="http://browsershots.org/">browser compatibility</a>, the <a href="https://twitter.com/soulhacker/status/145344139251286016">infuriatingly awful JavaScript language</a>, the pain when glueing DOM, CSS and JavaScript, and so on.</p>
 
 <p>I agree that all these are a pain in the ass. But they are NOTHING compared to back-end architecture. During my over 10 years career as a software architect, I’ve seen significant improvements in nearly every parts of back-end architecture but it’s still very hard. The fundamental difficulties are still there, nearly unchanged all the time. Let me list some of the major ones.
@@ -1726,10 +1726,10 @@ adb shell
   
   <entry>
     <title type="html"><![CDATA[7-inch Success]]></title>
-    <link href="http://paradigmx.net/blog/2011/12/03/7-inch-success/"/>
+    <link href="http://soulhacker.me/blog/2011/12/03/7-inch-success/"/>
     <updated>2011-12-03T16:59:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2011/12/03/7-inch-success</id>
-    <content type="html"><![CDATA[<p><img src="http://paradigmx.net/images/7-inch-success.jpg" alt="Kindle Fire" title="Kindle Fire" /></p>
+    <id>http://soulhacker.me/blog/2011/12/03/7-inch-success</id>
+    <content type="html"><![CDATA[<p><img src="http://soulhacker.me/images/7-inch-success.jpg" alt="Kindle Fire" title="Kindle Fire" /></p>
 
 <p>Kevin, my friend and colleague, just came back from USA, bringing a Kindle Fire with him. I tried it for an hour or two, and finally it confirms my earlier thought: this whole new Kindle, together with the strategy behind it, will gain its own success, and push the post-PC era, which is started by Apple, forward to a new stage.
 <!-- more -->

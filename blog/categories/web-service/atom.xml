@@ -2,22 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Web Service | Paradigm X]]></title>
-  <link href="http://paradigmx.net/blog/categories/web-service/atom.xml" rel="self"/>
-  <link href="http://paradigmx.net/"/>
-  <updated>2014-01-01T23:44:18+08:00</updated>
-  <id>http://paradigmx.net/</id>
+  <link href="http://soulhacker.me/blog/categories/web-service/atom.xml" rel="self"/>
+  <link href="http://soulhacker.me/"/>
+  <updated>2014-02-27T23:38:03+08:00</updated>
+  <id>http://soulhacker.me/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
-    <email><![CDATA[neo@paradigmx.net]]></email>
+    <email><![CDATA[neo@soulhacker.me]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
     <title type="html"><![CDATA[Introducing RestKit]]></title>
-    <link href="http://paradigmx.net/blog/2012/01/31/introducing-restkit/"/>
+    <link href="http://soulhacker.me/blog/2012/01/31/introducing-restkit/"/>
     <updated>2012-01-31T18:59:00+08:00</updated>
-    <id>http://paradigmx.net/blog/2012/01/31/introducing-restkit</id>
+    <id>http://soulhacker.me/blog/2012/01/31/introducing-restkit</id>
     <content type="html"><![CDATA[<p><a href="http://restkit.org/">RestKit</a> is an amazing <strong>Objective-C framework for iOS</strong> that aims to make interacting with RESTful web services simple, fast and fun. As said on its homepage:</p>
 
 <p><blockquote><p>It combines a clean, simple HTTP request/response API with a powerful object mapping system that reduces the amount of code you need to write to get stuff done.</p></blockquote>
