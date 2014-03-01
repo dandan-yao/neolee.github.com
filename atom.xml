@@ -4,7 +4,7 @@
   <title><![CDATA[Paradigm X]]></title>
   <link href="http://soulhacker.me/atom.xml" rel="self"/>
   <link href="http://soulhacker.me/"/>
-  <updated>2014-03-02T00:07:48+08:00</updated>
+  <updated>2014-03-02T00:09:01+08:00</updated>
   <id>http://soulhacker.me/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
@@ -25,6 +25,8 @@
 <p>Fortunately I can help. </p>
 
 <p>Here is my very simple and “just work” installation guide. It just works on almost all mainstream Linux distro, basically, any distro which can install and run <a href="https://www.docker.io">Docker</a>.</p>
+
+<!-- more -->
 
 <h2 id="pre-requisites">Pre-requisites</h2>
 
