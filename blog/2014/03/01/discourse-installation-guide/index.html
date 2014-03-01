@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Install Discourse on Mainstream Linux - Paradigm X</title>
+  <title>Discourse Installation Guide - Paradigm X</title>
   <meta name="author" content="soulhacker">
 
   
-  <meta name="description" content="Discourse is great, shiny, fancy and everybody want it. (really?) But the team has no time to write a simple and “just work” installation guide. I &hellip;">
+  <meta name="description" content="Discourse is great, shiny, fancy and everyone want it. (Seriously?) But the team has no time to write a simple and “just work” installation guide. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,7 +90,7 @@
   
   <header>
     
-      <h1 class="entry-title">Install Discourse on Mainstream Linux</h1>
+      <h1 class="entry-title">Discourse Installation Guide</h1>
     
     
       <p class="meta">
@@ -106,17 +106,239 @@
   
 
 
-<time datetime="2014-03-01T21:47:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2014</time>
+<time datetime="2014-03-01T22:15:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="http://www.discourse.org">Discourse</a> is great, shiny, fancy and everybody want it. (really?)</p>
+<div class="entry-content"><p><a href="http://www.discourse.org">Discourse</a> is great, shiny, fancy and everyone want it. (Seriously?)</p>
 
-<p>But the team has no time to write a simple and “just work” installation guide. I can help. Here is my very simple and “just work” installation guide. It just works on almost all mainstream Linux distro, basically, any distro which can install and run <a href="https://www.docker.io">Docker</a>.</p>
+<p>But the team has no time to write a simple and “just work” installation guide. </p>
 
+<p>Fortunately I can help. </p>
+
+<p>Here is my very simple and “just work” installation guide. It just works on almost all mainstream Linux distro, basically, any distro which can install and run <a href="https://www.docker.io">Docker</a>.</p>
+
+<h2 id="pre-requisites">Pre-requisites</h2>
+
+<h3 id="linux">Linux</h3>
+<p>Theorically Docker can be installed on almost any mainstream Linux distro. But as their developers told us:</p>
+
+<blockquote><p>The Ubuntu installation is the officially-tested version.</p><footer><strong>Docker Team</strong> <cite><a href="http://docs.docker.io/en/latest/installation/#installation-list">Docker Installation</a></cite></footer></blockquote>
+
+<blockquote><p>Mac, Windows and some Linux distributions cannot natively run Docker at this time…</p><footer><strong>Docker Team</strong> <cite><a href="https://www.docker.io/gettingstarted/">Docker Get Started</a></cite></footer></blockquote>
+
+<p>So Ubuntu seems to be the best option and I hightly recommend <code>Ubuntu 12.04 LTS 64-bit</code> box. But don’t worry if you cannot shoose this other. It may also be fine, just try to make Docker work on your system and the rest hopefully works as well.</p>
+
+<p><strong>IMPORTANT NOTE</strong><br />
+From mow on I will assume that you are working on a properly set Ubuntu Linux box logged in by your account (not <code>root</code> of cause) and have <code>sudo</code> privilege. And if you want to run Discourse behind <code>nginx</code> <em>named virtual hosts</em> (same as I do) you should already have a working nginx installed with default package setting.</p>
+
+<h2 id="installation">Installation</h2>
+
+<h3 id="git">Git</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo apt-get install git</pre></div>
+</div>
+ </figure></notextile></div>
+
+<h3 id="docker">Docker</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo apt-get update
+sudo apt-get install linux-image-generic-lts-raring linux-headers-generic-lts-raring</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>Here you should reboot your system and this is the ONLY once. After the system is up continue with:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo wget -qO- https://get.docker.io/ | sh</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>After the Docker install script ends successfully you can check the Docker installation with:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo docker info</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>If anything wrong you have to stop here or maybe get help from Docker community. If everything is right you are good to go!</p>
+
+<h3 id="discourse">Discourse</h3>
+
+<h4 id="preparation">Preparation</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo mkdir /var/docker
+sudo git clone https://github.com/discourse/discourse_docker.git /var/docker
+cd /var/docker
+sudo cp samples/standalone.yml containers/app.yml
+sudo vi container/app.yml</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>Now you are in the <em>Discourse Docker Container</em>’s main config file (of course you can use any editor if not like <code>vi</code>). What you write in here will affect the <em>Container</em> you build later and if anything wrong you would have to change setting here and rebuild the <em>Container</em>, which is a long process. So be very careful here. It’s the trickiest part.</p>
+
+<h4 id="appyml-expose">app.yml: expose</h4>
+
+<p>First part is the ports that <em>Container</em> should expose. The <em>Container</em> will open two services: SSH and HTTP. You can set two differect ports for each service: one for outside world and the other for the host machine (i.e. your Linux box) only. </p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre><span class="key">expose</span>:
+  - <span class="string"><span class="delimiter">&quot;</span><span class="content">8001:80</span><span class="delimiter">&quot;</span></span>
+  - <span class="string"><span class="delimiter">&quot;</span><span class="content">2222:22</span><span class="delimiter">&quot;</span></span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>the first line below <code>expose</code> is for the HTTP service and the second for SSH. If Discourse will be the only HTTP service in your box the first line should be <code>"80:80"</code>, so you can visit it through port <code>80</code> from anywhere. If you already have an HTTP server and port <code>80</code> already being used you have to change the left part of the first line to any unused port (<code>8001</code> in my case).</p>
+
+<h4 id="appyml-sshkey">app.yml: ssh_key</h4>
+
+<p>The <em>Container</em> can be accessed through SSH but you have to abbey two rules:</p>
+
+<ul>
+  <li>You must access the <em>Container</em> as <code>root</code></li>
+  <li>You must register your <code>root</code> account’s SSH public key in the <em>Container</em></li>
+</ul>
+
+<p>So open another SSH session to your Linux box and issue:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo su -
+cd ~/.ssh
+ssh_keygen ;; Save key file as default name (id_rsa) and give it a passphrase for protection
+cat ~/.ssh/id_rsa.pub</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>Copy the string output at the last step and paste it to <code>app.yaml</code> (and you can double <code>exit</code> to quit that second SSH session):</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre><span class="key">params</span>:
+  - <span class="string"><span class="content">ssh_key: your public key here</span></span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<h4 id="appyml-env">app.yml: env</h4>
+
+<p>There three important things here. Firstly you should set a <em>developer email</em> address, with which you can register in your Discourse forum later and magically become Admin! So just use the email address you would like to use at your Discourse Admin account. (Why isn’t it even mentioned at the official installation guide?)</p>
+
+<p>Sencondly, you should set the full doamin name you want to use for your Discourse forum. For now the <code>env</code> part should look like (using your email address and domain name of cause):</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre><span class="key">env</span>:
+  <span class="key">DISCOURSE_DEVELOPER_EMAILS</span>: <span class="string"><span class="content">'your.admin@email.com'</span></span>
+  <span class="key">DISCOURSE_HOSTNAME</span>: <span class="string"><span class="content">'discourse.yourdomain.com'</span></span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>And the last one is the Email sending server info. Discourse need send emails in several scenarios (signup, notification, etc.) so it needs a SMTP service. They recommend <a href="https://mandrillapp.com">Mandrill</a> service and it is indeed a good option. But any working authenticated SMTP service will be fine. Just fill the server address, port, user name and password:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre><span class="key">env</span>:
+  <span class="key">DISCOURSE_DEVELOPER_EMAILS</span>: <span class="string"><span class="content">'your.admin@email.com'</span></span>
+  <span class="key">DISCOURSE_HOSTNAME</span>: <span class="string"><span class="content">'discourse.yourdomain.com'</span></span>
+  <span class="key">DISCOURSE_SMTP_ADDRESS</span>: <span class="string"><span class="content">your smtp server address</span></span>
+  <span class="key">DISCOURSE_SMTP_PORT</span>: <span class="string"><span class="content">your smtp server port</span></span>
+  <span class="key">DISCOURSE_SMTP_USER_NAME</span>: <span class="string"><span class="content">your smtp server user name</span></span>
+  <span class="key">DISCOURSE_SMTP_PASSWORD</span>: <span class="string"><span class="content">your smtp server password</span></span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<h4 id="appyml-volumes">app.yml: volumes</h4>
+
+<p>Finally, pay attention to this part:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre><span class="key">volumes</span>:
+  - <span class="string"><span class="content">volume:</span><span class="content">
+      host: /var/docker/shared
+      guest: /shared</span></span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>Normally you don’t have to change it but you should know that this is a bi-direction read/write shared folder between inside the <em>Container</em> and your host Linux box.</p>
+
+<h4 id="bootstrap-and-startup">Bootstrap and startup</h4>
+
+<p>Double check the content of <code>app.yml</code> and save it. Continue with (confirm that you are still under <code>/var/docker</code>):</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo ./launcher bootstrap app</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>This is a very long process and after that the <em>Discourse Dock Container</em> will be ready to launch:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo ./launcher start app</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>At this moment you can run <code>sudo docker ps</code> to check. If the <em>Container</em> properly started you would find a record for it.</p>
+
+<p>And now you can visit <code>http://discourse.yourdomain.com:8001</code> (change the domain and port to yours as described above). But still more things we can do here.</p>
+
+<p>Firstly you can access the <em>Container</em> through SSH now, just issue:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo ./launcher ssh app</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>Enter your passphrase for the key you generated before and you will log in to the <em>Container</em> as <code>root</code>.</p>
+
+<p>Sencondly, if anything wrong and you have to modify the <code>app.yml</code> file, and/or you want to upgrade Discourse to the newest version, issue these commands under <code>/var/docker</code>:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo ./launcher stop app
+sudo ./launcher bootstrap app
+sudo ./launcher destroy app
+sudo ./launcher start app</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>In some cases there might be an error on the <code>destroy</code> command, just issue it again and all will be fine.</p>
+
+<h3 id="nginx">Nginx</h3>
+
+<p>In some cases we’d like to run Discourse behind <code>nginx</code> <em>name virtual hosts</em>. Just add a config file under <code>/etc/nginx/sites-available</code> and <code>ln -s</code> it to <code>/etc/nginx/sites-enabled</code>. And the content of the config file is very standard:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>server {
+    listen 80;
+
+    server_name discourse.yourdomain.com
+
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-NginX-Proxy true;
+
+        proxy_pass http://Container IP:Container Port/;
+        proxy_redirect off;
+    }
+}</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>If you read this guide carefully you would definitely know that the <code>80</code> port you set in <code>app.yml</code> will be the <code>Container Port</code> here, but what is the <code>Container IP</code>?</p>
+
+<p>Under <code>/var/docker</code> issue:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>sudo ./launcher ssh app</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>Now in the <em>Container</em> as <code>root</code>. use <code>ifconfig</code> to find the <em>Container</em> local IP (the one other than the trivial <code>127.0.0.1</code>) and that is the IP you should use in the <code>nginx</code> config file. Put it in the config file and restart <code>nginx</code>.</p>
+
+<p>That’s all. Now you can visit your fresh shiny Discourse forum at <code>http://discourse.yourdomain.com</code>.</p>
 </div>
 
 
@@ -139,8 +361,14 @@
   
 
 
-<time datetime="2014-03-01T21:47:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2014</time>
+<time datetime="2014-03-01T22:15:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>Linux</a>
+  
+</span>
 
 
     </p>
@@ -182,7 +410,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/03/01/discourse-installation-guide/">Install Discourse on Mainstream Linux</a>
+        <a href="/blog/2014/03/01/discourse-installation-guide/">Discourse Installation Guide</a>
       </li>
     
       <li class="post">
