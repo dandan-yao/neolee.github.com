@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | Paradigm X]]></title>
   <link href="http://soulhacker.me/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://soulhacker.me/"/>
-  <updated>2014-03-02T00:09:01+08:00</updated>
+  <updated>2014-03-18T16:05:52+08:00</updated>
   <id>http://soulhacker.me/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
@@ -202,7 +202,8 @@ cat ~/.ssh/id_rsa.pub</pre></div>
 <p>Sencondly, if anything wrong and you have to modify the <code>app.yml</code> file, and/or you want to upgrade Discourse to the newest version, issue these commands under <code>/var/docker</code>:</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
-  <div class="code"><pre>sudo ./launcher stop app
+  <div class="code"><pre>sudo git pull ;; especially after docker upgraded
+sudo ./launcher stop app
 sudo ./launcher bootstrap app
 sudo ./launcher destroy app
 sudo ./launcher start app</pre></div>

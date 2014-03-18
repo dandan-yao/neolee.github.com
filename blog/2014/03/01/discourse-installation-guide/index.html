@@ -297,7 +297,8 @@ cat ~/.ssh/id_rsa.pub</pre></div>
 <p>Sencondly, if anything wrong and you have to modify the <code>app.yml</code> file, and/or you want to upgrade Discourse to the newest version, issue these commands under <code>/var/docker</code>:</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
-  <div class="code"><pre>sudo ./launcher stop app
+  <div class="code"><pre>sudo git pull ;; especially after docker upgraded
+sudo ./launcher stop app
 sudo ./launcher bootstrap app
 sudo ./launcher destroy app
 sudo ./launcher start app</pre></div>
