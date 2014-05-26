@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | Paradigm X]]></title>
   <link href="http://soulhacker.me/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://soulhacker.me/"/>
-  <updated>2014-05-26T21:08:46+08:00</updated>
+  <updated>2014-05-26T21:42:05+08:00</updated>
   <id>http://soulhacker.me/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
@@ -117,7 +117,7 @@ sudo vi container/app.yml</pre></div>
 <p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
   <div class="code"><pre>sudo su -
 cd ~/.ssh
-ssh_keygen ;; Save key file as default name (id_rsa) and give it a passphrase for protection
+ssh-keygen ;; Save key file as default name (id_rsa) and give it a passphrase for protection
 cat ~/.ssh/id_rsa.pub</pre></div>
 </div>
  </figure></notextile></div></p>
