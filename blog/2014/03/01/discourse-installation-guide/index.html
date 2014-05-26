@@ -175,7 +175,7 @@ sudo apt-get install linux-image-generic-lts-raring linux-headers-generic-lts-ra
 <h4 id="preparation">Preparation</h4>
 
 <div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
-  <div class="code"><pre>sudo mkdir /var/docker/discourse
+  <div class="code"><pre>sudo mkdir -p /var/docker/discourse
 sudo git clone https://github.com/discourse/discourse_docker.git /var/docker/discourse
 cd /var/docker/discourse
 sudo cp samples/standalone.yml containers/app.yml

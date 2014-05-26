@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | Paradigm X]]></title>
   <link href="http://soulhacker.me/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://soulhacker.me/"/>
-  <updated>2014-03-18T20:23:56+08:00</updated>
+  <updated>2014-05-26T21:08:46+08:00</updated>
   <id>http://soulhacker.me/</id>
   <author>
     <name><![CDATA[soulhacker]]></name>
@@ -80,7 +80,7 @@ sudo apt-get install linux-image-generic-lts-raring linux-headers-generic-lts-ra
 <h4 id="preparation">Preparation</h4>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
-  <div class="code"><pre>sudo mkdir /var/docker/discourse
+  <div class="code"><pre>sudo mkdir -p /var/docker/discourse
 sudo git clone https://github.com/discourse/discourse_docker.git /var/docker/discourse
 cd /var/docker/discourse
 sudo cp samples/standalone.yml containers/app.yml
