@@ -70,11 +70,13 @@
                     </div><!-- .entry-meta -->
                 </header><!-- .entry-header -->
                 <div class="entry-content">
-                    <p><a href="http://golang.org/">Go</a> is <em>the</em> language from Google and Android is <em>the</em> mobile OS from Google. The bond between them are just born with. So there should be no surprise that we can use Go to write Android programs, though some important restricts for now:
-<!-- more -->
-- There is no Android SDK for Go, so no system API nor GUI for Go program on Android.
-- Go doesn’t support JNI for now. So Go programs have to be compiled as separate executables, wrapped as assets in apk and called within Java based apps.
-- Maybe cross-compiling is really hard. We cannot build Android applications which use Cgo(C bridge for Go) on our desktop computer for now, as shown below.</p>
+                    <p><a href="http://golang.org/">Go</a> is <em>the</em> language from Google and Android is <em>the</em> mobile OS from Google. The bond between them are just born with. So there should be no surprise that we can use Go to write Android programs, though some important restricts for now:</p>
+
+<ul>
+  <li>There is no Android SDK for Go, so no system API nor GUI for Go program on Android.</li>
+  <li>Go doesn’t support JNI for now. So Go programs have to be compiled as separate executables, wrapped as assets in apk and called within Java based apps.</li>
+  <li>Maybe cross-compiling is really hard. We cannot build Android applications which use Cgo(C bridge for Go) on our desktop computer for now, as shown below.</li>
+</ul>
 
 <p>But it’s not just a toy because of the following advantages:</p>
 
@@ -85,6 +87,8 @@
 </ul>
 
 <p>Go is a very young language, thus there’s few guides or tutorials out there. But it also makes earlier investion provide more return. My friend and colleague <a href="https://twitter.com/#!/rarnu">@rarnu</a> also likes the idea of writing Android program using Go and has written <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">a short tutorial</a>. I’d like to rewrite it here and fill all lost details which he was too lazy to include.</p>
+
+<!-- more -->
 
 <h3>Prerequisites</h3>
 <ul>

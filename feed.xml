@@ -5,8 +5,8 @@
         <description>All those innovative, insightful, intelligent, intriguing things.</description>
         <link>http://soulhacker.me/</link>
         <atom:link href="http://soulhacker.me/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 17 Aug 2016 16:19:07 +0800</pubDate>
-        <lastBuildDate>Wed, 17 Aug 2016 16:19:07 +0800</lastBuildDate>
+        <pubDate>Wed, 17 Aug 2016 17:16:46 +0800</pubDate>
+        <lastBuildDate>Wed, 17 Aug 2016 17:16:46 +0800</lastBuildDate>
         <generator>Jekyll v2.4.0</generator>
         
             <item>
@@ -14,6 +14,7 @@
                 <description>&lt;p&gt;&lt;a href=&quot;http://clojure.org&quot;&gt;Clojure&lt;/a&gt; keeps &lt;a href=&quot;http://wit.io/posts/clojure-all-grown-up&quot;&gt;growning up&lt;/a&gt;, and my 2.5-years old &lt;a href=&quot;http://7thgen.info/blog/2010/12/clojure-for-mac-os-x/&quot;&gt;guide for setting up Clojure environment on Mac OS X&lt;/a&gt; had been out-of-date for quite a while. The toolchains based on &lt;a href=&quot;https://github.com/technomancy/leiningen&quot;&gt;Leiningen 2&lt;/a&gt; and &lt;a href=&quot;https://github.com/clojure/tools.nrepl&quot;&gt;nREPL&lt;/a&gt; rise from underground, become really powerful and easy (even joyful for most of us) to use, and de facto standard. Nearly all main stream developing environments provide solutions for serious Clojure developers: &lt;a href=&quot;http://eclipse.org&quot;&gt;Eclipse&lt;/a&gt; + &lt;a href=&quot;http://code.google.com/p/counterclockwise/&quot;&gt;Counter Clockwise&lt;/a&gt;, &lt;a href=&quot;http://www.jetbrains.com/idea/&quot;&gt;IntelliJ IDEA&lt;/a&gt; + &lt;a href=&quot;http://www.jetbrains.com/idea/&quot;&gt;La Clojure&lt;/a&gt;, &lt;a href=&quot;http://www.sublimetext.com/2&quot;&gt;Sublime Text 2&lt;/a&gt; + &lt;a href=&quot;http://github.com/wuub/SublimeREPL&quot;&gt;SublimeREPL&lt;/a&gt;, Vim with &lt;a href=&quot;http://clojure-doc.org/articles/tutorials/vim_fireplace.html&quot;&gt;fireplace.vim&lt;/a&gt;, etc.&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, and the favorite I finally found several months ago, &lt;a href=&quot;https://github.com/overtone/emacs-live&quot;&gt;Emacs Live&lt;/a&gt;.&lt;/p&gt;
 
 &lt;!-- more --&gt;
+
 &lt;p&gt;&lt;em&gt;Emacs Live&lt;/em&gt; is brought to us by &lt;a href=&quot;https://github.com/samaaron&quot;&gt;Sam Aaron&lt;/a&gt;, a major developer of &lt;a href=&quot;https://github.com/overtone/overtone/&quot;&gt;Overtone&lt;/a&gt;, the Clojure-based open source live-programmable music exploration &amp;amp; collaboration toolkit&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. From &lt;em&gt;Emacs Live&lt;/em&gt; documentation:&lt;/p&gt;
 
 &lt;figure class=&quot;quote&quot;&gt;&lt;blockquote&gt;&lt;p&gt;Emacs Live is a carefully curated Emacs config which transforms vanilla Emacs from simply an incredible editor into an intense experience. The key is in the curation. Unlike other exemplary Emacs config tools such as the Starter Kit and Prelude which are very modular, Emacs Live embodies a holistic approach creating an all-round package. We build on the shoulders of giants and incorporate many independent projects, ensuring that they all work together seamlessly.&lt;/p&gt;&lt;/blockquote&gt;&lt;figcaption class=&quot;quote-source&quot;&gt;&lt;span class=&quot;quote-author&quot;&gt;Emacs Live&lt;/span&gt; &lt;cite class=&quot;quote-title&quot;&gt;&lt;a class=&quot;quote-link&quot; href=&quot;http://overtone.github.com/emacs-live/&quot;&gt;A curated Emacs experience&lt;/a&gt;&lt;/cite&gt;&lt;/figcaption&gt;&lt;/figure&gt;
@@ -255,9 +256,11 @@ A: After disabling the built-in &lt;code&gt;live/colour-pack&lt;/code&gt; (see t
 
 &lt;p&gt;iOS has very solid Unix foundation and decent application framework. For a long time iOS had incontrovertible advantages over its rivals: performance, security, smooth user interaction, etc., most of which are still advantages today. But we all know that some incapabilities in iOS, especially compared to Android, are becoming more and more important aspects that Apple cannot ignore. Consider the following facts: Android may not be rendering the UI animation as smoothly as iOS always does, but it’s been getting better and better since Android 4.0, while iOS still doesn’t allow third-party apps customize the lock screen or put widgets on any part of the main UI. See the difference? Android’s problems are ‘not as good as iOS’ and iOS has some &lt;em&gt;incapabilities&lt;/em&gt;. If Apple want more people to choose iOS it should persuade the swing people (not the fans) that &lt;em&gt;iOS is better in all aspects&lt;/em&gt;. It’s a prerequisite to eliminate those incapabilities ASAP.&lt;/p&gt;
 
-&lt;p&gt;Ars Technica &lt;a href=&quot;http://arstechnica.com/apple/2013/01/bring-us-the-features-an-ars-staff-wish-list-for-ios-7/&quot;&gt;posted their staff wish list for iOS 7&lt;/a&gt; last week. Most features in their list are &lt;em&gt;good&lt;/em&gt; ones but not the &lt;em&gt;critical&lt;/em&gt; ones. Base on the above &lt;em&gt;eliminating incapabilities&lt;/em&gt; theory I’ll list mine below, divided to developer and user categories.
+&lt;p&gt;Ars Technica &lt;a href=&quot;http://arstechnica.com/apple/2013/01/bring-us-the-features-an-ars-staff-wish-list-for-ios-7/&quot;&gt;posted their staff wish list for iOS 7&lt;/a&gt; last week. Most features in their list are &lt;em&gt;good&lt;/em&gt; ones but not the &lt;em&gt;critical&lt;/em&gt; ones. Base on the above &lt;em&gt;eliminating incapabilities&lt;/em&gt; theory I’ll list mine below, divided to developer and user categories.&lt;/p&gt;
+
 &lt;!-- more --&gt;
-##Wish List as a Developer&lt;/p&gt;
+
+&lt;h2&gt;Wish List as a Developer&lt;/h2&gt;
 
 &lt;h3&gt;1. Inter-app Communication&lt;/h3&gt;
 
@@ -341,9 +344,11 @@ A: After disabling the built-in &lt;code&gt;live/colour-pack&lt;/code&gt; (see t
                 <title>A Brief Guide of (RESTful) SOA, Part III</title>
                 <description>&lt;p&gt;&lt;a href=&quot;/blog/2012/04/27/a-brief-guide-of-restful-soa-part-i/&quot;&gt;Part I&lt;/a&gt; &lt;a href=&quot;/blog/2012/10/17/a-brief-guide-of-restful-soa-part-ii/&quot;&gt;Part II&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;In the final part of this article we will discuss several common topics of RESTful web service implementation. I will not dig deep here because all these topics are all quite complicated.
+&lt;p&gt;In the final part of this article we will discuss several common topics of RESTful web service implementation. I will not dig deep here because all these topics are all quite complicated.&lt;/p&gt;
+
 &lt;!-- more --&gt;
-## Level IV: RESTful Service Implementation&lt;/p&gt;
+
+&lt;h2&gt;Level IV: RESTful Service Implementation&lt;/h2&gt;
 
 &lt;h3&gt;4.1 Reference Architecture&lt;/h3&gt;
 
@@ -415,9 +420,11 @@ A: After disabling the built-in &lt;code&gt;live/colour-pack&lt;/code&gt; (see t
 
 &lt;h2&gt;Level III: Define and Tune the API&lt;/h2&gt;
 
-&lt;p&gt;Defining API specs is the most important part of all and it’s a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as &lt;a href=&quot;http://www.mediawiki.org/&quot;&gt;MediaWiki&lt;/a&gt; or &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;Markdown&lt;/a&gt; + &lt;a href=&quot;https://github.com&quot;&gt;GitHub&lt;/a&gt; etc. Then you can follow these sections below.
+&lt;p&gt;Defining API specs is the most important part of all and it’s a continuous progress in the whole lifecycle, mostly documentation oriented. A simple and neat document collaboration platform is very useful. I suggest facilitating tools such as &lt;a href=&quot;http://www.mediawiki.org/&quot;&gt;MediaWiki&lt;/a&gt; or &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;Markdown&lt;/a&gt; + &lt;a href=&quot;https://github.com&quot;&gt;GitHub&lt;/a&gt; etc. Then you can follow these sections below.&lt;/p&gt;
+
 &lt;!-- more --&gt;
-### 3.1 API Basics&lt;/p&gt;
+
+&lt;h3&gt;3.1 API Basics&lt;/h3&gt;
 
 &lt;p&gt;Use one or two pages to list basic information of the API system, including (but not constrained to):&lt;/p&gt;
 
@@ -566,9 +573,11 @@ A: After disabling the built-in &lt;code&gt;live/colour-pack&lt;/code&gt; (see t
 
 &lt;p&gt;X100 is a really amazing camera. Its &lt;a href=&quot;http://www.dxomark.com/index.php/en.../Cameras/Camera-Sensor-Database/Fujifilm/FinePix-X100&quot;&gt;top-of-the-line&lt;/a&gt; APS-C sized CMOS sensor provides great resolution and SNR. Its prime lens (with field of view equivalent to 35mm and 28mm lens on full frame) are especially suitable for landscape and cultural photography. iPhone 4S is a great backup, provide fairly good photos even in some typically difficult scenarios for compact DCs. Remember all these are very lightweight. Farewell my big DSLRs. &lt;em&gt;The best cameras are the ones you always take with you.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;As for the digital darkroom, Aperture is a perfect tool both on organising and editing. And the &lt;a href=&quot;https://github.com/iKenndac/500px-Aperture-Uploader/&quot;&gt;500px Uploader&lt;/a&gt; developed by iKenndac significantly simplifies the process of uploading photos to 500px. But I have some serious suggestions for 500px. Yep, this is the real reason I wrote this blog.
+&lt;p&gt;As for the digital darkroom, Aperture is a perfect tool both on organising and editing. And the &lt;a href=&quot;https://github.com/iKenndac/500px-Aperture-Uploader/&quot;&gt;500px Uploader&lt;/a&gt; developed by iKenndac significantly simplifies the process of uploading photos to 500px. But I have some serious suggestions for 500px. Yep, this is the real reason I wrote this blog.&lt;/p&gt;
+
 &lt;!-- more --&gt;
-First of all, please provide full support to all high DPI displays, i.e. iPhone 4/4S/5, the latest iPad and the MBP with Retina Display. You are a professional photography site and you have to support the best display devices in this planet, don’t you? It feels very bad when I see those low resolution photos in the shiny Retina Display MBP, especially when I’ve uploaded all the full resolution(12MP) images.&lt;/p&gt;
+
+&lt;p&gt;First of all, please provide full support to all high DPI displays, i.e. iPhone 4/4S/5, the latest iPad and the MBP with Retina Display. You are a professional photography site and you have to support the best display devices in this planet, don’t you? It feels very bad when I see those low resolution photos in the shiny Retina Display MBP, especially when I’ve uploaded all the full resolution(12MP) images.&lt;/p&gt;
 
 &lt;p&gt;Second, re-design your site navigation please. Think about it, user has profile, sets and stories. When I dig into some photo I want clear path to get out (e.g. back to a set or story). And I’d like some shortcut to quickly navigate between my sets and stories. The site’s navigation design does not exist, for now.&lt;/p&gt;
 
@@ -610,10 +619,12 @@ First of all, please provide full support to all high DPI displays, i.e. iPhone 
   &lt;li&gt;Support iPhone &lt;em&gt;and&lt;/em&gt; iPad-size mobile devices&lt;/li&gt;
   &lt;li&gt;Support i18n&lt;/li&gt;
   &lt;li&gt;Easy to backup/restore or export/import&lt;/li&gt;
-  &lt;li&gt;Acceptable performance for hundreds of images 
-&lt;!-- more --&gt;
-I think these requirements are very normal and reasonable for thousands of users. BTW, you will find out that &lt;a href=&quot;http://www.flickr.com&quot;&gt;Flickr.com&lt;/a&gt; matches most of them quite well, which may prove that Flickr is still the best image hosting and sharing service in the Internet.&lt;/li&gt;
+  &lt;li&gt;Acceptable performance for hundreds of images&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;I think these requirements are very normal and reasonable for thousands of users. BTW, you will find out that &lt;a href=&quot;http://www.flickr.com&quot;&gt;Flickr.com&lt;/a&gt; matches most of them quite well, which may prove that Flickr is still the best image hosting and sharing service in the Internet.&lt;/p&gt;
 
 &lt;p&gt;Anyone suggestion?&lt;/p&gt;
 
@@ -642,8 +653,10 @@ I think these requirements are very normal and reasonable for thousands of users
 
 &lt;p&gt;All these are perfect software architectural styles(well, except those words your spell checker complains), our best dream. These can’t be wrong. The problem is in the implementations. Fortunately the rises of RESTful services on the open web prove that the spirit of SOA can really matters. Maybe one day similar architecture and implementation will eventually change enterprise computing in return.&lt;/p&gt;
 
-&lt;p&gt;I always believe &lt;strong&gt;the service-oriented architecture will be the future of massive distributed software system&lt;/strong&gt;. And &lt;strong&gt;RESTful services will replace web sites and eventually become the main body of the Internet&lt;/strong&gt;. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol - it can be used as RPC protocol but it’s not RESTful and cannot provide key benefits which REST want to apply. 
-&lt;!-- more --&gt;&lt;/p&gt;
+&lt;p&gt;I always believe &lt;strong&gt;the service-oriented architecture will be the future of massive distributed software system&lt;/strong&gt;. And &lt;strong&gt;RESTful services will replace web sites and eventually become the main body of the Internet&lt;/strong&gt;. So I often think about how to help approaching it. I know that lots of people want to implement RESTful style services in their system (though they may not know what for). What they need is a brief and clean(maybe not extremely accurate and complete) guideline when practicing RESTful services. It can help to make things right and avoid traps such as using HTTP request as RPC protocol - it can be used as RPC protocol but it’s not RESTful and cannot provide key benefits which REST want to apply.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
 &lt;p&gt;&lt;span class=&quot;pullquote-right Morpheus, The Matrix Movie&quot; data-pullquote=&quot;“Try not to think of it in terms of right and wrong. She is a guide. She can help you to find the path.”&quot;&gt;&lt;/span&gt;
 Here it is. Below I’ll list a brief guide which can help you find the path, as in the Matrix movies Morpheus told Neo about the Oracle: “Try not to think of it in terms of right and wrong. She is a guide. She can help you to find the path.”&lt;/p&gt;
 
@@ -809,9 +822,11 @@ Apple AppStore’s biggest news this week is that, &lt;a href=&quot;http://www.f
 
 &lt;p&gt;Watch their &lt;a href=&quot;http://vimeo.com/37254322&quot;&gt;official trailer&lt;/a&gt; and you can get some clues. The trailer spreads several important ideas: 1. &lt;em&gt;Paper&lt;/em&gt; can be used anytime anywhere whenever people want to use pen and paper. 2. The User, the iPad, &lt;em&gt;Paper&lt;/em&gt; and the stylus work together as a whole. 3. All these are all about the user’s lifestyle, becoming part to it.&lt;/p&gt;
 
-&lt;p&gt;So what do you think while watching the video? Desire to light up your iPad at once and sketch something? Think about buying one &lt;a href=&quot;http://wacom.com/en/Products/Bamboo/BambooStylus.aspx&quot;&gt;Wacom Stylus&lt;/a&gt; for your iPad? Or those &lt;a href=&quot;http://www.youtube.com/watch?v=D2BvVcSkNkA&quot;&gt;amazing&lt;/a&gt; &lt;a href=&quot;http://www.youtube.com/watch?v=9bYx3iEdzzc&quot;&gt;ads&lt;/a&gt; for the &lt;a href=&quot;http://www.youtube.com/watch?v=btfbIVGES1I&quot;&gt;original&lt;/a&gt; &lt;a href=&quot;http://www.youtube.com/watch?v=NMvETJ0bxEQ&quot;&gt;iPad&lt;/a&gt;? My answer is: all of them. And one more ~~thing~~ person, Don Draper.
+&lt;p&gt;So what do you think while watching the video? Desire to light up your iPad at once and sketch something? Think about buying one &lt;a href=&quot;http://wacom.com/en/Products/Bamboo/BambooStylus.aspx&quot;&gt;Wacom Stylus&lt;/a&gt; for your iPad? Or those &lt;a href=&quot;http://www.youtube.com/watch?v=D2BvVcSkNkA&quot;&gt;amazing&lt;/a&gt; &lt;a href=&quot;http://www.youtube.com/watch?v=9bYx3iEdzzc&quot;&gt;ads&lt;/a&gt; for the &lt;a href=&quot;http://www.youtube.com/watch?v=btfbIVGES1I&quot;&gt;original&lt;/a&gt; &lt;a href=&quot;http://www.youtube.com/watch?v=NMvETJ0bxEQ&quot;&gt;iPad&lt;/a&gt;? My answer is: all of them. And one more ~~thing~~ person, Don Draper.&lt;/p&gt;
+
 &lt;!-- more --&gt;
-&lt;img class=&quot;right&quot; src=&quot;/images/posts/don-draper.gif&quot; /&gt;
+
+&lt;p&gt;&lt;img class=&quot;right&quot; src=&quot;/images/posts/don-draper.gif&quot; /&gt;
 In &lt;em&gt;Mad Men&lt;/em&gt;’s season I finale, &lt;em&gt;The Wheel&lt;/em&gt;, people from Eastman Kodak brought their new invention, a &lt;a href=&quot;http://en.wikipedia.org/wiki/Carousel_slide_projector&quot;&gt;slide projector&lt;/a&gt; to Don Draper for a name and an ad campaign proposal. After a typical &lt;a href=&quot;/images/don-draper-inspiration.jpg&quot;&gt;&lt;em&gt;Don’s inspiration routine&lt;/em&gt;&lt;/a&gt; Don Draper dug up a vision from his childhood and proposed ‘&lt;em&gt;Carousel&lt;/em&gt;’ as the name of the projector, which made it a symbolic memento of everybody’s childhood. Don Drape explained this idea as below:&lt;/p&gt;
 &lt;figure class=&quot;quote&quot;&gt;&lt;blockquote&gt;&lt;p&gt;“Technology is a glittering lure. But there’s the rare occasion when the public can be engaged on a level beyond flash, if they have a sentimental bond with the product.”&lt;/p&gt;&lt;/blockquote&gt;&lt;figcaption class=&quot;quote-source&quot;&gt;&lt;span class=&quot;quote-author&quot;&gt;Don Draper&lt;/span&gt; &lt;cite class=&quot;quote-title&quot;&gt;from Mad Men Season I Episode 13 &quot;The Wheel&quot;&lt;/cite&gt;&lt;/figcaption&gt;&lt;/figure&gt;
 
@@ -836,11 +851,13 @@ If not, they won’t be bonded to your product. Go get someone else or re-think 
         
             <item>
                 <title>Go for Android</title>
-                <description>&lt;p&gt;&lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt; is &lt;em&gt;the&lt;/em&gt; language from Google and Android is &lt;em&gt;the&lt;/em&gt; mobile OS from Google. The bond between them are just born with. So there should be no surprise that we can use Go to write Android programs, though some important restricts for now:
-&lt;!-- more --&gt;
-- There is no Android SDK for Go, so no system API nor GUI for Go program on Android.
-- Go doesn’t support JNI for now. So Go programs have to be compiled as separate executables, wrapped as assets in apk and called within Java based apps.
-- Maybe cross-compiling is really hard. We cannot build Android applications which use Cgo(C bridge for Go) on our desktop computer for now, as shown below.&lt;/p&gt;
+                <description>&lt;p&gt;&lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt; is &lt;em&gt;the&lt;/em&gt; language from Google and Android is &lt;em&gt;the&lt;/em&gt; mobile OS from Google. The bond between them are just born with. So there should be no surprise that we can use Go to write Android programs, though some important restricts for now:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;There is no Android SDK for Go, so no system API nor GUI for Go program on Android.&lt;/li&gt;
+  &lt;li&gt;Go doesn’t support JNI for now. So Go programs have to be compiled as separate executables, wrapped as assets in apk and called within Java based apps.&lt;/li&gt;
+  &lt;li&gt;Maybe cross-compiling is really hard. We cannot build Android applications which use Cgo(C bridge for Go) on our desktop computer for now, as shown below.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;But it’s not just a toy because of the following advantages:&lt;/p&gt;
 
@@ -851,6 +868,8 @@ If not, they won’t be bonded to your product. Go get someone else or re-think 
 &lt;/ul&gt;
 
 &lt;p&gt;Go is a very young language, thus there’s few guides or tutorials out there. But it also makes earlier investion provide more return. My friend and colleague &lt;a href=&quot;https://twitter.com/#!/rarnu&quot;&gt;@rarnu&lt;/a&gt; also likes the idea of writing Android program using Go and has written &lt;a href=&quot;http://blog.sina.com.cn/s/blog_68b671430100z4wn.html&quot;&gt;a short tutorial&lt;/a&gt;. I’d like to rewrite it here and fill all lost details which he was too lazy to include.&lt;/p&gt;
+
+&lt;!-- more --&gt;
 
 &lt;h3&gt;Prerequisites&lt;/h3&gt;
 &lt;ul&gt;
@@ -1037,7 +1056,9 @@ If not, they won’t be bonded to your product. Go get someone else or re-think 
                 <description>&lt;p&gt;&lt;a href=&quot;http://restkit.org/&quot;&gt;RestKit&lt;/a&gt; is an amazing &lt;strong&gt;Objective-C framework for iOS&lt;/strong&gt; that aims to make interacting with RESTful web services simple, fast and fun. As said on its homepage:&lt;/p&gt;
 
 &lt;blockquote&gt;&lt;p&gt;It combines a clean, simple HTTP request/response API with a powerful object mapping system that reduces the amount of code you need to write to get stuff done.&lt;/p&gt;&lt;/blockquote&gt;
+
 &lt;!-- more --&gt;
+
 &lt;p&gt;RestKit provides several components:&lt;/p&gt;
 
 &lt;ol&gt;
