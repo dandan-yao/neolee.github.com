@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">    
+    <title>Back-end is Hard</title> 
+    <meta name="description" content="All those innovative, insightful, intelligent, intriguing things.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic" />
+    <link rel="stylesheet" href="/css/main.css" />
+    
+    <link href='/stylesheets/all-59a811c39081ff1a1a7a90aa4876191a.css' media='all' rel='stylesheet' type='text/css'>
+    
+    <link rel="canonical" href="http://soulhacker.me/2011/12/24/back-end-is-hard/">
+    <link rel="alternate" type="application/rss+xml" title="Paradigm X Feed" href="http://soulhacker.me/feed.xml">
+</head>
+<body>
+    <nav id="top" class="site-navigation">
+        <div class="inner">
+            <button id="menu-toggle" aria-expanded="false">Menu</button>
+            <div class="nav-menu">
+                <ul class="menu">
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/">Home</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/tags/">Archives</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/about.html">About</a>
+                  </li>
+                
+                </ul>        
+            </div><!-- .nav-menu -->
+            <a class="subscribe-button fa-feed square fill-horizontal" href="/feed.xml"><span class="screen-reader-text">Subscribe</span></a>
+        </div><!-- .inner -->
+    </nav><!-- .site-navigation -->
+    <header class="site-header">
+        <div class="inner">
+            <h1 class="site-title"><a class="logo-text" href="/">Paradigm X</a></h1>
+            <p class="site-description">A vision quest of a soulhacker.</p>
+        </div><!-- .inner -->
+    </header>
+    <div class="site-content">
+    <div class="inner">
+        <main class="site-main">
+            <article class="post">
+                <header class="entry-header"> 
+                    <div class="entry-header-wrap">
+                        
+                        <h1 class="entry-title">Back-end is Hard</h1>
+                    </div><!-- .entry-header-wrap -->
+                    <div class="entry-meta">
+                        by <span class="post-author">Neo Lee</span> on <time class="published" datetime="2011-12-24">December 24, 2011</time>
+                    </div><!-- .entry-meta -->
+                </header><!-- .entry-header -->
+                <div class="entry-content">
+                    <p>Some of of my colleagues are talking about the difficulties of web front-end developing: the <a href="http://browsershots.org/">browser compatibility</a>, the <a href="https://twitter.com/soulhacker/status/145344139251286016">infuriatingly awful JavaScript language</a>, the pain when glueing DOM, CSS and JavaScript, and so on.</p>
+
+<p>I agree that all these are a pain in the ass. But they are NOTHING compared to back-end architecture. During my over 10 years career as a software architect, I’ve seen significant improvements in nearly every parts of back-end architecture but it’s still very hard. The fundamental difficulties are still there, nearly unchanged all the time. Let me list some of the major ones.
+<!-- more -->
+1. <strong>Design for failure.</strong> Nearly half of the back-end code are not for ‘common’ situation. They are <a href="http://www.usenix.org/event/lisa07/tech/full_papers/hamilton/hamilton_html/">designed for failures</a>. They are designed for letting the system provide acceptable response under special or extreme conditions (and within specific budget): too many concurrent requests, the memory runs out, a new node is being hot-plugged in to the system, the load balancing device stops working, the long connection breaks every several minutes for no reason, etc. To maintain such functionality the design should contain many compromises: sync or async? Scale out or scale up? Realtime transaction or batch job? etc. All these tradeoffs cannot be determined through any simple rules and must be considered via all aspects of environment and requirements of a dynamic system. It nearly always leads to some kind of mistakes.</p>
+
+<ol>
+  <li>
+    <p><strong>Architecture is about abstraction.</strong> Why abstract? Because abstract concept/mechanism/pattern/methodology provide far more flexibility and reusability. The progress of abstraction distills the essence of the problem and wrap it as reusable component which can be used to solve similar problems in completely different system/context. Seems beautiful isn’t it? But unfortunately, abstraction is hard. More unfortunately, inappropriate abstraction is incredibly disastrous. And the most unfortunately, we have very few working methodology to do abstraction. Abstraction is a kind of art, remember? Mostly we begin with several general models, walk through a series of key rules and continually test our design for the lifetime of the system. Very experience based. In many cases when we find an architectural mistake it is too late. All we can do is to choose from the options between rebuilding the system from ground up or doing the yucky patchwork until we are exhausted.</p>
+  </li>
+  <li>
+    <p><strong>Architecture IS product.</strong> A software product contains many different point of views. Two of the most important are the end-user point of view and the architecture point of view. The end-user POV is like a black box, described by system input and output, can be (relatively) precisely defined and tested. The architecture POV is from inside the software system, the blueprint of the system as a whole, mainly describes each of every parts of the system and the connections between them. In most cases there is no direct link between these POVs. So those are very different POVs but they belong to the SAME product. They must be kept aligned and consistent. So the architect must deeply understand the soul of the product and the product designer must know the capability and limit of the architecture. Otherwise (i.e. the common situations), either the architecture has to be changed tremendously to meet some normal new product feature request, or after implementing a high cost product feature it appears that this feature can be replaced by another easy one which can bring the end-user nearly the same value and experience.</p>
+  </li>
+</ol>
+
+<p>Well, there are more but that’s enough. I consider all the above are the ‘essential difficulties’ as defined by Frederick Brooks in his epic <a href="http://www.cs.nott.ac.uk/~cah/G51ISS/Documents/NoSilverBullet.html"><em>No Silver Bullet</em></a>, which means no quick solver in the coming future.</p>
+
+<p><strong>Back-end is hard. Q.E.D.</strong></p>
+
+                </div><!-- .entry-content -->
+                <footer class="entry-footer">
+                    <div class="share-post">
+                        <span>Share</span>
+                        <a class="fa-twitter" target="_blank" href="https://twitter.com/intent/tweet?text=Back-end%20is%20Hard&amp;url=http://soulhacker.me/2011/12/24/back-end-is-hard/"><span class="screen-reader-text">Twitter</span></a>
+                        <a class="fa-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://soulhacker.me/2011/12/24/back-end-is-hard/&amp;t=Back-end%20is%20Hard"><span class="screen-reader-text">Facebook</span></a>
+                        <a class="fa-google-plus" target="_blank" href="http://plus.google.com/share?url=http://soulhacker.me/2011/12/24/back-end-is-hard/"><span class="screen-reader-text">Google+</span></a>
+                    </div><!-- .share-post -->
+                    
+                    <div class="tag-links">
+                        Tags: <a href="/tags/index.html#Architecture" title="Pages tagged Architecture" rel="tag">Architecture</a>
+                    </div>
+                    
+                </footer><!-- .entry-footer -->
+            </article><!-- .post -->
+            <div class="author-box">
+                <div class="author-info">
+                    <div class="author-avatar" style="background-image: url(/images/author-image.jpg)"><span class="screen-reader-text">Neo Lee's Picture</span></div>
+                    <div class="author-details">
+                        <h2 class="author-title">About Neo Lee</h2>
+                        <p class="author-bio">An Internet architect, product designer, entrepreneur, startup coach, lifetime game and music lover.</p>
+                        <span class="author-location"><i class="fa-map-marker" aria-hidden="true"></i> Shanghai, China</span>
+                        <span class="author-website"><i class="fa-chain" aria-hidden="true"></i> <a href="http://soulhacker.me" target="_blank"> http://soulhacker.me</a></span>
+                    </div><!-- .author-details -->
+                </div><!-- .author-info -->
+            </div><!-- .author-box -->
+            <nav class="post-navigation">
+                <h2 class="screen-reader-text">Post navigation</h2>
+                
+                <div class="nav-previous">
+                    <div class="nav-inside">
+                        
+                        <div class="nav-before">Previous</div>
+                        <div class="nav-title"><a href="/2011/12/03/7-inch-success/">7-inch Success</a></div>
+                        <div class="nav-date">December 3, 2011</div>
+                    </div><!-- .nav-inside -->
+                </div><!-- .nav-previous -->
+                
+                
+                <div class="nav-next">
+                    <div class="nav-inside">
+                        
+                        <div class="nav-before">Next</div>
+                        <div class="nav-title"><a href="/2012/01/31/introducing-restkit/">Introducing RestKit</a></div>
+                        <div class="nav-date">January 31, 2012</div>
+                    </div><!-- .nav-inside -->
+                </div><!-- .nav-next -->
+                
+            </nav><!-- .post-navigation -->
+            
+        </main><!-- .site-main -->
+        <aside class="sidebar">
+
+    
+    <section class="widget widget-text">
+        <h2 class="widget-title">About Neo Lee</h2>
+        <p>An Internet architect, product designer, entrepreneur, startup coach, lifetime game and music lover.</p>
+    </section><!-- .widget-text -->
+    
+
+    
+
+    
+    <section class="widget widget-text">
+        <p><a href="http://soulhacker.me" target="_blank"><img src="/images/banner.jpg" alt="Optional Banner Ad" /></a></p>
+    </section><!-- .widget-text-->
+    
+
+    <section class="widget widget-recent-posts">
+        <h2 class="widget-title">Latest Posts</h2>
+        <ul class="recent-posts">
+            
+            <li class="recent-item"><a href="/2013/04/01/clojure-toolchain-reloaded/">Clojure Toolchain Reloaded</a> <span>April 1, 2013</span></li>
+            
+            <li class="recent-item"><a href="/2013/01/29/ios-7/">iOS 7</a> <span>January 29, 2013</span></li>
+            
+            <li class="recent-item"><a href="/2012/10/18/a-brief-guide-of-restful-soa/">A Brief Guide of (RESTful) SOA, Part III</a> <span>October 18, 2012</span></li>
+            
+            <li class="recent-item"><a href="/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">A Brief Guide of (RESTful) SOA, Part II</a> <span>October 17, 2012</span></li>
+            
+            <li class="recent-item"><a href="/2012/09/18/europe-summer-2012-and-500px/">Europe Summer 2012 and 500px</a> <span>September 18, 2012</span></li>
+            
+        </ul><!-- .recent-posts -->
+    </section><!-- .widget-recent-posts -->
+
+    <!--Create a sorted array of tags-->
+    
+    
+    <section class="widget widget-tags">
+        <h2 class="widget-title">Tags</h2>
+        <div class="tagcloud">
+            
+            <a href="/tags/#Apple">Apple</a>
+            
+            <a href="/tags/#Architecture">Architecture</a>
+            
+            <a href="/tags/#Gadget">Gadget</a>
+            
+            <a href="/tags/#Photograph">Photograph</a>
+            
+            <a href="/tags/#Product">Product</a>
+            
+            <a href="/tags/#Programming">Programming</a>
+            
+        </div><!-- .tagcloud -->
+    </section><!-- .widget -->
+
+</aside><!-- .sidebar -->
+    </div><!-- .inner -->
+</div><!-- .site-content -->
+
+    <footer class="site-footer">
+    <div class="inner">
+        <div class="social-links">
+            
+            <a href="https://twitter.com/soulhacker" class="fa-twitter square fill-horizontal"><span class="screen-reader-text">Twitter</span></a>
+            
+            
+            <a href="https://www.facebook.com/neo.lee.x" class="fa-facebook square fill-horizontal"><span class="screen-reader-text">Facebook</span></a>
+            
+            
+            
+            <a href="https://github.com/neolee" class="fa-github-alt square fill-horizontal"><span class="screen-reader-text">GitHub</span></a>
+            
+            
+            
+            
+            
+            <a href="http://instagram.com/soulhacker" class="fa-instagram square fill-horizontal"><span class="screen-reader-text">Instagram</span></a>
+            
+            
+            
+            <a class="fa-feed square fill-horizontal" href="/feed.xml"><span class="screen-reader-text">RSS</span></a>
+        </div><!-- .social-links -->
+        <div class="site-info">
+            &copy; <a href="/">Paradigm X</a> all rights reserved. <br />Powered by <a target="_blank" href="https://jekyllrb.com/">Jekyll</a>. BlogInn theme by <a target="_blank" href="http://justgoodthemes.com/">JustGoodThemes</a>
+            <a href="#top" id="top-link" class="fa-chevron-up top-link square fill-horizontal"><span class="screen-reader-text">Back to the top</span></a>
+        </div><!-- .site-info -->
+    </div><!-- .inner -->
+</footer><!-- .site-footer -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/plugins.js"></script>
+    <script type="text/javascript" src="/js/custom.js"></script>
+</body>
+</html>

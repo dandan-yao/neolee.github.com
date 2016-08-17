@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">    
+    <title>Introducing RestKit</title> 
+    <meta name="description" content="All those innovative, insightful, intelligent, intriguing things.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic" />
+    <link rel="stylesheet" href="/css/main.css" />
+    
+    <link href='/stylesheets/all-59a811c39081ff1a1a7a90aa4876191a.css' media='all' rel='stylesheet' type='text/css'>
+    
+    <link rel="canonical" href="http://soulhacker.me/2012/01/31/introducing-restkit/">
+    <link rel="alternate" type="application/rss+xml" title="Paradigm X Feed" href="http://soulhacker.me/feed.xml">
+</head>
+<body>
+    <nav id="top" class="site-navigation">
+        <div class="inner">
+            <button id="menu-toggle" aria-expanded="false">Menu</button>
+            <div class="nav-menu">
+                <ul class="menu">
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/">Home</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/tags/">Archives</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/about.html">About</a>
+                  </li>
+                
+                </ul>        
+            </div><!-- .nav-menu -->
+            <a class="subscribe-button fa-feed square fill-horizontal" href="/feed.xml"><span class="screen-reader-text">Subscribe</span></a>
+        </div><!-- .inner -->
+    </nav><!-- .site-navigation -->
+    <header class="site-header">
+        <div class="inner">
+            <h1 class="site-title"><a class="logo-text" href="/">Paradigm X</a></h1>
+            <p class="site-description">A vision quest of a soulhacker.</p>
+        </div><!-- .inner -->
+    </header>
+    <div class="site-content">
+    <div class="inner">
+        <main class="site-main">
+            <article class="post">
+                <header class="entry-header"> 
+                    <div class="entry-header-wrap">
+                        
+                        <h1 class="entry-title">Introducing RestKit</h1>
+                    </div><!-- .entry-header-wrap -->
+                    <div class="entry-meta">
+                        by <span class="post-author">Neo Lee</span> on <time class="published" datetime="2012-01-31">January 31, 2012</time>
+                    </div><!-- .entry-meta -->
+                </header><!-- .entry-header -->
+                <div class="entry-content">
+                    <p><a href="http://restkit.org/">RestKit</a> is an amazing <strong>Objective-C framework for iOS</strong> that aims to make interacting with RESTful web services simple, fast and fun. As said on its homepage:</p>
+
+<blockquote><p>It combines a clean, simple HTTP request/response API with a powerful object mapping system that reduces the amount of code you need to write to get stuff done.</p></blockquote>
+<!-- more -->
+<p>RestKit provides several components:</p>
+
+<ol>
+  <li><strong>An HTTP client component</strong> based on <code>NSURLConnection</code>. It’s not as feature-packed as ASIHTTPRequest<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>, but it does its part very well in most cases. It supports <code>GET</code> <code>POST</code> <code>PUT</code> <code>DELETE</code>, <code>SSL</code> &amp; <code>HTTP AUTH</code>, multi-part, etc. It even provides a request queue to manage the HTTP requests(mostly implicitly), making them more memory and bandwidth efficient.</li>
+  <li><strong>A powerful but elegant object mapping system</strong>, which uses idiomatic key-value coding mechanism to define and implement the round-trip transformation between <code>JSON</code><sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> string and native Objective-C class. Well, the magic behind it is called <a href="https://github.com/jverkoey/sockit">SOCKit</a><sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>.</li>
+  <li><strong>A persistent layer</strong> built on top of the object mapping system, fully integrated with CoreData. Can be used as app’s primary data storage or just local cache.</li>
+  <li><strong>Miscellaneous helpers</strong> for better life. Reachability, database seeding, API environments switching, etc.</li>
+</ol>
+
+<p>Other than making another almighty monster its creators focus on the remote-local object (can be transient or persistent through CoreData) mapping. They made it through the ‘<em>common things simple, others possible</em>’ philosophy, which I always love.</p>
+
+<p>RestKit has some <a href="https://github.com/RestKit/RestKit/wiki">documentations</a> but not very well organized. Maybe it’s the biggest problem for beginners. So I’d like to list below some most useful solution recipes I’ve used in real world project, updated progressively.</p>
+
+<p><strong>**<em>WARNING</em>**</strong>: it will be incredibly long anyway.</p>
+
+<h3>Setting up</h3>
+<p>RestKit provides two ways to set up the RestKit client: <code>RKClient</code> and <code>RKObjectManager</code>. If you want to manually handle the return data you should use <code>RKClient</code>. Otherwise, if you want to use the RestKit object mapping system, then <code>RKObjectManager</code> is the one.</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1">// API base (and the whole API environment) can be switched by</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="cp">#define gkBaseURL @&quot;https:</span><span class="c1">//api.domain.com/v2&quot;</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">RKObjectManager</span><span class="o">*</span> <span class="n">manager</span> <span class="o">=</span> <span class="p">[</span><span class="n">RKObjectManager</span> <span class="nl">objectManagerWithBaseURL</span><span class="p">:</span><span class="n">gkBaseURL</span><span class="p">];</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;I am your RKObjectManager singleton : %@&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">);</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1">// Or you can use</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">RKClient</span> <span class="o">*</span><span class="n">client</span> <span class="o">=</span> <span class="p">[</span><span class="n">RKClient</span> <span class="nl">clientWithBaseURL</span><span class="p">:</span><span class="n">gkBaseURL</span><span class="p">];</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;I am your RKClient singleton : %@&quot;</span><span class="p">,</span> <span class="n">client</span><span class="p">);</span></div></div></pre></div></figure>
+<p>RestKit uses a convenient convention: the first initialized client object becomes a singleton and can be referenced by <code>[RKClient sharedClient]</code> or <code>[RKObjectManager sharedManager]</code> correspondingly.</p>
+
+<p>In real world we usually have more than one base URLs, say, one for product environment, the second for testing and third for developing. The base URL can be easily changed globally:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[[</span><span class="n">RKClient</span> <span class="n">sharedClient</span><span class="p">]</span> <span class="nl">setBaseURL</span><span class="p">:</span><span class="s">@&quot;https://api.domain.com/v2d&quot;</span><span class="p">];</span></div></div></pre></div></figure>
+<p>Note that change base URL while app is running may bring some side effects. See <a href="http://restkit.org/api/0.9/Classes/RKClient.html#//api/name/baseURL">the API document</a> for detail.</p>
+
+<p><code>RKClient</code> acts just like a plain asynchronous HTTP client. You can send any HTTP request through its intuitive interface:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@interface</span> <span class="nc">User</span> : <span class="bp">NSObject</span> <span class="o">&lt;</span><span class="n">RKRequestDelegate</span><span class="o">&gt;</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@implementation</span> <span class="nc">User</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">send</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="c1">// HTTP GET</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span> <span class="p">[</span><span class="n">RKClient</span> <span class="n">sharedClient</span><span class="p">]</span> <span class="nl">get</span><span class="p">:</span><span class="s">@&quot;users/self&quot;</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">];</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="c1">// HTTP POST. Note the transparent NSDictionary conversion</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="bp">NSDictionary</span><span class="o">*</span> <span class="n">params</span> <span class="o">=</span> 
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="p">[</span><span class="bp">NSDictionary</span> <span class="nl">dictionaryWithObjectsAndKeys</span><span class="p">:</span><span class="n">_userName</span><span class="p">,</span> <span class="s">@&quot;userName&quot;</span><span class="p">,</span> 
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">                                                   <span class="n">_password</span><span class="p">,</span> <span class="s">@&quot;password&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span> <span class="p">[</span><span class="n">RKClient</span> <span class="n">sharedClient</span><span class="p">]</span> <span class="nl">post</span><span class="p">:</span><span class="s">@&quot;users/login&quot;</span> <span class="nl">params</span><span class="p">:</span><span class="n">params</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">];</span>
+</div></div><div data-line="15" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="c1">// HTTP DELETE</span>
+</div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span> <span class="p">[</span><span class="n">RKClient</span> <span class="n">sharedClient</span><span class="p">]</span> <span class="nl">delete</span><span class="p">:</span><span class="s">@&quot;users/13&quot;</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">];</span>
+</div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span>
+</div></div><div data-line="19" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="20" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1">// The delegate handles the response data when its fully loaded</span>
+</div></div><div data-line="21" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">request:</span><span class="p">(</span><span class="n">RKRequest</span><span class="o">*</span><span class="p">)</span><span class="nv">request</span> <span class="nf">didLoadResponse:</span><span class="p">(</span><span class="n">RKResponse</span><span class="o">*</span><span class="p">)</span><span class="nv">response</span> <span class="p">&#x7b;</span>  
+</div></div><div data-line="22" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">if</span> <span class="p">([</span><span class="n">request</span> <span class="n">isGET</span><span class="p">])</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="23" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">if</span> <span class="p">([</span><span class="n">response</span> <span class="n">isOK</span><span class="p">])</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="24" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Data returned: %@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">response</span> <span class="n">bodyAsString</span><span class="p">]);</span>
+</div></div><div data-line="25" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="p">&#x7d;</span>
+</div></div><div data-line="26" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span> <span class="k">else</span> <span class="k">if</span> <span class="p">([</span><span class="n">request</span> <span class="n">isPOST</span><span class="p">])</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="27" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">if</span> <span class="p">([</span><span class="n">response</span> <span class="n">isJSON</span><span class="p">])</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="28" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;POST returned a JSON response&quot;</span><span class="p">);</span>
+</div></div><div data-line="29" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="p">&#x7d;</span>
+</div></div><div data-line="30" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span> <span class="k">else</span> <span class="k">if</span> <span class="p">([</span><span class="n">request</span> <span class="n">isDELETE</span><span class="p">])</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="31" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">if</span> <span class="p">([</span><span class="n">response</span> <span class="n">isNotFound</span><span class="p">])</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="32" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Resource &#39;%@&#39; not exists&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">request</span> <span class="n">resourcePath</span><span class="p">]);</span>
+</div></div><div data-line="33" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="p">&#x7d;</span>
+</div></div><div data-line="34" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span>
+</div></div><div data-line="35" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span></div></div></pre></div></figure>
+<p>By using <code>RKObjectManager</code> you’ll map the web resources to local Objective-C objects, so you need not (and cannot) handle the return data explicitly. Instead you should handle data through the mapping system, which will be discussed below.</p>
+
+<h3>Modeling and Mapping</h3>
+<p>Now the object mapping system. Let’s start with the best practice in RESTful API backed mobile app development:</p>
+<blockquote><ol>
+  <li>Analyze the business and make abstraction.</li>
+  <li>Design the RESTful API spec based on the first step, including all call endpoints, parameters and returning data in JSON format.</li>
+  <li>Mapping the API spec to native code in designated mobile platform.</li>
+</ol></blockquote>
+<p>Assuming we have a simple API named <code>users/login</code>, accepting POST request with 2 parameters: <code>username</code> and <code>password</code>, doing login check, and returning a encrypted access <code>token</code> and corresponding <code>user</code> object. And as a global convention we encapsulate the payload as <code>response</code> section in a JSON string which also contains a <code>meta</code> section for system level info such as status code and error message. So here it looks like:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7b;</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s2">&quot;meta&quot;</span><span class="o">:</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="s2">&quot;code&quot;</span><span class="o">:</span> <span class="mi">200</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;,</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s2">&quot;response&quot;</span><span class="o">:</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="s2">&quot;token&quot;</span><span class="o">:</span> <span class="s2">&quot;931240153764834717 156605143238420655&quot;</span><span class="p">,</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="s2">&quot;user_name&quot;</span><span class="o">:</span> <span class="s2">&quot;soulhacker&quot;</span><span class="p">,</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="s2">&quot;...&quot;</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="p">&#x7d;</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span></div></div></pre></div></figure>
+<p>It’s simple but not trivial, and very <em>representative</em>. What will the mapping work? Have a look at the code first:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="cp">#pragma Mark - Class Meta</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@interface</span> <span class="nc">Meta</span> : <span class="bp">NSObject</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@property</span> <span class="p">(</span><span class="k">readonly</span><span class="p">)</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">code</span><span class="p">;</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@end</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@implementation</span> <span class="nc">Meta</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@synthesize</span> <span class="n">code</span> <span class="o">=</span> <span class="n">_code</span><span class="p">;</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@end</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="cp">#pragma Mark - Class User</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@interface</span> <span class="nc">User</span> : <span class="bp">NSObject</span>
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@property</span> <span class="p">(</span><span class="k">readonly</span><span class="p">)</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">userName</span><span class="p">;</span>
+</div></div><div data-line="15" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1">// Many stuff omitted here</span>
+</div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@end</span>
+</div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@implementation</span> <span class="nc">User</span>
+</div></div><div data-line="19" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@synthesize</span> <span class="n">userName</span> <span class="o">=</span> <span class="n">_userName</span><span class="p">;</span>
+</div></div><div data-line="20" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1">// Many stuff omitted here</span>
+</div></div><div data-line="21" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@end</span>
+</div></div><div data-line="22" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="23" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="cp">#pragma Mark - Class UsersLogin</span>
+</div></div><div data-line="24" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="25" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@interface</span> <span class="nc">UsersLogin</span> : <span class="bp">NSObject</span>
+</div></div><div data-line="26" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@property</span> <span class="p">(</span><span class="k">readonly</span><span class="p">)</span> <span class="n">Meta</span> <span class="o">*</span><span class="n">meta</span><span class="p">;</span>
+</div></div><div data-line="27" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@property</span> <span class="p">(</span><span class="k">readonly</span><span class="p">)</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">token</span><span class="p">;</span>
+</div></div><div data-line="28" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@property</span> <span class="p">(</span><span class="k">readonly</span><span class="p">)</span> <span class="n">User</span> <span class="o">*</span><span class="n">user</span><span class="p">;</span>
+</div></div><div data-line="29" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@end</span>
+</div></div><div data-line="30" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="31" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@implementation</span> <span class="nc">UsersLogin</span>
+</div></div><div data-line="32" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@synthesize</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">_meta</span><span class="p">;</span>
+</div></div><div data-line="33" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@synthesize</span> <span class="n">token</span> <span class="o">=</span> <span class="n">_token</span><span class="p">;</span>
+</div></div><div data-line="34" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@synthesize</span> <span class="n">user</span> <span class="o">=</span> <span class="n">_user</span><span class="p">;</span>
+</div></div><div data-line="35" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@end</span>
+</div></div><div data-line="36" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="37" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="cp">#pragma Mark - Class UsersLoginRequest</span>
+</div></div><div data-line="38" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="39" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@interface</span> <span class="nc">UsersLoginRequest</span> : <span class="bp">NSObject</span> <span class="o">&lt;</span><span class="n">RKObjectLoaderDelegate</span><span class="o">&gt;</span> 
+</div></div><div data-line="40" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">retain</span><span class="p">)</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">userName</span><span class="p">;</span>
+</div></div><div data-line="41" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">retain</span><span class="p">)</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">password</span><span class="p">;</span>
+</div></div><div data-line="42" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="43" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="n">UsersLoginRequest</span> <span class="o">*</span><span class="p">)</span><span class="nf">initWithUserName:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">userName</span> <span class="nf">password:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">password</span><span class="p">;</span>
+</div></div><div data-line="44" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">login</span><span class="p">;</span>
+</div></div><div data-line="45" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@end</span>
+</div></div><div data-line="46" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="47" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">@implementation</span> <span class="nc">UsersLoginRequest</span>
+</div></div><div data-line="48" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1">// Even more stuff omitted here</span>
+</div></div><div data-line="49" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="50" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">login</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="51" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="n">RKObjectMapping</span> <span class="o">*</span><span class="n">metaMapping</span> <span class="o">=</span> <span class="p">[</span><span class="n">RKObjectMapping</span> <span class="nl">mappingForClass</span><span class="p">:[</span><span class="n">Meta</span> <span class="k">class</span><span class="p">]];</span>
+</div></div><div data-line="52" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">metaMapping</span> <span class="nl">mapAttributes</span><span class="p">:</span><span class="s">@&quot;code&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</div></div><div data-line="53" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="54" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="n">RKObjectMapping</span> <span class="o">*</span><span class="n">userMapping</span> <span class="o">=</span> <span class="p">[</span><span class="n">RKObjectMapping</span> <span class="nl">mappingForClass</span><span class="p">:[</span><span class="n">User</span> <span class="k">class</span><span class="p">]];</span>
+</div></div><div data-line="55" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">userMapping</span> <span class="nl">mapKeyPath</span><span class="p">:</span><span class="s">@&quot;user_name&quot;</span> <span class="nl">toAttribute</span><span class="p">:</span><span class="s">@&quot;userName&quot;</span><span class="p">];</span>
+</div></div><div data-line="56" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="c1">// More mapping for userMapping</span>
+</div></div><div data-line="57" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="58" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="n">RKObjectMapping</span> <span class="o">*</span><span class="n">mapping</span> <span class="o">=</span> <span class="p">[</span><span class="n">RKObjectMapping</span> <span class="nl">mappingForClass</span><span class="p">:[</span><span class="n">UsersLogin</span> <span class="k">class</span><span class="p">]];</span>
+</div></div><div data-line="59" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">mapping</span> <span class="nl">mapKeyPath</span><span class="p">:</span><span class="s">@&quot;response.token&quot;</span> <span class="nl">toAttribute</span><span class="p">:</span><span class="s">@&quot;token&quot;</span><span class="p">];</span>
+</div></div><div data-line="60" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">mapping</span> <span class="nl">mapKeyPath</span><span class="p">:</span><span class="s">@&quot;meta&quot;</span> <span class="nl">toRelationship</span><span class="p">:</span><span class="s">@&quot;meta&quot;</span> <span class="nl">withMapping</span><span class="p">:</span><span class="n">metaMapping</span><span class="p">];</span>
+</div></div><div data-line="61" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">mapping</span> <span class="nl">mapKeyPath</span><span class="p">:</span><span class="s">@&quot;user&quot;</span> <span class="nl">toRelationship</span><span class="p">:</span><span class="s">@&quot;user&quot;</span> <span class="nl">withMapping</span><span class="p">:</span><span class="n">userMapping</span><span class="p">];</span>
+</div></div><div data-line="62" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="63" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="c1">// Make the call</span>
+</div></div><div data-line="64" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="bp">NSDictionary</span><span class="o">*</span> <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSDictionary</span> <span class="nl">dictionaryWithObjectsAndKeys</span><span class="p">:</span><span class="n">_userName</span><span class="p">,</span> <span class="s">@&quot;userName&quot;</span><span class="p">,</span> <span class="n">_password</span><span class="p">,</span> <span class="s">@&quot;password&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</div></div><div data-line="65" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="bp">NSString</span> <span class="o">*</span><span class="n">endpoint</span> <span class="o">=</span> <span class="s">@&quot;users/login?&quot;</span><span class="p">;</span>
+</div></div><div data-line="66" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="bp">NSString</span> <span class="o">*</span><span class="n">resourcePath</span> <span class="o">=</span> <span class="p">[</span><span class="n">endpoint</span> <span class="nl">stringByAppendingString</span><span class="p">:[</span><span class="n">params</span> <span class="n">queryString</span><span class="p">]];</span>
+</div></div><div data-line="67" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[[</span><span class="n">RKObjectManager</span> <span class="n">sharedManager</span><span class="p">]</span> <span class="nl">loadObjectsAtResourcePath</span><span class="p">:</span><span class="n">resourcePath</span> <span class="nl">objectMapping</span><span class="p">:</span><span class="n">mapping</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">];</span>
+</div></div><div data-line="68" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span>
+</div></div><div data-line="69" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="70" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="cp">#pragma Mark - RKObjectLoaderDelegate</span>
+</div></div><div data-line="71" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="72" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">objectLoader:</span><span class="p">(</span><span class="n">RKObjectLoader</span> <span class="o">*</span><span class="p">)</span><span class="nv">objectLoader</span> <span class="nf">didLoadObjects:</span><span class="p">(</span><span class="bp">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="nv">objects</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="73" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="n">UsersLogin</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">objects</span> <span class="nl">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+</div></div><div data-line="74" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="75" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Response code=%@, token=[%@], userName=[%@]&quot;</span><span class="p">,</span> <span class="p">[[</span><span class="n">result</span> <span class="n">meta</span><span class="p">]</span> <span class="n">code</span><span class="p">],</span> <span class="p">[</span><span class="n">result</span> <span class="n">token</span><span class="p">],</span> <span class="p">[[</span><span class="n">result</span> <span class="n">user</span><span class="p">]</span> <span class="n">userName</span><span class="p">]);</span>
+</div></div><div data-line="76" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span>
+</div></div><div data-line="77" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="78" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">objectLoader:</span><span class="p">(</span><span class="n">RKObjectLoader</span> <span class="o">*</span><span class="p">)</span><span class="nv">objectLoader</span> <span class="nf">didFailWithError:</span><span class="p">(</span><span class="bp">NSError</span> <span class="o">*</span><span class="p">)</span><span class="nv">error</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="79" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Error!&quot;</span><span class="p">);</span>
+</div></div><div data-line="80" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span></div></div></pre></div></figure>
+<p><strong>Line 1-35</strong>. Firstly we defined all needed model classes: fundamental ones first, ones that contain them next. Just follow the nature of the data structure within the API’s response data.<br />
+<strong>Line 51-56</strong>. Use instances of <code>RKObjectMapping</code> class to define object mappings. Simple mappings are self explained. Note that <code>RKObjectMapping</code> provides several different <code>mapXXX</code> methods to suit different use cases. The key path in mapping definition fully follows Cocoa’s key path style (also support <a href="http://developer.apple.com/library/ios/#documentation/cocoa/conceptual/KeyValueCoding/Articles/CollectionOperators.html">collection operators</a>). Check <a href="http://restkit.org/api/master/Classes/RKObjectManager.html">its document</a> and Apple’s <a href="http://developer.apple.com/library/ios/#documentation/cocoa/conceptual/KeyValueCoding/Articles/KeyValueCoding.html">Key Value Coding Guide</a> for detail.<br />
+<strong>Line 58-61</strong>. Complex object mappings are defined by <code>mapKeyPath:toRelationship:withMapping:</code> or similar methods. They map some key path to pre-defined object mappings. As seen in the code, the mapping to class <code>UsersLogin</code> contains simple mapping (<em>line 59</em>) and relationship mappings (<em>line 60-61</em>).<br />
+<strong>Line 64-67</strong>. <code>RKObjectManager</code> provides <code>loadObjectsAtResourcePath:objectMapping:delegate:</code> method to do these steps in order: combine resource path with the global <code>BaseURL</code> (configured within the <code>RKObjectManager</code> singleton), load resource from web services, parse return data, transform to local objects according to pre-defined <code>RKObjectMapping</code> instance, at last call the delegate to handle result.<br />
+<strong>Line 72-80</strong>. Delegate methods <code>didLoadObjects</code> and <code>didFailWithError</code> (<em>required</em>) are called after the object mapping process. Normally fetch the result object and do whatever you want.</p>
+
+<h3>Routing</h3>
+<p>The previous code list is neat except one part. Note <strong>line 64-66</strong>, in which we hard-code the API endpoint and parameters. In our <code>login</code> scenario it may not be a big problem, but for highly reused objects, repeatedly constructing <code>GET</code> <code>POST</code> <code>PUT</code> <code>DELETE</code> URLs by hand could be real pain in the ass. How about more object-oriented and more elegant way, just like the <a href="http://guides.rubyonrails.org/routing.html">routing system in Ruby on Rails</a>?</p>
+
+<p>RestKit is most suitable for developers who has RoR background because of its <strong>Routing</strong> system which is highly alike to RoR’s, but built on Cocoa’s idiomatic key-value coding way. Here is the code sample:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1">// The router belongs to the object manager, just as mappers</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">RKObjectRouter</span> <span class="o">*</span><span class="n">router</span> <span class="o">=</span> <span class="p">[[</span><span class="n">RKObjectManager</span> <span class="n">sharedManager</span><span class="p">]</span> <span class="n">router</span><span class="p">];</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[</span><span class="n">router</span> <span class="nl">routeClass</span><span class="p">:[</span><span class="n">User</span> <span class="k">class</span><span class="p">]</span> <span class="nl">toResourcePath</span><span class="p">:</span><span class="s">@&quot;/users/:id&quot;</span><span class="p">];</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[</span><span class="n">router</span> <span class="nl">routeClass</span><span class="p">:[</span><span class="n">User</span> <span class="k">class</span><span class="p">]</span> <span class="nl">toResourcePath</span><span class="p">:</span><span class="s">@&quot;/users&quot;</span> <span class="nl">forMethod</span><span class="p">:</span><span class="n">RKRequestMethodPOST</span><span class="p">];</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1">// Then we can call the GET POST PUT DELETE verbs directly from object manager</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">User</span> <span class="o">*</span><span class="n">me</span> <span class="o">=</span> <span class="p">[[</span><span class="n">User</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">me</span><span class="p">.</span><span class="n">userName</span> <span class="o">=</span> <span class="s">@&quot;soulhacker&quot;</span><span class="p">;</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[[</span><span class="n">RKObjectManager</span> <span class="n">sharedManager</span><span class="p">]</span> <span class="nl">postObject</span><span class="p">:</span><span class="n">me</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">];</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">User</span> <span class="o">*</span><span class="n">sb2nuke</span> <span class="o">=</span> <span class="p">[[</span><span class="n">User</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">sb2nuke</span><span class="p">.</span><span class="kt">id</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSNumber</span> <span class="nl">numberWithInt</span><span class="p">:</span><span class="mi">13</span><span class="p">];</span>
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[[</span><span class="n">RKObjectManager</span> <span class="n">sharedManager</span><span class="p">]</span> <span class="nl">deleteObject</span><span class="p">:</span><span class="n">sb2nuke</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">];</span></div></div></pre></div></figure>
+<p><strong>Line 4</strong> set the <em>default</em> route of <code>User</code> class, which means when you call object manager’s <code>getObject</code> <code>postObject</code> <code>putObject</code> <code>deleteObject</code> methods the requests will go to <code>@"/users/:id"</code>. This is a colon coded endpoint and what is after the colon is the name of a <em>method</em> in the route class, whose return value will replace the colon part.<br />
+<strong>Line 5</strong> set a special route for <code>postObject</code> method, which will override the setting in default route.<br />
+<strong>Line 10</strong> requests <code>@"/users"</code> with HTTP <code>POST</code> method and RestKit will transform <code>me</code> object into post data form as the way defined in object mapper of class User.<br />
+<strong>Line 14</strong> first call <code>[sb2nuke id]</code> method to get the value and replace <code>:id</code> with it, then requests <code>@"/users/13"</code> with HTTP <code>DELETE</code> method, which (should) remove the user object with id 13 from the server.</p>
+
+<p>So you see, RestKit provides very flexible tools for RESTful web services integration: you can use the network layer and do all data mapping by hand, or you can use the object mapping to do it completely within local object system, or you can tuning it in some intermediate way. No matter which solution you choose remember to align the protocol between the server and client side, and don’t forget to verify them to the Android platform if necessary (there is no RestKit over there for now -_-).</p>
+
+<p>Thus we’ve completed the first part of this introduction guide. Below we will discuss some facilities bundled in RestKit to make our life better.</p>
+
+<h3>The Request Queue</h3>
+<p>Request queue is the most important support player under the hood. <code>RKRequestQueue</code> is behind nearly all network access within RestKit and provides elegant solution for critical memory and bandwidth problems. <code>RKRequestQueue</code> wraps memory management within RestKit framework so you’ll never see any <code>retain</code> <code>release</code> <code>autorelease</code> for <code>RKRequest</code> <code>RKResponse</code> instances. It let us developers focus on the business with very little concern about the memory management.</p>
+
+<p><code>RKRequestQueue</code> also provides seamless integration with Reachability API (in iOS System Configuration framework), pooling all requests when network is unavailable, and limiting concurrent requests when network becomes reachable to prevent overburden as well.</p>
+
+<p>All the amazing features described above are working without knowing, and maybe the only visible part of <code>RKRequestQueue</code> is its <em>request lifecycle management</em> feature, by which you can cancel ongoing requests to prevent wasting the bandwidth. This is a common situation in mobile apps that when some user action generates a bunch of network requests and the following action actually makes those requests useless (e.g. the view for previous action is dismissed by the later action). By using <code>RKRequestQueue</code> we can do it very easily by its <code>cancelRequest:</code> <code>cancelRequestsWithDelegate:</code> and  cancelAllRequests:` methods. And remember that whether and when to call them is fully determined by developers so you can choose the strategy wisely according to the different scenarios. Here is the simplest sample:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillAppear:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nv">animated</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">RKClient</span> <span class="n">sharedClient</span><span class="p">]</span> <span class="nl">get</span><span class="p">:</span><span class="s">@&quot;users/self&quot;</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">];</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillDisappear:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nv">animated</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[[</span><span class="n">RKRequestQueue</span> <span class="n">sharedQueue</span><span class="p">]</span> <span class="nl">cancelRequestsWithDelegate</span><span class="p">:</span><span class="nb">self</span><span class="p">];</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span></div></div></pre></div></figure>
+<p>The <code>cancelRequestsWithDelegate:</code> method cancel all requests that current controller is delegate for. If there are no one processing it’ll do nothing.</p>
+
+<p>The last but not least. What <code>[RKRequestQueue sharedQueue]</code> returns is the default queue which created automatically when the RestKit client initialized. In most real world apps it’s not enough. For example we may need a queue to handle special resource intensive tasks in a background thread, such as data uploading/downloading, while the default queue keep working for  responding user actions. It’s easy:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">RKRequestQueue</span><span class="o">*</span> <span class="n">queue</span> <span class="o">=</span> <span class="p">[[</span><span class="n">RKRequestQueue</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">queue</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">queue</span><span class="p">.</span><span class="n">concurrentRequestsLimit</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">queue</span><span class="p">.</span><span class="n">showsNetworkActivityIndicatorWhenBusy</span> <span class="o">=</span> <span class="nb">YES</span><span class="p">;</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1">// Add some requests to it and make it start</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[</span><span class="n">queue</span> <span class="nl">addRequest</span><span class="p">:[</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">RKClient</span> <span class="n">sharedClient</span><span class="p">]</span> <span class="nl">requestWithResourcePath</span><span class="p">:</span><span class="s">@&quot;users/1&quot;</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">]];</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[</span><span class="n">queue</span> <span class="nl">addRequest</span><span class="p">:[</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">RKClient</span> <span class="n">sharedClient</span><span class="p">]</span> <span class="nl">requestWithResourcePath</span><span class="p">:</span><span class="s">@&quot;users/2&quot;</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">]];</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[</span><span class="n">queue</span> <span class="nl">addRequest</span><span class="p">:[</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">RKClient</span> <span class="n">sharedClient</span><span class="p">]</span> <span class="nl">requestWithResourcePath</span><span class="p">:</span><span class="s">@&quot;users/3&quot;</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">]];</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[</span><span class="n">queue</span> <span class="n">start</span><span class="p">];</span></div></div></pre></div></figure>
+
+<h3>Reachability</h3>
+<p>Reachability is the problem all mobile apps have to face and of course iOS provides solution for that, well, sort of. The problem is: <code>SCNetworkReachability</code> (in <code>SystemConfiguration</code> framework) is implemented as low level C APIs and not so easy to use. Fortunately RestKit is bundled with a very straight-forward Objective-C wrapper for that, the <code>RKReachabilityObserver</code>.</p>
+
+<p>When RKClient (or RKObjectManager) is initialized with some base URL, RestKit automatically initializes an instance of RKReachabilityObserver targeted at the host specified in the base URL and can be accessed via <code>baseURLReachabilityObserver</code> property. This observer also automatically registers <code>RKReachabilityStateChangedNotification</code> events in the default notification center. So in most cases we can use it in very simple way:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">if</span> <span class="p">((</span><span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">]))</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="p">[[</span><span class="bp">NSNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span> <span class="nl">addObserver</span><span class="p">:</span><span class="nb">self</span> 
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="nl">selector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">reachabilityChanged</span><span class="p">:)</span> 
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="nl">name</span><span class="p">:</span><span class="n">RKReachabilityStateChangedNotification</span> 
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="nl">object</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">reachabilityChanged:</span><span class="p">(</span><span class="bp">NSNotification</span><span class="o">*</span><span class="p">)</span><span class="nv">notification</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="n">RKReachabilityObserver</span> <span class="o">*</span><span class="n">observer</span> <span class="o">=</span> <span class="p">(</span><span class="n">RKReachabilityObserver</span> <span class="o">*</span><span class="p">)[</span><span class="n">notification</span> <span class="n">object</span><span class="p">];</span>
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="15" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">if</span> <span class="p">([</span><span class="n">observer</span> <span class="n">isNetworkAvailable</span><span class="p">])</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;We&#39;re online!&quot;</span><span class="p">);</span>
+</div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">if</span> <span class="p">(</span><span class="n">RKReachabilityReachableViaWiFi</span> <span class="o">==</span> <span class="p">[</span><span class="n">observer</span> <span class="n">networkStatus</span><span class="p">])</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="19" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;…via WiFi.&quot;</span><span class="p">);</span>
+</div></div><div data-line="20" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="p">&#x7d;</span> 
+</div></div><div data-line="21" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">RKReachabilityReachableViaWWAN</span> <span class="o">==</span> <span class="p">[</span><span class="n">observer</span> <span class="n">networkStatus</span><span class="p">])</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="22" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;…via mobile network.&quot;</span><span class="p">);</span>
+</div></div><div data-line="23" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="p">&#x7d;</span>
+</div></div><div data-line="24" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span>
+</div></div><div data-line="25" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">else</span> <span class="k">if</span> <span class="p">([</span><span class="n">observer</span> <span class="n">isConnectionRequired</span><span class="p">])</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="26" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Mobile network may be available if we open a connection...&quot;</span><span class="p">);</span>
+</div></div><div data-line="27" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span> 
+</div></div><div data-line="28" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">else</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="29" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;We&#39;re offline!&quot;</span><span class="p">);</span>
+</div></div><div data-line="30" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span>
+</div></div><div data-line="31" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span></div></div></pre></div></figure>
+
+<h3>Sending Multi-part Data</h3>
+<p>Sending multi-part data through HTTP requests is very common requirement and incredibly difficult in most programming languages. RestKit uses <code>RKParams</code> and <code>RKParamsAttachment</code> to handle that problem. <code>RKParams</code> is the container that can hold any kinds of parameters. For simple data type it works just like a NSDictionary, and for multi-part data it can wrap <code>NSData</code> and/or <code>RKParamsAttachment</code> objects. Both <code>RKParams</code> and <code>RKParamsAttachment</code> are MIME type friendly. The following self-explained code sample shows all:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="bp">NSString</span><span class="o">*</span> <span class="n">filePath</span> <span class="o">=</span> <span class="s">@&quot;/path/to/avatar.jpg&quot;</span><span class="p">;</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">RKParams</span><span class="o">*</span> <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">RKParams</span> <span class="n">params</span><span class="p">];</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[</span><span class="n">params</span> <span class="nl">setValue</span><span class="p">:</span><span class="s">@&quot;Neo&quot;</span> <span class="nl">forParam</span><span class="p">:</span><span class="s">@&quot;name&quot;</span><span class="p">];</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[</span><span class="n">params</span> <span class="nl">setValue</span><span class="p">:</span><span class="s">@&quot;soulhacker@matrix.net&quot;</span> <span class="nl">forParam</span><span class="p">:</span><span class="s">@&quot;email&quot;</span><span class="p">];</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">RKParamsAttachment</span><span class="o">*</span> <span class="n">attachment</span> <span class="o">=</span> <span class="p">[</span><span class="n">params</span> <span class="nl">setFile</span><span class="p">:</span><span class="n">filePath</span> <span class="nl">forParam</span><span class="p">:</span><span class="s">@&quot;avatar&quot;</span><span class="p">];</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">attachment</span><span class="p">.</span><span class="n">MIMEType</span> <span class="o">=</span> <span class="s">@&quot;image/jpeg&quot;</span><span class="p">;</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">attachment</span><span class="p">.</span><span class="n">fileName</span> <span class="o">=</span> <span class="s">@&quot;avatar.jpg&quot;</span><span class="p">;</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="bp">UIImage</span><span class="o">*</span> <span class="n">image</span> <span class="o">=</span> <span class="p">[</span><span class="bp">UIImage</span> <span class="nl">imageNamed</span><span class="p">:</span><span class="s">@&quot;wallpaper.png&quot;</span><span class="p">];</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="bp">NSData</span><span class="o">*</span> <span class="n">imageData</span> <span class="o">=</span> <span class="n">UIImagePNGRepresentation</span><span class="p">(</span><span class="n">image</span><span class="p">);</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[</span><span class="n">params</span> <span class="nl">setData</span><span class="p">:</span><span class="n">imageData</span> <span class="nl">MIMEType</span><span class="p">:</span><span class="s">@&quot;image/png&quot;</span> <span class="nl">forParam</span><span class="p">:</span><span class="s">@&quot;wallpaper&quot;</span><span class="p">];</span>
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="15" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;ContentType = %@, ContentLength = %@&quot;</span><span class="p">,</span> 
+</div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">params</span> <span class="n">HTTPHeaderValueForContentType</span><span class="p">],</span>
+</div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">[</span><span class="n">params</span> <span class="n">HTTPHeaderValueForContentLength</span><span class="p">]);</span>
+</div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="19" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1">// Send a Request!</span>
+</div></div><div data-line="20" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">[[</span><span class="n">RKClient</span> <span class="n">sharedClient</span><span class="p">]</span> <span class="nl">post</span><span class="p">:</span><span class="s">@&quot;/upload&quot;</span> <span class="nl">params</span><span class="p">:</span><span class="n">params</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">];</span></div></div></pre></div></figure>
+
+<h3>Background Upload/Download</h3>
+<p>iOS supported multi-tasking since 4.0 but it’s a highly restricted support and there are so many misconceptions among the users and even developers. I would strongly suggest Fraser Speirs’ <a href="http://speirs.org/blog/2012/1/2/misconceptions-about-ios-multitasking.html">excellent blog</a> which explains all about iOS multi-tasking.</p>
+
+<p>RestKit can seamlessly facilitate multi-tasking to prevent important long-time requests being interrupted by user switching out of the app. The key is the <code>backgroundPolicy</code> property of <code>RKRequest</code> which can be one of 4 enum values:</p>
+
+<ul>
+  <li><code>RKRequestBackgroundPolicyNone</code>: the default value, do nothing for backgrounding;</li>
+  <li><code>RKRequestBackgroundPolicyCancel</code>: cancel the request when app switches to background;</li>
+  <li><code>RKRequestBackgroundPolicyContinue</code>: continue the request in background;</li>
+  <li><code>RKRequestBackgroundPolicyRequeue</code>: place the request back to the queue for next activation.</li>
+</ul>
+
+<p>So to make a request continue to work in background, just set its <code>backgroundPolicy</code> property as below:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">RKRequest</span><span class="o">*</span> <span class="n">request</span> <span class="o">=</span> <span class="p">[[</span><span class="n">RKClient</span> <span class="n">sharedClient</span><span class="p">]</span> <span class="nl">post</span><span class="p">:</span><span class="s">@&quot;/upload&quot;</span> <span class="nl">delegate</span><span class="p">:</span><span class="nb">self</span><span class="p">];</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">request</span><span class="p">.</span><span class="n">backgroundPolicy</span> <span class="o">=</span> <span class="n">RKRequestBackgroundPolicyContinue</span><span class="p">;</span></div></div></pre></div></figure>
+
+<h3>Conclusion</h3>
+<p>RestKit is a clean and elegant solution for iOS app to interact with RESTful web services. It encapsulates many everyday work into a tiny yet powerful framework and extremely easy to use. Suggest every iOS developers to give it a try.</p>
+
+<h3>References</h3>
+<ul>
+  <li><a href="http://restkit.org/api/master/">RestKit References (master branch)</a></li>
+  <li><a href="https://github.com/RestKit/RestKit/wiki/Tutorial-%3A-Introduction-to-RestKit">Tutorial: Introduction to RestKit</a></li>
+  <li><a href="http://mobile.tutsplus.com/tutorials/iphone/advanced-restkit-development_iphone-sdk/">Advanced RestKit Development</a></li>
+  <li><a href="https://github.com/RestKit/RestKit/wiki/Solution-Recipes">RestKit Solution Recipes</a></li>
+</ul>
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>In fact ASIHTTPRequest has been <a href="http://allseeing-i.com/%5Brequest_release%5D">abandoned</a> since September 2011, and RestKit is one of replacements its author suggested. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>The JSON parsing layer is pluggable, default to <a href="https://github.com/johnezang/JSONKit">JSONKit</a>. And I haven’t mentioned the <em>old</em> XML, have I? <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>Created by <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#106;&#118;&#101;&#114;&#107;&#111;&#101;&#121;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;">Jeff Verkoeyen</a>, the author of <a href="https://github.com/jverkoey/nimbus">Nimbus</a>, the highly improved successor of Facebook’s Three20. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+                </div><!-- .entry-content -->
+                <footer class="entry-footer">
+                    <div class="share-post">
+                        <span>Share</span>
+                        <a class="fa-twitter" target="_blank" href="https://twitter.com/intent/tweet?text=Introducing%20RestKit&amp;url=http://soulhacker.me/2012/01/31/introducing-restkit/"><span class="screen-reader-text">Twitter</span></a>
+                        <a class="fa-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://soulhacker.me/2012/01/31/introducing-restkit/&amp;t=Introducing%20RestKit"><span class="screen-reader-text">Facebook</span></a>
+                        <a class="fa-google-plus" target="_blank" href="http://plus.google.com/share?url=http://soulhacker.me/2012/01/31/introducing-restkit/"><span class="screen-reader-text">Google+</span></a>
+                    </div><!-- .share-post -->
+                    
+                    <div class="tag-links">
+                        Tags: <a href="/tags/index.html#Architecture" title="Pages tagged Architecture" rel="tag">Architecture</a>
+                    </div>
+                    
+                </footer><!-- .entry-footer -->
+            </article><!-- .post -->
+            <div class="author-box">
+                <div class="author-info">
+                    <div class="author-avatar" style="background-image: url(/images/author-image.jpg)"><span class="screen-reader-text">Neo Lee's Picture</span></div>
+                    <div class="author-details">
+                        <h2 class="author-title">About Neo Lee</h2>
+                        <p class="author-bio">An Internet architect, product designer, entrepreneur, startup coach, lifetime game and music lover.</p>
+                        <span class="author-location"><i class="fa-map-marker" aria-hidden="true"></i> Shanghai, China</span>
+                        <span class="author-website"><i class="fa-chain" aria-hidden="true"></i> <a href="http://soulhacker.me" target="_blank"> http://soulhacker.me</a></span>
+                    </div><!-- .author-details -->
+                </div><!-- .author-info -->
+            </div><!-- .author-box -->
+            <nav class="post-navigation">
+                <h2 class="screen-reader-text">Post navigation</h2>
+                
+                <div class="nav-previous">
+                    <div class="nav-inside">
+                        
+                        <div class="nav-before">Previous</div>
+                        <div class="nav-title"><a href="/2011/12/24/back-end-is-hard/">Back-end is Hard</a></div>
+                        <div class="nav-date">December 24, 2011</div>
+                    </div><!-- .nav-inside -->
+                </div><!-- .nav-previous -->
+                
+                
+                <div class="nav-next">
+                    <div class="nav-inside">
+                        
+                        <div class="nav-before">Next</div>
+                        <div class="nav-title"><a href="/2012/02/05/go-for-android/">Go for Android</a></div>
+                        <div class="nav-date">February 5, 2012</div>
+                    </div><!-- .nav-inside -->
+                </div><!-- .nav-next -->
+                
+            </nav><!-- .post-navigation -->
+            
+        </main><!-- .site-main -->
+        <aside class="sidebar">
+
+    
+    <section class="widget widget-text">
+        <h2 class="widget-title">About Neo Lee</h2>
+        <p>An Internet architect, product designer, entrepreneur, startup coach, lifetime game and music lover.</p>
+    </section><!-- .widget-text -->
+    
+
+    
+
+    
+    <section class="widget widget-text">
+        <p><a href="http://soulhacker.me" target="_blank"><img src="/images/banner.jpg" alt="Optional Banner Ad" /></a></p>
+    </section><!-- .widget-text-->
+    
+
+    <section class="widget widget-recent-posts">
+        <h2 class="widget-title">Latest Posts</h2>
+        <ul class="recent-posts">
+            
+            <li class="recent-item"><a href="/2013/04/01/clojure-toolchain-reloaded/">Clojure Toolchain Reloaded</a> <span>April 1, 2013</span></li>
+            
+            <li class="recent-item"><a href="/2013/01/29/ios-7/">iOS 7</a> <span>January 29, 2013</span></li>
+            
+            <li class="recent-item"><a href="/2012/10/18/a-brief-guide-of-restful-soa/">A Brief Guide of (RESTful) SOA, Part III</a> <span>October 18, 2012</span></li>
+            
+            <li class="recent-item"><a href="/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">A Brief Guide of (RESTful) SOA, Part II</a> <span>October 17, 2012</span></li>
+            
+            <li class="recent-item"><a href="/2012/09/18/europe-summer-2012-and-500px/">Europe Summer 2012 and 500px</a> <span>September 18, 2012</span></li>
+            
+        </ul><!-- .recent-posts -->
+    </section><!-- .widget-recent-posts -->
+
+    <!--Create a sorted array of tags-->
+    
+    
+    <section class="widget widget-tags">
+        <h2 class="widget-title">Tags</h2>
+        <div class="tagcloud">
+            
+            <a href="/tags/#Apple">Apple</a>
+            
+            <a href="/tags/#Architecture">Architecture</a>
+            
+            <a href="/tags/#Gadget">Gadget</a>
+            
+            <a href="/tags/#Photograph">Photograph</a>
+            
+            <a href="/tags/#Product">Product</a>
+            
+            <a href="/tags/#Programming">Programming</a>
+            
+        </div><!-- .tagcloud -->
+    </section><!-- .widget -->
+
+</aside><!-- .sidebar -->
+    </div><!-- .inner -->
+</div><!-- .site-content -->
+
+    <footer class="site-footer">
+    <div class="inner">
+        <div class="social-links">
+            
+            <a href="https://twitter.com/soulhacker" class="fa-twitter square fill-horizontal"><span class="screen-reader-text">Twitter</span></a>
+            
+            
+            <a href="https://www.facebook.com/neo.lee.x" class="fa-facebook square fill-horizontal"><span class="screen-reader-text">Facebook</span></a>
+            
+            
+            
+            <a href="https://github.com/neolee" class="fa-github-alt square fill-horizontal"><span class="screen-reader-text">GitHub</span></a>
+            
+            
+            
+            
+            
+            <a href="http://instagram.com/soulhacker" class="fa-instagram square fill-horizontal"><span class="screen-reader-text">Instagram</span></a>
+            
+            
+            
+            <a class="fa-feed square fill-horizontal" href="/feed.xml"><span class="screen-reader-text">RSS</span></a>
+        </div><!-- .social-links -->
+        <div class="site-info">
+            &copy; <a href="/">Paradigm X</a> all rights reserved. <br />Powered by <a target="_blank" href="https://jekyllrb.com/">Jekyll</a>. BlogInn theme by <a target="_blank" href="http://justgoodthemes.com/">JustGoodThemes</a>
+            <a href="#top" id="top-link" class="fa-chevron-up top-link square fill-horizontal"><span class="screen-reader-text">Back to the top</span></a>
+        </div><!-- .site-info -->
+    </div><!-- .inner -->
+</footer><!-- .site-footer -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/plugins.js"></script>
+    <script type="text/javascript" src="/js/custom.js"></script>
+</body>
+</html>

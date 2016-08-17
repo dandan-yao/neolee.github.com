@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">    
+    <title>Go for Android</title> 
+    <meta name="description" content="All those innovative, insightful, intelligent, intriguing things.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic" />
+    <link rel="stylesheet" href="/css/main.css" />
+    
+    <link href='/stylesheets/all-59a811c39081ff1a1a7a90aa4876191a.css' media='all' rel='stylesheet' type='text/css'>
+    
+    <link rel="canonical" href="http://soulhacker.me/2012/02/05/go-for-android/">
+    <link rel="alternate" type="application/rss+xml" title="Paradigm X Feed" href="http://soulhacker.me/feed.xml">
+</head>
+<body>
+    <nav id="top" class="site-navigation">
+        <div class="inner">
+            <button id="menu-toggle" aria-expanded="false">Menu</button>
+            <div class="nav-menu">
+                <ul class="menu">
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/">Home</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/tags/">Archives</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                    <a class="" href="/about.html">About</a>
+                  </li>
+                
+                </ul>        
+            </div><!-- .nav-menu -->
+            <a class="subscribe-button fa-feed square fill-horizontal" href="/feed.xml"><span class="screen-reader-text">Subscribe</span></a>
+        </div><!-- .inner -->
+    </nav><!-- .site-navigation -->
+    <header class="site-header">
+        <div class="inner">
+            <h1 class="site-title"><a class="logo-text" href="/">Paradigm X</a></h1>
+            <p class="site-description">A vision quest of a soulhacker.</p>
+        </div><!-- .inner -->
+    </header>
+    <div class="site-content">
+    <div class="inner">
+        <main class="site-main">
+            <article class="post">
+                <header class="entry-header"> 
+                    <div class="entry-header-wrap">
+                        
+                        <h1 class="entry-title">Go for Android</h1>
+                    </div><!-- .entry-header-wrap -->
+                    <div class="entry-meta">
+                        by <span class="post-author">Neo Lee</span> on <time class="published" datetime="2012-02-05">February 5, 2012</time>
+                    </div><!-- .entry-meta -->
+                </header><!-- .entry-header -->
+                <div class="entry-content">
+                    <p><a href="http://golang.org/">Go</a> is <em>the</em> language from Google and Android is <em>the</em> mobile OS from Google. The bond between them are just born with. So there should be no surprise that we can use Go to write Android programs, though some important restricts for now:
+<!-- more -->
+- There is no Android SDK for Go, so no system API nor GUI for Go program on Android.
+- Go doesn’t support JNI for now. So Go programs have to be compiled as separate executables, wrapped as assets in apk and called within Java based apps.
+- Maybe cross-compiling is really hard. We cannot build Android applications which use Cgo(C bridge for Go) on our desktop computer for now, as shown below.</p>
+
+<p>But it’s not just a toy because of the following advantages:</p>
+
+<ul>
+  <li>Go is <em>fast</em> and all C programmers just like it.</li>
+  <li>Go language is bundled with high quality libraries, especially suitable for special tasks.</li>
+  <li>Go is from Google! It does have a future! Well, at least let’s hope so.</li>
+</ul>
+
+<p>Go is a very young language, thus there’s few guides or tutorials out there. But it also makes earlier investion provide more return. My friend and colleague <a href="https://twitter.com/#!/rarnu">@rarnu</a> also likes the idea of writing Android program using Go and has written <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">a short tutorial</a>. I’d like to rewrite it here and fill all lost details which he was too lazy to include.</p>
+
+<h3>Prerequisites</h3>
+<ul>
+  <li>C Tools
+    <ul>
+      <li>GCC, C standard library, bison, GNU Make and Awk</li>
+    </ul>
+  </li>
+  <li><a href="http://mercurial.selenic.com/wiki/Download">Mercurial</a>
+    <ul>
+      <li><code>hg</code></li>
+    </ul>
+  </li>
+  <li><a href="http://developer.android.com/sdk/installing.html">Android SDK</a>
+    <ul>
+      <li><code>adb</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Preparing Go Language</h3>
+<p>Firstly some environment variables need to be set (better be added to <code>.bashrc</code> or <code>.zshrc</code> etc.):</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">export GOROOT="$HOME/Code/Go/Home"
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">export GOBIN="$GOROOT/bin"
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">export PATH="$PATH:$GOBIN:"</div></div></pre></div></figure>
+
+<p><code>GOROOT</code> should be the folder where Go source is in and <code>GOBIN</code> should be in the system <code>PATH</code>. Double check them and issue these commands in terminal:</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">hg clone -u release https://go.googlecode.com/hg/ $GOROOT
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">cd $GOROOT/src
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">export GOOS=linux
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">export GOARCH=arm
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">./all.bash</div></div></pre></div></figure>
+
+<p>Now check out <code>$GOBIN</code> folder, three commands <code>go</code> <code>godoc</code> <code>gofmt</code>(<code>go</code> command line tools) and a folder <code>linux_arm</code>(cross-compiling tools for Linux/ARM targets) should be in there. <strong>Line 2-5</strong> can be run multiple times by setting different <code>$GOOS</code> and <code>$GOARCH</code> combinations to support <code>amd64</code> <code>386</code> and <code>arm</code> instruction sets all in one install base. See “<a href="http://golang.org/doc/install/source">Installing Go from source</a>” for detail.</p>
+
+<h3>Hello Android from Go!</h3>
+<p>Now create Go source files for testing. Let’s start with the most favorite ‘Hello world!’ one.</p>
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">hello.go</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="kn">package</span> <span class="nx">main</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nb">println</span><span class="p">(</span><span class="s">&quot;Hello Android from Go!&quot;</span><span class="p">)</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span></div></div></pre></div></figure>
+
+<p>Compile it and generate executable:</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -o hello-arm hello.go</div></div></pre></div></figure>
+
+<p>The last command will generate an executable named <code>hello-arm</code> which targets Linux/ARM system (i.e. Android). Now connect to an debuggable Android device and issue in the same folder:</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">adb push hello-arm /data/local/
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">adb shell
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">/data/local/hello-arm</div></div></pre></div></figure>
+
+<p>If all things go right it will generate output as expected. Using the same routine showed above, all code examples on <a href="http://golang.org/">Go’s homepage</a> can be verified working well on Android devices.</p>
+
+<h3>Real World Example</h3>
+<p>The following code example is borrowed from rarnu’s <a href="http://blog.sina.com.cn/s/blog_68b671430100z4wn.html">blog post</a> and modified a bit.</p>
+
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">checkupdate.go</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="kn">package</span> <span class="nx">main</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="kn">import</span> <span class="p">(</span><span class="s">&quot;net/http&quot;</span><span class="p">;</span> <span class="s">&quot;flag&quot;</span><span class="p">;</span> <span class="s">&quot;os&quot;</span><span class="p">;</span> <span class="s">&quot;strconv&quot;</span><span class="p">;</span> <span class="s">&quot;encoding/json&quot;</span><span class="p">;</span> <span class="s">&quot;io/ioutil&quot;</span><span class="p">)</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nx">flag</span><span class="p">.</span><span class="nx">Parse</span><span class="p">()</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">if</span> <span class="nx">flag</span><span class="p">.</span><span class="nx">NArg</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">return</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nx">version</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nx">Atoi</span><span class="p">(</span><span class="nx">flag</span><span class="p">.</span><span class="nx">Arg</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nx">res</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;http://rarnu.7thgen.info/api/query_software_update.php&quot;</span><span class="p">)</span>
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">if</span> <span class="nx">res</span><span class="p">.</span><span class="nx">StatusCode</span> <span class="o">!=</span> <span class="mi">200</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="15" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">return</span>
+</div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span>
+</div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nx">buf</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nx">ReadAll</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+</div></div><div data-line="19" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="20" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="kd">var</span> <span class="nx">f</span> <span class="kd">interface</span><span class="p">&#x7b;&#x7d;</span>
+</div></div><div data-line="21" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nx">json</span><span class="p">.</span><span class="nx">Unmarshal</span><span class="p">(</span><span class="nx">buf</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">f</span><span class="p">)</span>
+</div></div><div data-line="22" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nx">m</span> <span class="o">:=</span> <span class="nx">f</span><span class="p">.(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">&#x7b;&#x7d;);</span>
+</div></div><div data-line="23" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nx">v</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">[</span><span class="s">&quot;lastver&quot;</span><span class="p">];</span>
+</div></div><div data-line="24" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nx">sver</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nx">Atoi</span><span class="p">(</span><span class="nx">v</span><span class="p">.(</span><span class="kt">string</span><span class="p">))</span>
+</div></div><div data-line="25" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="26" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">if</span> <span class="nx">sver</span> <span class="p">&gt;</span> <span class="nx">version</span> <span class="p">&#x7b;</span>
+</div></div><div data-line="27" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="nx">fn</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">[</span><span class="s">&quot;url&quot;</span><span class="p">]</span>
+</div></div><div data-line="28" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="nx">fn</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</div></div><div data-line="29" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">return</span>
+</div></div><div data-line="30" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="p">&#x7d;</span>
+</div></div><div data-line="31" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</div></div><div data-line="32" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">&#x7d;</span></div></div></pre></div></figure>
+
+<p>Handling JSON data returned from web services in Go is pretty neat and clean, right? Build it as above:</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -o cu-arm checkupdate.go
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">adb push cu-arm /data/local/
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">adb shell
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">/data/local/cu-arm 20</div></div></pre></div></figure>
+
+<p>When running it on my Galaxy Nexus (ARM v7 dual-core 1.2 GHz Cortex-A9, Android 4.0.2 with kernel 3.0.8) it crashed on <strong>line 14</strong> - the <code>http.Get</code> call failed. Because of some issues in the cross-compiling system, all calls using Cgo will cause failure like that, at least for now. Unfortunately the <code>net</code> package depend on Cgo and nearly all useful applications need <code>net</code> package.</p>
+
+<h3>Call Go Code in Android Apps</h3>
+<p>Exactly the same as calling any native executables in Android apps, which fully explained in <a href="http://gimite.net/en/index.php?Run%20native%20executable%20in%20Android%20App">this guide</a>. I’ll list a more general and accurate solution below for convenience.</p>
+
+<p>The following Java class shows how to invoke a process in Android apps (actually it is used by Google itself), which is the base of the following guide:</p>
+
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">CommandResult.java</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CommandResult</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="kd">public</span> <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="kd">public</span> <span class="n">String</span> <span class="n">error</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="kd">public</span> <span class="kd">static</span> <span class="nf">runCommand</span><span class="o">(</span><span class="n">String</span> <span class="n">command</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">root</span><span class="o">)</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">&quot;runCommand&quot;</span><span class="o">,</span> <span class="n">command</span><span class="o">);</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">Process</span> <span class="n">process</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">DataOutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">DataInputStream</span> <span class="n">stdout</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">DataInputStream</span> <span class="n">stderr</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">CommandResult</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">CommandResult</span><span class="o">();</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">try</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">StringBuffer</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">StringBuffer</span><span class="o">();</span>
+</div></div><div data-line="15" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">StringBuffer</span> <span class="n">error</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">StringBuffer</span><span class="o">();</span>
+</div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">)</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">process</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">exec</span><span class="o">(</span><span class="s">&quot;su&quot;</span><span class="o">);</span>
+</div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">os</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">DataOutputStream</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+</div></div><div data-line="19" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">os</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">command</span> <span class="o">+</span> <span class="s">&quot;\n&quot;</span><span class="o">);</span>
+</div></div><div data-line="20" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">os</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="s">&quot;exit\n&quot;</span><span class="o">);</span>
+</div></div><div data-line="21" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">os</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</div></div><div data-line="22" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="o">&#x7d;</span> <span class="k">else</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="23" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">process</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">exec</span><span class="o">(</span><span class="n">command</span><span class="o">);</span>
+</div></div><div data-line="24" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="o">&#x7d;</span>
+</div></div><div data-line="25" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="26" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">stdout</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">DataInputStream</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+</div></div><div data-line="27" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">String</span> <span class="n">line</span><span class="o">;</span>
+</div></div><div data-line="28" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="k">while</span> <span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">stdout</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="29" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">output</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">line</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;\n&#39;</span><span class="o">);</span>
+</div></div><div data-line="30" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="o">&#x7d;</span>
+</div></div><div data-line="31" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">stderr</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">DataInputStream</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">getErrorStream</span><span class="o">());</span>
+</div></div><div data-line="32" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="k">while</span> <span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">stderr</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="33" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">error</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">line</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;\n&#39;</span><span class="o">);</span>
+</div></div><div data-line="34" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="o">&#x7d;</span>
+</div></div><div data-line="35" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">process</span><span class="o">.</span><span class="na">waitFor</span><span class="o">();</span>
+</div></div><div data-line="36" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">ret</span><span class="o">.</span><span class="na">result</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="na">toString</span><span class="o">().</span><span class="na">trim</span><span class="o">();</span>
+</div></div><div data-line="37" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">ret</span><span class="o">.</span><span class="na">error</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="na">toString</span><span class="o">().</span><span class="na">trim</span><span class="o">();</span>
+</div></div><div data-line="38" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="o">&#x7d;</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="39" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">ret</span><span class="o">.</span><span class="na">result</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+</div></div><div data-line="40" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="n">ret</span><span class="o">.</span><span class="na">error</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+</div></div><div data-line="41" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="o">&#x7d;</span> <span class="k">finally</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="42" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="k">try</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="43" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="k">if</span> <span class="o">(</span><span class="n">os</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="44" class="code-highlight-row numbered"><div class="code-highlight-line">                    <span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</div></div><div data-line="45" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="o">&#x7d;</span>
+</div></div><div data-line="46" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="k">if</span> <span class="o">(</span><span class="n">stdout</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="47" class="code-highlight-row numbered"><div class="code-highlight-line">                    <span class="n">stdout</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</div></div><div data-line="48" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="o">&#x7d;</span>
+</div></div><div data-line="49" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="k">if</span> <span class="o">(</span><span class="n">stderr</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="50" class="code-highlight-row numbered"><div class="code-highlight-line">                    <span class="n">stderr</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</div></div><div data-line="51" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="o">&#x7d;</span>
+</div></div><div data-line="52" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">process</span><span class="o">.</span><span class="na">destroy</span><span class="o">();</span>
+</div></div><div data-line="53" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="o">&#x7d;</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">&#x7b;</span>
+</div></div><div data-line="54" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">ret</span><span class="o">.</span><span class="na">result</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+</div></div><div data-line="55" class="code-highlight-row numbered"><div class="code-highlight-line">                <span class="n">ret</span><span class="o">.</span><span class="na">error</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+</div></div><div data-line="56" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="o">&#x7d;</span>
+</div></div><div data-line="57" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="o">&#x7d;</span>
+</div></div><div data-line="58" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="59" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
+</div></div><div data-line="60" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="o">&#x7d;</span>
+</div></div><div data-line="61" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="o">&#x7d;</span></div></div></pre></div></figure>
+
+<p>To run a native executable (whether written in Go or not) in Android apps:</p>
+
+<ul>
+  <li>Include the binary <code>go-exec</code> in the <code>assets</code> folder.</li>
+  <li>Use <code>getAssets().open("go-exec")</code> to get an <code>InputStream</code>.</li>
+  <li>Write it to <code>/data/data/app-package-name/</code>, where the app has access to write files and make it executable.</li>
+  <li>Make it executable using the code above, i.e. <code>CommandResult.runCommand("/system/bin/chmod 744 /data/data/app-package-name/go-exec", 0)</code></li>
+  <li>Run <code>/data/data/app-package-name/go-exec</code> using the code above.</li>
+</ul>
+
+<h3>Updates</h3>
+<p><code>Go 1</code> is now live! Article updated to match changes in <code>Go 1</code>. And the <code>Go 1</code> <a href="http://golang.org/doc/go1.html">release note</a> is a must read.</p>
+
+                </div><!-- .entry-content -->
+                <footer class="entry-footer">
+                    <div class="share-post">
+                        <span>Share</span>
+                        <a class="fa-twitter" target="_blank" href="https://twitter.com/intent/tweet?text=Go%20for%20Android&amp;url=http://soulhacker.me/2012/02/05/go-for-android/"><span class="screen-reader-text">Twitter</span></a>
+                        <a class="fa-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://soulhacker.me/2012/02/05/go-for-android/&amp;t=Go%20for%20Android"><span class="screen-reader-text">Facebook</span></a>
+                        <a class="fa-google-plus" target="_blank" href="http://plus.google.com/share?url=http://soulhacker.me/2012/02/05/go-for-android/"><span class="screen-reader-text">Google+</span></a>
+                    </div><!-- .share-post -->
+                    
+                    <div class="tag-links">
+                        Tags: <a href="/tags/index.html#Programming" title="Pages tagged Programming" rel="tag">Programming</a>
+                    </div>
+                    
+                </footer><!-- .entry-footer -->
+            </article><!-- .post -->
+            <div class="author-box">
+                <div class="author-info">
+                    <div class="author-avatar" style="background-image: url(/images/author-image.jpg)"><span class="screen-reader-text">Neo Lee's Picture</span></div>
+                    <div class="author-details">
+                        <h2 class="author-title">About Neo Lee</h2>
+                        <p class="author-bio">An Internet architect, product designer, entrepreneur, startup coach, lifetime game and music lover.</p>
+                        <span class="author-location"><i class="fa-map-marker" aria-hidden="true"></i> Shanghai, China</span>
+                        <span class="author-website"><i class="fa-chain" aria-hidden="true"></i> <a href="http://soulhacker.me" target="_blank"> http://soulhacker.me</a></span>
+                    </div><!-- .author-details -->
+                </div><!-- .author-info -->
+            </div><!-- .author-box -->
+            <nav class="post-navigation">
+                <h2 class="screen-reader-text">Post navigation</h2>
+                
+                <div class="nav-previous">
+                    <div class="nav-inside">
+                        
+                        <div class="nav-before">Previous</div>
+                        <div class="nav-title"><a href="/2012/01/31/introducing-restkit/">Introducing RestKit</a></div>
+                        <div class="nav-date">January 31, 2012</div>
+                    </div><!-- .nav-inside -->
+                </div><!-- .nav-previous -->
+                
+                
+                <div class="nav-next">
+                    <div class="nav-inside">
+                        
+                        <div class="nav-before">Next</div>
+                        <div class="nav-title"><a href="/2012/03/31/soul-link/">Soul Link</a></div>
+                        <div class="nav-date">March 31, 2012</div>
+                    </div><!-- .nav-inside -->
+                </div><!-- .nav-next -->
+                
+            </nav><!-- .post-navigation -->
+            
+        </main><!-- .site-main -->
+        <aside class="sidebar">
+
+    
+    <section class="widget widget-text">
+        <h2 class="widget-title">About Neo Lee</h2>
+        <p>An Internet architect, product designer, entrepreneur, startup coach, lifetime game and music lover.</p>
+    </section><!-- .widget-text -->
+    
+
+    
+
+    
+    <section class="widget widget-text">
+        <p><a href="http://soulhacker.me" target="_blank"><img src="/images/banner.jpg" alt="Optional Banner Ad" /></a></p>
+    </section><!-- .widget-text-->
+    
+
+    <section class="widget widget-recent-posts">
+        <h2 class="widget-title">Latest Posts</h2>
+        <ul class="recent-posts">
+            
+            <li class="recent-item"><a href="/2013/04/01/clojure-toolchain-reloaded/">Clojure Toolchain Reloaded</a> <span>April 1, 2013</span></li>
+            
+            <li class="recent-item"><a href="/2013/01/29/ios-7/">iOS 7</a> <span>January 29, 2013</span></li>
+            
+            <li class="recent-item"><a href="/2012/10/18/a-brief-guide-of-restful-soa/">A Brief Guide of (RESTful) SOA, Part III</a> <span>October 18, 2012</span></li>
+            
+            <li class="recent-item"><a href="/2012/10/17/a-brief-guide-of-restful-soa-part-ii/">A Brief Guide of (RESTful) SOA, Part II</a> <span>October 17, 2012</span></li>
+            
+            <li class="recent-item"><a href="/2012/09/18/europe-summer-2012-and-500px/">Europe Summer 2012 and 500px</a> <span>September 18, 2012</span></li>
+            
+        </ul><!-- .recent-posts -->
+    </section><!-- .widget-recent-posts -->
+
+    <!--Create a sorted array of tags-->
+    
+    
+    <section class="widget widget-tags">
+        <h2 class="widget-title">Tags</h2>
+        <div class="tagcloud">
+            
+            <a href="/tags/#Apple">Apple</a>
+            
+            <a href="/tags/#Architecture">Architecture</a>
+            
+            <a href="/tags/#Gadget">Gadget</a>
+            
+            <a href="/tags/#Photograph">Photograph</a>
+            
+            <a href="/tags/#Product">Product</a>
+            
+            <a href="/tags/#Programming">Programming</a>
+            
+        </div><!-- .tagcloud -->
+    </section><!-- .widget -->
+
+</aside><!-- .sidebar -->
+    </div><!-- .inner -->
+</div><!-- .site-content -->
+
+    <footer class="site-footer">
+    <div class="inner">
+        <div class="social-links">
+            
+            <a href="https://twitter.com/soulhacker" class="fa-twitter square fill-horizontal"><span class="screen-reader-text">Twitter</span></a>
+            
+            
+            <a href="https://www.facebook.com/neo.lee.x" class="fa-facebook square fill-horizontal"><span class="screen-reader-text">Facebook</span></a>
+            
+            
+            
+            <a href="https://github.com/neolee" class="fa-github-alt square fill-horizontal"><span class="screen-reader-text">GitHub</span></a>
+            
+            
+            
+            
+            
+            <a href="http://instagram.com/soulhacker" class="fa-instagram square fill-horizontal"><span class="screen-reader-text">Instagram</span></a>
+            
+            
+            
+            <a class="fa-feed square fill-horizontal" href="/feed.xml"><span class="screen-reader-text">RSS</span></a>
+        </div><!-- .social-links -->
+        <div class="site-info">
+            &copy; <a href="/">Paradigm X</a> all rights reserved. <br />Powered by <a target="_blank" href="https://jekyllrb.com/">Jekyll</a>. BlogInn theme by <a target="_blank" href="http://justgoodthemes.com/">JustGoodThemes</a>
+            <a href="#top" id="top-link" class="fa-chevron-up top-link square fill-horizontal"><span class="screen-reader-text">Back to the top</span></a>
+        </div><!-- .site-info -->
+    </div><!-- .inner -->
+</footer><!-- .site-footer -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/plugins.js"></script>
+    <script type="text/javascript" src="/js/custom.js"></script>
+</body>
+</html>
